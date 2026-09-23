@@ -1,0 +1,193 @@
+
+*{box-sizing:border-box}
+:root{
+  --blue:#0f4c81; --blue2:#1976a8; --bg:#f4f7fa; --text:#1f2937;
+  --muted:#6b7280; --line:#e5e7eb; --warn:#fff8e1; --danger:#fff1f2;
+  --info:#eef6fc; --ok:#eefbf2;
+}
+body{margin:0;font-family:Arial,Helvetica,sans-serif;background:var(--bg);color:var(--text);direction:rtl}
+header{background:linear-gradient(135deg,var(--blue),var(--blue2));color:white;padding:30px 18px;text-align:center;border-radius:0 0 24px 24px}
+header h1{margin:0;font-size:27px} header p{margin:8px 0 0;opacity:.92}
+main{max-width:980px;margin:auto;padding:20px}
+.search-container{margin:4px 0 28px}
+#searchInput{width:100%;padding:16px 18px;font-size:17px;border:0;border-radius:14px;box-shadow:0 3px 12px rgba(0,0,0,.08);outline:none}
+#searchInput:focus{box-shadow:0 0 0 2px var(--blue2)}
+section.category{margin-bottom:32px}
+section.category h2{font-size:19px;color:#374151;margin:0 4px 14px}
+.protocol-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:14px}
+.protocol-card{background:white;border-radius:16px;padding:18px;display:flex;align-items:center;gap:14px;box-shadow:0 3px 12px rgba(0,0,0,.07);text-decoration:none;color:inherit;transition:.18s}
+.protocol-card:hover{transform:translateY(-2px);box-shadow:0 7px 18px rgba(0,0,0,.12)}
+.protocol-card h3{margin:0 0 5px;color:var(--blue);font-size:17px}
+.protocol-card p{margin:0;color:var(--muted);font-size:13px;line-height:1.5}
+.icon{font-size:30px;min-width:44px;text-align:center}
+#noResults{display:none;background:white;padding:24px;border-radius:14px;text-align:center;color:var(--muted)}
+footer{text-align:center;color:#9ca3af;font-size:12px;padding:28px}
+.back-button,.source-button{display:inline-block;text-decoration:none;border-radius:10px;padding:11px 14px;margin:0 0 14px;background:white;color:var(--blue);box-shadow:0 2px 8px rgba(0,0,0,.08);font-weight:700}
+.source-button{margin-right:8px;background:var(--blue);color:white}
+.protocol-content{background:white;padding:24px;border-radius:18px;box-shadow:0 3px 12px rgba(0,0,0,.07);line-height:1.65}
+.protocol-content h2{color:var(--blue);margin-top:30px}
+.protocol-content h2:first-child{margin-top:0}
+.protocol-content h3{margin-bottom:8px}
+.meta{color:var(--muted);margin-bottom:16px}
+.info-box,.warning-box,.danger-box,.success-box,.treatment-box{padding:16px;border-radius:11px;margin:14px 0}
+.info-box{background:var(--info);border-right:5px solid var(--blue2)}
+.warning-box{background:var(--warn);border-right:5px solid #f59e0b}
+.danger-box{background:var(--danger);border-right:5px solid #dc2626}
+.success-box{background:var(--ok);border-right:5px solid #22c55e}
+.treatment-box{background:#f8fafc;border-right:4px solid var(--blue)}
+.table-container{overflow-x:auto;margin:14px 0 24px}
+.clinical-table{width:100%;border-collapse:collapse;background:white}
+.clinical-table th{background:var(--blue);color:white;padding:11px}
+.clinical-table td{padding:11px;border-bottom:1px solid var(--line);vertical-align:top}
+.clinical-table tr:nth-child(even){background:#f8fafc}
+.monitoring-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+.monitor-box{background:var(--info);padding:14px;border-radius:11px;text-align:center}
+details{border:1px solid var(--line);border-radius:12px;padding:12px 14px;margin:14px 0;background:#fff}
+summary{cursor:pointer;font-weight:700;color:var(--blue)}
+.protocol-image{width:100%;height:auto;border:1px solid var(--line);border-radius:12px;margin-top:14px}
+.small{font-size:13px;color:var(--muted)}
+ul{padding-right:22px}
+@media(max-width:650px){
+  header{padding:25px 14px} header h1{font-size:22px}
+  main{padding:15px}.protocol-grid,.monitoring-grid{grid-template-columns:1fr}
+  .protocol-content{padding:17px}
+  .source-button{margin-right:0}
+}
+/* Mobile readability improvements */
+@media (max-width: 768px) {
+
+  body {
+    font-size: 18px;
+    line-height: 1.6;
+  }
+
+  header h1 {
+    font-size: 26px;
+    line-height: 1.3;
+  }
+
+  .search-container input {
+    font-size: 18px;
+    padding: 14px 16px;
+  }
+
+  .protocol-grid {
+    grid-template-columns: 1fr;
+    gap: 14px;
+  }
+
+  .protocol-card {
+    padding: 20px;
+    min-height: 90px;
+  }
+
+  .protocol-card h3 {
+    font-size: 20px;
+    line-height: 1.4;
+  }
+
+  .protocol-card .icon {
+    font-size: 30px;
+  }
+
+  main {
+    padding: 14px;
+  }
+
+  h2 {
+    font-size: 24px;
+  }
+
+  h3 {
+    font-size: 21px;
+  }
+
+  p, li, td, th {
+    font-size: 18px;
+    line-height: 1.6;
+  }
+
+  button,
+  .button,
+  .source-button,
+  a.back-button {
+    font-size: 18px;
+    padding: 14px 18px;
+    min-height: 48px;
+  }
+
+  table {
+    font-size: 17px;
+  }
+}
+@media (max-width: 768px) {
+  body {
+    font-size: 20px !important;
+    line-height: 1.65;
+  }
+
+  header h1 {
+    font-size: 28px !important;
+  }
+
+  header p {
+    font-size: 18px !important;
+  }
+
+  section.category h2 {
+    font-size: 22px !important;
+  }
+
+  #searchInput {
+    font-size: 20px !important;
+    padding: 17px !important;
+  }
+
+  .protocol-card {
+    padding: 22px !important;
+    min-height: 105px;
+  }
+
+  .protocol-card h3 {
+    font-size: 22px !important;
+  }
+
+  .protocol-card p {
+    font-size: 17px !important;
+  }
+
+  .icon {
+    font-size: 36px !important;
+  }
+
+  .protocol-content {
+    font-size: 20px !important;
+    line-height: 1.7;
+    padding: 20px !important;
+  }
+
+  .protocol-content h2 {
+    font-size: 26px !important;
+  }
+
+  .protocol-content h3 {
+    font-size: 22px !important;
+  }
+
+  .protocol-content p,
+  .protocol-content li {
+    font-size: 20px !important;
+  }
+
+  .clinical-table th,
+  .clinical-table td {
+    font-size: 17px !important;
+    padding: 12px !important;
+  }
+
+  .back-button,
+  .source-button {
+    font-size: 19px !important;
+    padding: 14px 18px !important;
+  }
+}
