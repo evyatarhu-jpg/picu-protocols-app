@@ -1,4 +1,4 @@
-const CACHE = 'picu-v8';
+const CACHE = 'picu-v9';
 const APP_SHELL = [
   './', './index.html', './style.css', './app.js', './manifest.json',
   './dka.html', './bleeding.html', './anticoagulation.html', './warfarin.html',
