@@ -1,4 +1,4 @@
-const CACHE = "picu-v11";
+const CACHE = "picu-v12";
 
 const APP_SHELL = [
   "./",
@@ -15,6 +15,7 @@ const APP_SHELL = [
   "./air-embolism.html",
   "./delirium.html",
   "./pain.html",
+  "./burn-pain.html",
   "./chylothorax.html",
   "./assets/icon-192.png",
   "./assets/icon-512.png",
