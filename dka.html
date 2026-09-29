@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
 <meta name="theme-color" content="#0f4c81">
-<title>DKA — Prototype v2</title>
+<title>DKA — טיפול בילדים</title>
 <link rel="stylesheet" href="style.css">
 <style>
 :root{--blue:#0f4c81;--blue2:#176fa6;--blueSoft:#eef6fb;--green:#2e7d32;--greenSoft:#eef8ef;--orange:#b26a00;--orangeSoft:#fff6e8;--red:#b3261e;--redSoft:#fff0ef;--line:#dce6ee;--bg:#f4f8fb}
@@ -12,17 +12,17 @@
 body{margin:0;background:var(--bg);color:#1f2933;font-family:Arial,"Noto Sans Hebrew",sans-serif;line-height:1.55}
 .appbar{position:sticky;top:0;z-index:1000;display:flex;justify-content:space-between;gap:8px;padding:10px 12px;background:rgba(255,255,255,.97);border-bottom:1px solid var(--line)}
 .actions{display:flex;gap:8px}.btn{display:inline-flex;align-items:center;justify-content:center;min-height:44px;padding:9px 13px;border-radius:12px;border:1px solid var(--line);background:#fff;color:var(--blue);text-decoration:none;font-weight:700;cursor:pointer}.btn.primary{background:var(--blue);color:#fff;border-color:var(--blue)}
-.page{max-width:920px;margin:auto;padding:18px 14px 36px}.hero{background:linear-gradient(135deg,var(--blue),var(--blue2));color:#fff;border-radius:20px;padding:20px;margin-bottom:16px}.hero h1{margin:0 0 5px;font-size:2rem}.hero p{margin:0;color:#e9f4fb}.meta{margin-top:13px;display:flex;gap:8px;flex-wrap:wrap;font-size:14px}.meta span{background:rgba(255,255,255,.13);padding:6px 9px;border-radius:999px}
+.page{max-width:920px;margin:auto;padding:18px 14px 36px}.hero{background:linear-gradient(135deg,var(--blue),var(--blue2));color:#fff;border-radius:20px;padding:20px;margin-bottom:16px}.hero h1{margin:0 0 5px;font-size:2rem}.hero p{margin:0;color:#e9f4fb}.meta{margin-top:13px;display:flex;gap:8px;flex-wrap:wrap;font-size:14px}.meta span{background:rgba(255,255,255,.18);color:#fff;border:1px solid rgba(255,255,255,.45);padding:6px 10px;border-radius:999px;font-weight:800}
 .quick{display:flex;gap:8px;overflow:auto;padding:2px 0 12px}.quick a{flex:0 0 auto;text-decoration:none;color:var(--blue);background:#fff;border:1px solid var(--line);border-radius:999px;padding:8px 12px;font-weight:700;font-size:14px}
 .step{background:#fff;border:1px solid var(--line);border-radius:18px;margin:14px 0;overflow:hidden;box-shadow:0 3px 12px rgba(22,47,67,.05)}.head{display:flex;align-items:center;gap:12px;padding:14px 16px;background:var(--blueSoft);border-bottom:1px solid var(--line)}.num{flex:0 0 38px;width:38px;height:38px;border-radius:50%;display:flex;align-items:center;justify-content:center;background:var(--blue);color:#fff;font-size:19px;font-weight:800}.head h2{margin:0;color:var(--blue);font-size:1.25rem}.body{padding:15px 16px}
 .field{display:grid;grid-template-columns:130px 1fr;gap:10px;padding:9px 0;border-bottom:1px dashed #e5edf3}.field:last-child{border-bottom:0}.label{font-weight:800;color:#34495e}.dose{display:inline-block;background:#edf6ff;border:1px solid #cfe3f3;border-radius:8px;padding:3px 7px;font-weight:800;direction:ltr;unicode-bidi:isolate}
 .callout{border-radius:14px;padding:13px 14px;margin:12px 0;border-right:5px solid}.callout strong{display:block;margin-bottom:4px}.blue{background:var(--blueSoft);border-color:var(--blue)}.green{background:var(--greenSoft);border-color:var(--green)}.orange{background:var(--orangeSoft);border-color:var(--orange)}.red{background:var(--redSoft);border-color:var(--red)}
 .grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;margin-top:10px}.mini{border:1px solid var(--line);border-radius:14px;padding:12px;background:#fbfdff}.mini h3{margin:0 0 6px;color:var(--blue);font-size:1rem}
-ul{margin:0;padding-right:20px}li{margin:6px 0}.target{color:var(--green);font-weight:800}.danger{color:var(--red);font-weight:800}.footer{text-align:center;color:#66727d;font-size:13px;margin-top:18px}
+ul{margin:0;padding-right:20px}li{margin:6px 0}.target{color:var(--green);font-weight:800}.danger{color:var(--red);font-weight:800}.footer{text-align:center;color:#66727d;font-size:13px;margin-top:18px}.to-top{position:fixed;left:16px;bottom:18px;z-index:1200;display:inline-flex;align-items:center;gap:6px;padding:10px 13px;border-radius:999px;background:#0f4c81;color:#fff;text-decoration:none;font-weight:800;box-shadow:0 6px 18px rgba(15,76,129,.28);border:2px solid #fff}.num.stop{width:42px;height:42px;display:inline-flex;align-items:center;justify-content:center;background:#d62828;color:#fff;font-size:21px;line-height:1;font-weight:900;clip-path:polygon(30% 0%,70% 0%,100% 30%,100% 70%,70% 100%,30% 100%,0% 70%,0% 30%);border:2px solid #ffffff;box-shadow:0 2px 8px rgba(0,0,0,.15)}.num.stop span{transform:translateY(-1px)}
 @media(max-width:700px){.page{padding:12px 10px 28px}.hero{border-radius:16px;padding:17px}.hero h1{font-size:1.65rem}.step{border-radius:15px}.head{padding:12px}.head h2{font-size:1.14rem}.body{padding:13px}.field{grid-template-columns:1fr;gap:3px;padding:10px 0}.label{font-size:15px;color:var(--blue)}.field>div:last-child{font-size:17px}.grid{grid-template-columns:1fr}.btn{font-size:14px;padding:8px 11px}}
 </style>
 </head>
-<body>
+<body id="top">
 
 <header class="appbar">
   <div class="actions">
@@ -36,7 +36,7 @@ ul{margin:0;padding-right:20px}li{margin:6px 0}.target{color:var(--green);font-w
 <section class="hero">
   <h1>DKA — טיפול בילדים</h1>
   <p>תקציר קליני מהיר המבוסס על פרוטוקול DKA</p>
-  <div class="meta"><span>גרסת מקור: ינואר 2026</span><span>תצוגת אפליקציה: 29.09.2026</span><span>Prototype v2</span></div>
+  <div class="meta"><span>עדכון: ינואר 2026</span></div>
 </section>
 
 <nav class="quick">
@@ -59,7 +59,9 @@ ul{margin:0;padding-right:20px}li{margin:6px 0}.target{color:var(--green);font-w
 
 <section class="step"><div class="head"><div class="num">3</div><h2>טיפול המשכי — נוזלים</h2></div><div class="body">
 <div class="field"><div class="label">קצב בסיס</div><div>קצב אחזקה שעתי לפי משקל + <span class="dose">1.5 mL/kg/hr</span>.</div></div>
-<div class="field"><div class="label">אחזקה</div><div>4 mL/kg/hr עבור 10 הק"ג הראשונים; 2 mL/kg/hr עבור 10 הק"ג הבאים; 1 mL/kg/hr לכל ק"ג מעל 20 ק"ג.</div></div>
+<div class="field"><div class="label">10 הק"ג הראשונים</div><div><span class="dose">4 mL/kg/hr</span></div></div>
+<div class="field"><div class="label">10 הק"ג הבאים</div><div><span class="dose">2 mL/kg/hr</span></div></div>
+<div class="field"><div class="label">מעל 20 ק"ג</div><div><span class="dose">1 mL/kg/hr</span> לכל ק"ג נוסף.</div></div>
 <div class="field"><div class="label">תוספת חסר</div><div><span class="dose">1.5 mL/kg/hr</span> = 70 mL/kg ל־48 שעות.</div></div>
 <div class="callout orange"><strong>בחירת שקית</strong> נקבעת לפי DS, נתרן ואשלגן כמפורט בהמשך.</div>
 </div></section>
@@ -79,7 +81,7 @@ ul{margin:0;padding-right:20px}li{margin:6px 0}.target{color:var(--green);font-w
 </div></section>
 
 <section class="step" id="electrolytes"><div class="head"><div class="num">6</div><h2>גלוקוז, אשלגן, נתרן ופוספט</h2></div><div class="body">
-<h3>גלוקוז — הרכב שקית</h3>
+<h3>סוג התמיסה לפי רמת גלוקוז</h3>
 <div class="field"><div class="label">DS &gt;300</div><div>NaCl 0.9%.</div></div>
 <div class="field"><div class="label">DS 200–300</div><div>Glucose 5% + NaCl 0.9%.</div></div>
 <div class="field"><div class="label">DS 150–200</div><div>Glucose 10% + NaCl 0.9%.</div></div>
@@ -90,8 +92,16 @@ ul{margin:0;padding-right:20px}li{margin:6px 0}.target{color:var(--green);font-w
 <div class="field"><div class="label">K &gt;5.5</div><div>נוזלים ללא אשלגן.</div></div>
 <div class="field"><div class="label">K 4–5.5</div><div><strong>40 mEq/L</strong>.</div></div>
 <div class="field"><div class="label">K 3.5–4</div><div><strong>60 mEq/L</strong>.</div></div>
-<div class="field"><div class="label">K &lt;3.5</div><div>מוניטור קרדיאלי + אק"ג; תיקון מהיר <span class="dose">0.5–1 mEq/kg</span>, מקסימום 20 mEq, לפי פרוטוקול שירותי רוקחות; לאחר מכן 60 mEq/L בנוזלי אחזקה.</div></div>
-<div class="callout orange"><strong>התחלת אשלגן</strong> רק כאשר K מתחת ל־5.5 ורק לאחר וידוא מתן שתן.</div>
+<div class="field"><div class="label">K &lt;3.5</div><div>
+<div><strong>ניטור:</strong> חיבור למוניטור קרדיאלי וביצוע אק"ג.</div>
+<div><strong>תיקון מהיר:</strong> <span class="dose">0.5–1 mEq/kg</span>.</div>
+<div><strong>מקסימום:</strong> <span class="dose">20 mEq</span>.</div>
+<div><strong>לאחר התיקון:</strong> 60 mEq/L בנוזלי אחזקה, לפי פרוטוקול שירותי רוקחות.</div>
+</div></div>
+<div class="callout orange"><strong>מתי מתחילים אשלגן?</strong>
+<div><strong>1.</strong> כאשר K &lt;5.5 mEq/L.</div>
+<div><strong>2.</strong> רק לאחר וידוא מתן שתן.</div>
+</div>
 
 <h3>נתרן</h3>
 <div class="field"><div class="label">נתרן מתוקן</div><div><span class="dose">Na + 0.016 × (Glu − 100)</span></div></div>
@@ -109,19 +119,32 @@ ul{margin:0;padding-right:20px}li{margin:6px 0}.target{color:var(--green);font-w
 <ul><li><span class="target">pH &gt;7.3</span> ו/או <span class="target">HCO₃⁻ &gt;18 mmol/L</span>.</li><li>המטופל רוצה ויכול לאכול פומית, ללא בחילות/הקאות.</li><li>15 דקות לאחר מתן אינסולין SC ניתן לאכול ולהפסיק אינסולין IV.</li><li>ב־DKA קל, אם אינו מקיא ומסוגל לאכול, ניתן להתחיל טיפול SC.</li></ul>
 </div></section>
 
-<section class="step" id="cerebral"><div class="head"><div class="num">!</div><h2>בצקת מוחית — זיהוי וטיפול</h2></div><div class="body">
+<section class="step" id="cerebral"><div class="head"><div class="num stop" aria-label="עצור"><span>✋</span></div><h2>בצקת מוחית — זיהוי וטיפול</h2></div><div class="body">
 <div class="callout red"><strong>סימנים מוקדמים</strong> כאב ראש, שינוי התנהגות/אי־שקט, בחילות או הקאות מתמשכות, תגובה שאינה תואמת לכאב, ירידה בערנות.</div>
 <div class="callout red"><strong>סימנים מתקדמים</strong> ברדיקרדיה ו/או יתר לחץ דם, שינוי במצב הכרה, שיתוק עצבים קרניאליים, פפילאדמה, פרכוסים או דיכוי נשימתי.</div>
-<div class="field"><div class="label">Neuroprotection</div><div>ראש מיטה 30°, ראש במנח מרכזי, נורמותרמיה.</div></div>
-<div class="field"><div class="label">נתיב אוויר</div><div>אינטובציה בייעוץ כונן; להימנע מהיפרונטילציה ככל האפשר.</div></div>
-<div class="field"><div class="label">טיפול היפראוסמוטי</div><div>Mannitol <span class="dose">1 g/kg</span> או Hypertonic Saline 3% <span class="dose">5 mL/kg</span>, עם המשך טיפול אחזקתי.</div></div>
-<div class="field"><div class="label">המשך</div><div>לוודא לחץ דם מספק לשמירת Cerebral Perfusion Pressure; הדמיה מוחית לאחר ייצוב המודינמי ונשימתי.</div></div>
+<div class="field"><div class="label">1. Neuroprotection</div><div>
+<div>הרמת ראש המיטה ל־30°.</div>
+<div>מנח ראש מרכזי.</div>
+<div>שמירה על נורמותרמיה.</div>
+</div></div>
+<div class="field"><div class="label">2. נתיב אוויר</div><div>
+<div>אינטובציה בייעוץ כונן.</div>
+<div>להימנע מהיפרונטילציה ככל האפשר.</div>
+</div></div>
+<div class="field"><div class="label">3. טיפול היפראוסמוטי</div><div>
+<div><strong>Mannitol:</strong> <span class="dose">1 g/kg</span>.</div>
+<div><strong>או Hypertonic Saline 3%:</strong> <span class="dose">5 mL/kg</span>.</div>
+<div><strong>לאחר מכן:</strong> המשך טיפול אחזקתי.</div>
+</div></div>
+<div class="field"><div class="label">4. פרפוזיה מוחית</div><div>לוודא לחץ דם מספק לשמירה על Cerebral Perfusion Pressure.</div></div>
+<div class="field"><div class="label">5. הדמיה</div><div>הדמיה מוחית לאחר ייצוב המודינמי ונשימתי.</div></div>
 </div></section>
 
 <div class="actions" style="justify-content:center;margin-top:18px">
   <a class="btn" href="index.html">מסך ראשי</a>
   <a class="btn primary" href="originals/DKA-Public.pdf" target="_blank" rel="noopener">מסמך מקור</a>
 </div>
-<div class="footer">Prototype v2 — מיועד לבדיקת מבנה, קריאות ו־UX לפני החלפת הדף הקיים.</div>
+<div class="footer">DKA — תקציר קליני מהיר</div>
+<a class="to-top" href="#top" aria-label="לראש הדף">↑ לראש הדף</a>
 </main>
 </body></html>
