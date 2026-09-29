@@ -1,51 +1,127 @@
 <!DOCTYPE html>
 <html lang="he" dir="rtl">
 <head>
-<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
 <meta name="theme-color" content="#0f4c81">
-<title>פרוטוקול טיפול ב־DKA</title>
-<link rel="manifest" href="manifest.json"><link rel="stylesheet" href="style.css?v=2">
+<title>DKA — Prototype v2</title>
+<link rel="stylesheet" href="style.css">
+<style>
+:root{--blue:#0f4c81;--blue2:#176fa6;--blueSoft:#eef6fb;--green:#2e7d32;--greenSoft:#eef8ef;--orange:#b26a00;--orangeSoft:#fff6e8;--red:#b3261e;--redSoft:#fff0ef;--line:#dce6ee;--bg:#f4f8fb}
+*{box-sizing:border-box} html{scroll-behavior:smooth}
+body{margin:0;background:var(--bg);color:#1f2933;font-family:Arial,"Noto Sans Hebrew",sans-serif;line-height:1.55}
+.appbar{position:sticky;top:0;z-index:1000;display:flex;justify-content:space-between;gap:8px;padding:10px 12px;background:rgba(255,255,255,.97);border-bottom:1px solid var(--line)}
+.actions{display:flex;gap:8px}.btn{display:inline-flex;align-items:center;justify-content:center;min-height:44px;padding:9px 13px;border-radius:12px;border:1px solid var(--line);background:#fff;color:var(--blue);text-decoration:none;font-weight:700;cursor:pointer}.btn.primary{background:var(--blue);color:#fff;border-color:var(--blue)}
+.page{max-width:920px;margin:auto;padding:18px 14px 36px}.hero{background:linear-gradient(135deg,var(--blue),var(--blue2));color:#fff;border-radius:20px;padding:20px;margin-bottom:16px}.hero h1{margin:0 0 5px;font-size:2rem}.hero p{margin:0;color:#e9f4fb}.meta{margin-top:13px;display:flex;gap:8px;flex-wrap:wrap;font-size:14px}.meta span{background:rgba(255,255,255,.13);padding:6px 9px;border-radius:999px}
+.quick{display:flex;gap:8px;overflow:auto;padding:2px 0 12px}.quick a{flex:0 0 auto;text-decoration:none;color:var(--blue);background:#fff;border:1px solid var(--line);border-radius:999px;padding:8px 12px;font-weight:700;font-size:14px}
+.step{background:#fff;border:1px solid var(--line);border-radius:18px;margin:14px 0;overflow:hidden;box-shadow:0 3px 12px rgba(22,47,67,.05)}.head{display:flex;align-items:center;gap:12px;padding:14px 16px;background:var(--blueSoft);border-bottom:1px solid var(--line)}.num{flex:0 0 38px;width:38px;height:38px;border-radius:50%;display:flex;align-items:center;justify-content:center;background:var(--blue);color:#fff;font-size:19px;font-weight:800}.head h2{margin:0;color:var(--blue);font-size:1.25rem}.body{padding:15px 16px}
+.field{display:grid;grid-template-columns:130px 1fr;gap:10px;padding:9px 0;border-bottom:1px dashed #e5edf3}.field:last-child{border-bottom:0}.label{font-weight:800;color:#34495e}.dose{display:inline-block;background:#edf6ff;border:1px solid #cfe3f3;border-radius:8px;padding:3px 7px;font-weight:800;direction:ltr;unicode-bidi:isolate}
+.callout{border-radius:14px;padding:13px 14px;margin:12px 0;border-right:5px solid}.callout strong{display:block;margin-bottom:4px}.blue{background:var(--blueSoft);border-color:var(--blue)}.green{background:var(--greenSoft);border-color:var(--green)}.orange{background:var(--orangeSoft);border-color:var(--orange)}.red{background:var(--redSoft);border-color:var(--red)}
+.grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;margin-top:10px}.mini{border:1px solid var(--line);border-radius:14px;padding:12px;background:#fbfdff}.mini h3{margin:0 0 6px;color:var(--blue);font-size:1rem}
+ul{margin:0;padding-right:20px}li{margin:6px 0}.target{color:var(--green);font-weight:800}.danger{color:var(--red);font-weight:800}.footer{text-align:center;color:#66727d;font-size:13px;margin-top:18px}
+@media(max-width:700px){.page{padding:12px 10px 28px}.hero{border-radius:16px;padding:17px}.hero h1{font-size:1.65rem}.step{border-radius:15px}.head{padding:12px}.head h2{font-size:1.14rem}.body{padding:13px}.field{grid-template-columns:1fr;gap:3px;padding:10px 0}.label{font-size:15px;color:var(--blue)}.field>div:last-child{font-size:17px}.grid{grid-template-columns:1fr}.btn{font-size:14px;padding:8px 11px}}
+</style>
 </head>
 <body>
-<header><h1>פרוטוקול טיפול ב־DKA</h1><p>רפואה דחופה וטיפול נמרץ ילדים</p></header>
-<main>
-<a class="back-button" href="index.html">← חזרה לכל הפרוטוקולים</a>
-<a class="source-button" href="originals/DKA-Public.pdf" target="_blank">מסמך מקור</a>
-<section class="protocol-content">
-<div class="meta"><strong>תאריך אפקטיבי:</strong> ינואר 2026</div>
-<h2>אבחנה וחומרה</h2>
-<div class="info-box"><strong>DKA:</strong> גלוקוז מעל 200 מ״ג/ד״ל + קטונוריה + pH &lt; 7.3 ו/או HCO₃ &lt; 18 mmol/L.</div>
-<div class="table-container"><table class="clinical-table">
-<tr><th>חומרה</th><th>pH</th><th>HCO₃</th></tr>
-<tr><td>קל</td><td>7.2–7.3</td><td>10–18 mmol/L</td></tr>
-<tr><td>בינוני</td><td>7.1–7.2</td><td>5–10 mmol/L</td></tr>
-<tr><td>קשה</td><td>&lt;7.1</td><td>&lt;5 mmol/L</td></tr>
-</table></div>
-<h2>טיפול ראשוני בנוזלים</h2>
-<div class="treatment-box"><strong>שוק:</strong> NS 0.9% 20 mL/kg במשך 20 דקות; הערכה חוזרת ומנות נוספות לפי תגובה.</div>
-<div class="treatment-box"><strong>ללא שוק + התייבשות משמעותית:</strong> NS 0.9% 20 mL/kg במשך 30 דקות.</div>
-<div class="treatment-box"><strong>ללא שוק וללא התייבשות משמעותית:</strong> NS 0.9% 10 mL/kg במשך 30 דקות.</div>
-<h2>אינסולין וניטור</h2>
-<div class="info-box">Regular insulin 0.1 unit/kg/hour. הכנה: 50 יחידות Actrapid בתוך 50 מ״ל saline; קצב 0.1 mL/kg/hour.</div>
-<div class="monitoring-grid">
-<div class="monitor-box"><strong>כל שעה</strong><br>מצב הכרה, אישונים, סימנים חיוניים, פרפוזיה, DS</div>
-<div class="monitor-box"><strong>כל שעתיים</strong><br>גזים + אלקטרוליטים</div>
-<div class="monitor-box"><strong>כל 4 שעות</strong><br>כימיה + Mg + P</div>
-</div>
-<h2>גלוקוז ואשלגן</h2>
-<div class="table-container"><table class="clinical-table">
-<tr><th>DS</th><th>נוזל</th></tr>
-<tr><td>&gt;300</td><td>NaCl 0.9%</td></tr>
-<tr><td>200–300</td><td>Glucose 5% + NaCl 0.9%</td></tr>
-<tr><td>150–200</td><td>Glucose 10% + NaCl 0.9%</td></tr>
-<tr><td>70–150</td><td>Glucose 12.5% + NaCl 0.9%</td></tr>
-<tr><td>&lt;70</td><td>הפסקת אינסולין וייעוץ אנדוקרינולוג</td></tr>
-</table></div>
-<div class="warning-box">אשלגן מתחילים רק כאשר K &lt;5.5 ולאחר וידוא מתן שתן. 4–5.5: 40 mEq/L; 3.5–4: 60 mEq/L; מתחת 3.5: מוניטור + ECG ותיקון לפי פרוטוקול רוקחות.</div>
-<h2>בצקת מוחית</h2>
-<div class="danger-box"><strong>סימני אזהרה:</strong> כאב ראש, שינוי התנהגות, הקאות, ירידה בערנות; ובהחמרה ברדיקרדיה/יתר לחץ דם, שינוי הכרה, פגיעה בעצבים קרניאליים, פרכוסים או דיכוי נשימתי.</div>
-<div class="treatment-box"><strong>טיפול:</strong> ראש מיטה 30°, ראש מרכזי, נורמותרמיה; אינטובציה בייעוץ כונן; Mannitol 1 g/kg או Hypertonic saline 3% 5 mL/kg bolus.</div>
+
+<header class="appbar">
+  <div class="actions">
+    <button class="btn" onclick="history.back()">← חזרה</button>
+    <a class="btn" href="index.html">⌂ מסך ראשי</a>
+  </div>
+  <a class="btn primary" href="originals/DKA-Public.pdf" target="_blank" rel="noopener">מסמך מקור</a>
+</header>
+
+<main class="page">
+<section class="hero">
+  <h1>DKA — טיפול בילדים</h1>
+  <p>תקציר קליני מהיר המבוסס על פרוטוקול DKA</p>
+  <div class="meta"><span>גרסת מקור: ינואר 2026</span><span>תצוגת אפליקציה: 29.09.2026</span><span>Prototype v2</span></div>
 </section>
+
+<nav class="quick">
+  <a href="#diagnosis">אבחנה</a><a href="#fluids">נוזלים</a><a href="#insulin">אינסולין</a><a href="#monitor">ניטור</a><a href="#electrolytes">אלקטרוליטים</a><a href="#exit">יציאה</a><a href="#cerebral">בצקת מוחית</a>
+</nav>
+
+<section class="step" id="diagnosis"><div class="head"><div class="num">1</div><h2>אבחנה וקביעת חומרה</h2></div><div class="body">
+<div class="field"><div class="label">DKA</div><div><strong>גלוקוז &gt;200 mg/dL</strong> + <strong>pH &lt;7.3</strong> ו/או <strong>HCO₃⁻ &lt;18 mmol/L</strong> + קטונוריה.</div></div>
+<div class="field"><div class="label">בדיקות ראשוניות</div><div>גזים בדם, ספירת דם, כימיה מלאה, קטונים בשתן, HbA1C, TSH/FT4/FT3, anti-GAD, anti-IA2, anti-Insulin.</div></div>
+<div class="grid"><div class="mini"><h3>קל</h3>pH <strong>7.2–7.3</strong> ו/או HCO₃⁻ <strong>10–18</strong>.</div><div class="mini"><h3>בינוני</h3>pH <strong>7.1–7.2</strong> ו/או HCO₃⁻ <strong>5–10</strong>.</div><div class="mini"><h3>קשה</h3>pH <strong>&lt;7.1</strong> ו/או HCO₃⁻ <strong>&lt;5</strong>.</div></div>
+<div class="callout blue"><strong>כלל</strong> דרגת החומרה נקבעת לפי המדד החמור מבין pH ו־HCO₃⁻.</div>
+</div></section>
+
+<section class="step" id="fluids"><div class="head"><div class="num">2</div><h2>טיפול ראשוני — בולוס נוזלים</h2></div><div class="body">
+<div class="field"><div class="label">עם סימני שוק</div><div><span class="dose">NS 0.9% 20 mL/kg</span> במשך <strong>20 דקות</strong>, הערכה חוזרת; ניתן לחזור לפי תגובה.</div></div>
+<div class="field"><div class="label">ללא שוק + התייבשות משמעותית</div><div><span class="dose">NS 0.9% 20 mL/kg</span> במשך <strong>30 דקות</strong>, והערכה חוזרת.</div></div>
+<div class="field"><div class="label">ללא שוק + ללא התייבשות משמעותית</div><div><span class="dose">NS 0.9% 10 mL/kg</span> במשך <strong>30 דקות</strong>, והערכה חוזרת.</div></div>
+<div class="callout green"><strong>לאחר הבולוס הראשון, אם אין שוק</strong> הערכה קלינית: סימנים חיוניים, מצב הכרה והידרציה. גזים חוזרים כולל אלקטרוליטים לאחר שעה.</div>
+</div></section>
+
+<section class="step"><div class="head"><div class="num">3</div><h2>טיפול המשכי — נוזלים</h2></div><div class="body">
+<div class="field"><div class="label">קצב בסיס</div><div>קצב אחזקה שעתי לפי משקל + <span class="dose">1.5 mL/kg/hr</span>.</div></div>
+<div class="field"><div class="label">אחזקה</div><div>4 mL/kg/hr עבור 10 הק"ג הראשונים; 2 mL/kg/hr עבור 10 הק"ג הבאים; 1 mL/kg/hr לכל ק"ג מעל 20 ק"ג.</div></div>
+<div class="field"><div class="label">תוספת חסר</div><div><span class="dose">1.5 mL/kg/hr</span> = 70 mL/kg ל־48 שעות.</div></div>
+<div class="callout orange"><strong>בחירת שקית</strong> נקבעת לפי DS, נתרן ואשלגן כמפורט בהמשך.</div>
+</div></section>
+
+<section class="step" id="insulin"><div class="head"><div class="num">4</div><h2>אינסולין</h2></div><div class="body">
+<div class="field"><div class="label">מינון</div><div><span class="dose">0.1 unit/kg/hr</span>.</div></div>
+<div class="field"><div class="label">הכנה</div><div><strong>50 units ACTRAPID / REGULAR</strong> בתוך <strong>50 mL NS</strong> במשאבת מזרק.</div></div>
+<div class="field"><div class="label">קצב משאבה</div><div><span class="dose">0.1 mL/kg/hr</span>.</div></div>
+<div class="field"><div class="label">אשלגן</div><div>אם K <strong>&lt;3.5 mEq/L</strong> — להתחיל אינסולין לאחר מתן אשלגן.</div></div>
+<div class="callout red"><strong>אין להפחית מינון אינסולין</strong> לפני העלאת ריכוז הגלוקוז בתמיסה עד 12.5%.</div>
+</div></section>
+
+<section class="step" id="monitor"><div class="head"><div class="num">5</div><h2>ניטור</h2></div><div class="body">
+<div class="field"><div class="label">כל שעה</div><div>מצב הכרה, אישונים, סימנים חיוניים, פרפוזיה + DS.</div></div>
+<div class="field"><div class="label">כל שעתיים</div><div>גזים בדם כולל אלקטרוליטים.</div></div>
+<div class="field"><div class="label">כל 4 שעות</div><div>כימיה בדם כולל Mg ו־P.</div></div>
+</div></section>
+
+<section class="step" id="electrolytes"><div class="head"><div class="num">6</div><h2>גלוקוז, אשלגן, נתרן ופוספט</h2></div><div class="body">
+<h3>גלוקוז — הרכב שקית</h3>
+<div class="field"><div class="label">DS &gt;300</div><div>NaCl 0.9%.</div></div>
+<div class="field"><div class="label">DS 200–300</div><div>Glucose 5% + NaCl 0.9%.</div></div>
+<div class="field"><div class="label">DS 150–200</div><div>Glucose 10% + NaCl 0.9%.</div></div>
+<div class="field"><div class="label">DS 70–150</div><div>Glucose 12.5% + NaCl 0.9%.</div></div>
+<div class="field"><div class="label">DS &lt;70</div><div class="danger">להפסיק אינסולין ולהתייעץ עם אנדוקרינולוג.</div></div>
+
+<h3>אשלגן</h3>
+<div class="field"><div class="label">K &gt;5.5</div><div>נוזלים ללא אשלגן.</div></div>
+<div class="field"><div class="label">K 4–5.5</div><div><strong>40 mEq/L</strong>.</div></div>
+<div class="field"><div class="label">K 3.5–4</div><div><strong>60 mEq/L</strong>.</div></div>
+<div class="field"><div class="label">K &lt;3.5</div><div>מוניטור קרדיאלי + אק"ג; תיקון מהיר <span class="dose">0.5–1 mEq/kg</span>, מקסימום 20 mEq, לפי פרוטוקול שירותי רוקחות; לאחר מכן 60 mEq/L בנוזלי אחזקה.</div></div>
+<div class="callout orange"><strong>התחלת אשלגן</strong> רק כאשר K מתחת ל־5.5 ורק לאחר וידוא מתן שתן.</div>
+
+<h3>נתרן</h3>
+<div class="field"><div class="label">נתרן מתוקן</div><div><span class="dose">Na + 0.016 × (Glu − 100)</span></div></div>
+<div class="field"><div class="label">&lt;145</div><div>NaCl 0.9%.</div></div>
+<div class="field"><div class="label">&gt;145</div><div>NaCl 0.45%.</div></div>
+
+<h3>פוספט</h3>
+<div class="field"><div class="label">P &lt;1 או חולשת שרירים</div><div>תיקון IV לפי פרוטוקול שירותי רוקחות.</div></div>
+
+<h3>סודיום ביקרבונט</h3>
+<div class="callout red"><strong>רק בייעוץ כונן</strong> כאשר pH &lt;6.9, יש לשקול רק בנוכחות תפקוד לב ירוד, אי־יציבות המודינמית או היפרקלמיה מסכנת חיים. מתן ביקרבונט מעלה סיכון לבצקת מוחית.</div>
+</div></section>
+
+<section class="step" id="exit"><div class="head"><div class="num">7</div><h2>יציאה מפרוטוקול ומעבר ל־SC</h2></div><div class="body">
+<ul><li><span class="target">pH &gt;7.3</span> ו/או <span class="target">HCO₃⁻ &gt;18 mmol/L</span>.</li><li>המטופל רוצה ויכול לאכול פומית, ללא בחילות/הקאות.</li><li>15 דקות לאחר מתן אינסולין SC ניתן לאכול ולהפסיק אינסולין IV.</li><li>ב־DKA קל, אם אינו מקיא ומסוגל לאכול, ניתן להתחיל טיפול SC.</li></ul>
+</div></section>
+
+<section class="step" id="cerebral"><div class="head"><div class="num">!</div><h2>בצקת מוחית — זיהוי וטיפול</h2></div><div class="body">
+<div class="callout red"><strong>סימנים מוקדמים</strong> כאב ראש, שינוי התנהגות/אי־שקט, בחילות או הקאות מתמשכות, תגובה שאינה תואמת לכאב, ירידה בערנות.</div>
+<div class="callout red"><strong>סימנים מתקדמים</strong> ברדיקרדיה ו/או יתר לחץ דם, שינוי במצב הכרה, שיתוק עצבים קרניאליים, פפילאדמה, פרכוסים או דיכוי נשימתי.</div>
+<div class="field"><div class="label">Neuroprotection</div><div>ראש מיטה 30°, ראש במנח מרכזי, נורמותרמיה.</div></div>
+<div class="field"><div class="label">נתיב אוויר</div><div>אינטובציה בייעוץ כונן; להימנע מהיפרונטילציה ככל האפשר.</div></div>
+<div class="field"><div class="label">טיפול היפראוסמוטי</div><div>Mannitol <span class="dose">1 g/kg</span> או Hypertonic Saline 3% <span class="dose">5 mL/kg</span>, עם המשך טיפול אחזקתי.</div></div>
+<div class="field"><div class="label">המשך</div><div>לוודא לחץ דם מספק לשמירת Cerebral Perfusion Pressure; הדמיה מוחית לאחר ייצוב המודינמי ונשימתי.</div></div>
+</div></section>
+
+<div class="actions" style="justify-content:center;margin-top:18px">
+  <a class="btn" href="index.html">מסך ראשי</a>
+  <a class="btn primary" href="originals/DKA-Public.pdf" target="_blank" rel="noopener">מסמך מקור</a>
+</div>
+<div class="footer">Prototype v2 — מיועד לבדיקת מבנה, קריאות ו־UX לפני החלפת הדף הקיים.</div>
 </main>
-<script src="app.js"></script>
 </body></html>
