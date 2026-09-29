@@ -1,6 +1,6 @@
-const CACHE = "picu-v13";
+const CACHE = "picu-v14";
 
-const APP_SHELL = [
+const PRECACHE = [
   "./",
   "./index.html",
   "./style.css",
@@ -9,70 +9,54 @@ const APP_SHELL = [
   "./dka.html",
   "./bleeding.html",
   "./anticoagulation.html",
-  "./bivalirudin.html",
   "./warfarin.html",
   "./feeding.html",
   "./air-embolism.html",
   "./delirium.html",
   "./pain.html",
-  "./burn-pain.html",
   "./chylothorax.html",
+  "./bivalirudin.html",
+  "./burn-pain.html",
   "./assets/icon-192.png",
-  "./assets/icon-512.png",
-  "./assets/chylothorax-protocol.png"
+  "./assets/icon-512.png"
 ];
 
 self.addEventListener("install", event => {
   event.waitUntil(
-    caches.open(CACHE).then(cache => cache.addAll(APP_SHELL))
+    caches.open(CACHE).then(cache => cache.addAll(PRECACHE))
   );
-
   self.skipWaiting();
 });
 
 self.addEventListener("activate", event => {
   event.waitUntil(
-    caches.keys().then(keys =>
-      Promise.all(
-        keys
-          .filter(key => key !== CACHE)
-          .map(key => caches.delete(key))
+    caches.keys()
+      .then(keys =>
+        Promise.all(
+          keys
+            .filter(key => key !== CACHE)
+            .map(key => caches.delete(key))
+        )
       )
-    )
+      .then(() => self.clients.claim())
   );
-
-  self.clients.claim();
 });
 
 self.addEventListener("fetch", event => {
+  if (event.request.method !== "GET") return;
+
   const request = event.request;
-
-  if (request.method !== "GET") return;
-
-  // Do not cache partial PDF/range requests
-  if (request.headers.has("range")) {
-    event.respondWith(fetch(request));
-    return;
-  }
-
-  // Only manage files from this app
   const url = new URL(request.url);
 
-  if (url.origin !== self.location.origin) {
-    return;
-  }
+  if (url.origin !== self.location.origin) return;
 
   event.respondWith(
-    fetch(request)
+    fetch(request, { cache: "no-store" })
       .then(response => {
-        if (response && response.ok) {
+        if (response && response.status === 200) {
           const copy = response.clone();
-
-          caches.open(CACHE).then(cache => {
-            cache.put(request, copy);
-          });
+          caches.open(CACHE).then(cache => cache.put(request, copy));
         }
-
         return response;
       })
       .catch(() =>
