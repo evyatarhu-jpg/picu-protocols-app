@@ -1,4 +1,4 @@
-const CACHE = "picu-v12";
+const CACHE = "picu-v13";
 
 const APP_SHELL = [
   "./",
