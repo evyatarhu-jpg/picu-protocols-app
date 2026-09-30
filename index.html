@@ -5,23 +5,68 @@
 <meta name="theme-color" content="#0f4c81">
 <title>פרוטוקולי PICU / PCICU</title>
 <link rel="manifest" href="manifest.json"><link rel="stylesheet" href="style.css?v=2">
+
+<style id="home-ui-v2">
+.protocol-card{
+    position:relative;
+    overflow:hidden;
+}
+
+/* צבע קבוע לפי קטגוריה */
+.cat-emergency .protocol-card{
+    border-right:6px solid #F0A24B;
+}
+
+.cat-coag .protocol-card{
+    border-right:6px solid #D95B73;
+}
+
+.cat-pcicu .protocol-card{
+    border-right:6px solid #4A90C2;
+}
+
+.cat-pain .protocol-card{
+    border-right:6px solid #8A6FB5;
+}
+
+/* כפתור חזרה לראש הדף */
+.home-to-top{
+    position:fixed;
+    left:14px;
+    bottom:16px;
+    z-index:1200;
+    display:inline-flex;
+    align-items:center;
+    gap:4px;
+    padding:7px 10px;
+    border-radius:999px;
+    background:#0f4c81;
+    color:#fff;
+    text-decoration:none;
+    font-weight:800;
+    font-size:13px;
+    border:2px solid #fff;
+    box-shadow:0 5px 14px rgba(15,76,129,.24);
+}
+</style>
+
 </head>
-<body>
-<header><h1>פרוטוקולי PICU / PCICU</h1><p>גישה מהירה לפרוטוקולים המחלקתיים</p></header>
+<body id="top">
+<header><h1>פרוטוקולי PICU / PCICU</h1></header>
 <main>
 <div class="search-container"><input id="searchInput" placeholder="חיפוש פרוטוקול..." autocomplete="off"></div>
-<section class="category"><h2>מצבי חירום ומטבוליזם</h2><div class="protocol-grid"><a class="protocol-card" href="dka.html" data-name="DKA סוכרת קטואצידוזיס">
-        <span class="icon">🚨</span><div><h3>טיפול ב־DKA</h3><p>אבחנה, נוזלים, אינסולין, אלקטרוליטים וניטור</p></div></a></div></section><section class="category"><h2>קרישה ואנטיקואגולציה</h2><div class="protocol-grid"><a class="protocol-card" href="anticoagulation.html?v=2" data-name="טרומבוליטי אנטיקואגולציה TPA Heparin Clexane Xarelto">
+<section class="category cat-emergency"><h2>מצבי חירום ומטבוליזם</h2><div class="protocol-grid"><a class="protocol-card" href="dka.html" data-name="DKA סוכרת קטואצידוזיס">
+        <span class="icon">🚨</span><div><h3>טיפול ב־DKA</h3><p>אבחנה, נוזלים, אינסולין, אלקטרוליטים וניטור</p></div></a></div></section><section class="category cat-coag"><h2>קרישה ואנטיקואגולציה</h2><div class="protocol-grid"><a class="protocol-card" href="anticoagulation.html?v=2" data-name="טרומבוליטי אנטיקואגולציה TPA Heparin Clexane Xarelto">
         <span class="icon">🩸</span><div><h3>טרומבוליזה ואנטיקואגולציה</h3><p>TPA, Heparin, Clexane, Xarelto</p></div></a><a class="protocol-card" href="warfarin.html" data-name="קומדין warfarin INR">
         <span class="icon">💊</span><div><h3>קומדין / Warfarin</h3><p>מינון, INR, טיטרציה והיפוך</p></div></a><a class="protocol-card" href="bivalirudin.html" data-name="ביוולירודין אנגיומקס bivalirudin angiomax HIT קרישה אנטיקואגולציה">
 <span class="icon">💉</span><div>
 <h3>Bivalirudin / Angiomax</h3>
 <p>מעכב ישיר של תרומבין, HIT, מינון וניטור aPTT</p>
-</div></a></div></section><section class="category"><h2>PCICU ולאחר ניתוח לב</h2><div class="protocol-grid"><a class="protocol-card" href="bleeding.html" data-name="דימום ניתוח לב bleeding">
+</div></a></div></section><section class="category cat-pcicu"><h2>PCICU ולאחר ניתוח לב</h2><div class="protocol-grid"><a class="protocol-card" href="bleeding.html" data-name="דימום ניתוח לב bleeding">
         <span class="icon">❤️</span><div><h3>דימום לאחר ניתוח לב</h3><p>ניקוזים, יעדים, מוצרי דם ו־MTP</p></div></a><a class="protocol-card" href="feeding.html" data-name="הזנה אנטרלית nutrition cardiac feeding">
         <span class="icon">🍼</span><div><h3>הזנה אנטרלית בחולי לב</h3><p>רמזור, VIS, סיכון והתקדמות הזנה</p></div></a><a class="protocol-card" href="chylothorax.html" data-name="כילותורקס chylothorax">
         <span class="icon">🫁</span><div><h3>כילותורקס</h3><p>אבחנה, סיווג ואלגוריתם טיפול</p></div></a><a class="protocol-card" href="air-embolism.html" data-name="תסחיף אוויר מוח cerebral air embolism">
-        <span class="icon">🧠</span><div><h3>תסחיף אוויר מוחי</h3><p>חשד, CT, תא לחץ וסדר פעולות</p></div></a></div></section><section class="category"><h2>כאב, סדציה ודליריום</h2><div class="protocol-grid"><a class="protocol-card" href="delirium.html" data-name="דליריום CAPD sedation">
+        <span class="icon">🧠</span><div><h3>תסחיף אוויר מוחי</h3><p>חשד, CT, תא לחץ וסדר פעולות</p></div></a></div></section><section class="category cat-pain"><h2>כאב, סדציה ודליריום</h2><div class="protocol-grid"><a class="protocol-card" href="delirium.html" data-name="דליריום CAPD sedation">
         <span class="icon">🧠</span><div><h3>דליריום</h3><p>CAPD, מניעה, טיפול וגמילה</p></div></a><a class="protocol-card" href="pain.html" data-name="כאב analgesia pain">
         <span class="icon">💉</span><div><h3>טיפול בכאב</h3><p>Multimodal analgesia ומינונים מרכזיים</p></div></a><a class="protocol-card" href="burn-pain.html" data-name="כאב לאחר כוויות burn pain burns analgesia sedation">
 <span class="icon">🔥</span><div>
@@ -30,6 +75,7 @@
 </div></a></div></section>
 <div id="noResults">לא נמצאו פרוטוקולים מתאימים</div>
 </main>
-<footer>גרסה ראשונה | פרוטוקולים מחלקתיים</footer>
+
+<a class="home-to-top" href="#top">↑ לראש הדף</a>
 <script src="app.js"></script>
 </body></html>
