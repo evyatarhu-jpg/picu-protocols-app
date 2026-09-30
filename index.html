@@ -50,25 +50,52 @@
 }
 </style>
 
+
+<style id="search-upgrade-css">
+.search-container{
+    display:flex;
+    align-items:center;
+    gap:8px;
+}
+.search-container input{
+    flex:1;
+}
+#voiceSearch{
+    flex:0 0 46px;
+    width:46px;
+    height:46px;
+    border-radius:50%;
+    border:1px solid #d5e1ea;
+    background:#fff;
+    font-size:21px;
+    cursor:pointer;
+    box-shadow:0 2px 7px rgba(15,76,129,.08);
+}
+#voiceSearch.listening{
+    background:#fff0ef;
+    border-color:#d62828;
+}
+</style>
+
 </head>
 <body id="top">
 <header><h1>פרוטוקולי PICU / PCICU</h1></header>
 <main>
-<div class="search-container"><input id="searchInput" placeholder="חיפוש פרוטוקול..." autocomplete="off"></div>
-<section class="category cat-emergency"><h2>מצבי חירום ומטבוליזם</h2><div class="protocol-grid"><a class="protocol-card" href="dka.html" data-name="DKA סוכרת קטואצידוזיס">
+<div class="search-container"><input id="searchInput" placeholder="חיפוש פרוטוקול..." autocomplete="off"><button id="voiceSearch" type="button" aria-label="חיפוש קולי" title="חיפוש קולי">🎙️</button></div>
+<section class="category cat-emergency"><h2>מצבי חירום ומטבוליזם</h2><div class="protocol-grid"><a class="protocol-card" href="dka.html" data-name="DKA קטואצידוזיס סוכרת diabetic ketoacidosis glucose insulin אינסולין גלוקוז">
         <span class="icon">🚨</span><div><h3>טיפול ב־DKA</h3><p>אבחנה, נוזלים, אינסולין, אלקטרוליטים וניטור</p></div></a></div></section><section class="category cat-coag"><h2>קרישה ואנטיקואגולציה</h2><div class="protocol-grid"><a class="protocol-card" href="anticoagulation.html?v=2" data-name="טרומבוליטי אנטיקואגולציה TPA Heparin Clexane Xarelto">
-        <span class="icon">🩸</span><div><h3>טרומבוליזה ואנטיקואגולציה</h3><p>TPA, Heparin, Clexane, Xarelto</p></div></a><a class="protocol-card" href="warfarin.html" data-name="קומדין warfarin INR">
-        <span class="icon">💊</span><div><h3>קומדין / Warfarin</h3><p>מינון, INR, טיטרציה והיפוך</p></div></a><a class="protocol-card" href="bivalirudin.html" data-name="ביוולירודין אנגיומקס bivalirudin angiomax HIT קרישה אנטיקואגולציה">
+        <span class="icon">🩸</span><div><h3>טרומבוליזה ואנטיקואגולציה</h3><p>TPA, Heparin, Clexane, Xarelto</p></div></a><a class="protocol-card" href="warfarin.html" data-name="קומדין warfarin coumadin INR vitamin K ויטמין קיי קרישה">
+        <span class="icon">💊</span><div><h3>קומדין / Warfarin</h3><p>מינון, INR, טיטרציה והיפוך</p></div></a><a class="protocol-card" href="bivalirudin.html" data-name="bivalirudin angiomax HIT heparin induced thrombocytopenia תרומבין direct thrombin inhibitor">
 <span class="icon">💉</span><div>
 <h3>Bivalirudin / Angiomax</h3>
 <p>מעכב ישיר של תרומבין, HIT, מינון וניטור aPTT</p>
-</div></a></div></section><section class="category cat-pcicu"><h2>PCICU ולאחר ניתוח לב</h2><div class="protocol-grid"><a class="protocol-card" href="bleeding.html" data-name="דימום ניתוח לב bleeding">
-        <span class="icon">❤️</span><div><h3>דימום לאחר ניתוח לב</h3><p>ניקוזים, יעדים, מוצרי דם ו־MTP</p></div></a><a class="protocol-card" href="feeding.html" data-name="הזנה אנטרלית nutrition cardiac feeding">
-        <span class="icon">🍼</span><div><h3>הזנה אנטרלית בחולי לב</h3><p>רמזור, VIS, סיכון והתקדמות הזנה</p></div></a><a class="protocol-card" href="chylothorax.html" data-name="כילותורקס chylothorax">
-        <span class="icon">🫁</span><div><h3>כילותורקס</h3><p>אבחנה, סיווג ואלגוריתם טיפול</p></div></a><a class="protocol-card" href="air-embolism.html" data-name="תסחיף אוויר מוח cerebral air embolism">
-        <span class="icon">🧠</span><div><h3>תסחיף אוויר מוחי</h3><p>חשד, CT, תא לחץ וסדר פעולות</p></div></a></div></section><section class="category cat-pain"><h2>כאב, סדציה ודליריום</h2><div class="protocol-grid"><a class="protocol-card" href="delirium.html" data-name="דליריום CAPD sedation">
-        <span class="icon">🧠</span><div><h3>דליריום</h3><p>CAPD, מניעה, טיפול וגמילה</p></div></a><a class="protocol-card" href="pain.html" data-name="כאב analgesia pain">
-        <span class="icon">💉</span><div><h3>טיפול בכאב</h3><p>Multimodal analgesia ומינונים מרכזיים</p></div></a><a class="protocol-card" href="burn-pain.html" data-name="כאב לאחר כוויות burn pain burns analgesia sedation">
+</div></a></div></section><section class="category cat-pcicu"><h2>PCICU ולאחר ניתוח לב</h2><div class="protocol-grid"><a class="protocol-card" href="bleeding.html" data-name="דימום ניתוח לב bleeding cardiac surgery hemorrhage MTP massive transfusion מוצרי דם קרישה">
+        <span class="icon">❤️</span><div><h3>דימום לאחר ניתוח לב</h3><p>ניקוזים, יעדים, מוצרי דם ו־MTP</p></div></a><a class="protocol-card" href="feeding.html" data-name="הזנה אנטרלית enteral feeding nutrition cardiac congenital heart VIS כלכלה הזנה">
+        <span class="icon">🍼</span><div><h3>הזנה אנטרלית בחולי לב</h3><p>רמזור, VIS, סיכון והתקדמות הזנה</p></div></a><a class="protocol-card" href="chylothorax.html" data-name="כילותורקס chylothorax chyle לימפה octreotide אוקטראוטייד MCT">
+        <span class="icon">🫁</span><div><h3>כילותורקס</h3><p>אבחנה, סיווג ואלגוריתם טיפול</p></div></a><a class="protocol-card" href="air-embolism.html" data-name="תסחיף אוויר מוחי cerebral air embolism hyperbaric תא לחץ CT נוירולוגיה">
+        <span class="icon">🧠</span><div><h3>תסחיף אוויר מוחי</h3><p>חשד, CT, תא לחץ וסדר פעולות</p></div></a></div></section><section class="category cat-pain"><h2>כאב, סדציה ודליריום</h2><div class="protocol-grid"><a class="protocol-card" href="delirium.html" data-name="דליריום delirium CAPD sedation סדציה risperidone ריספרדל clonidine clonidine methadone">
+        <span class="icon">🧠</span><div><h3>דליריום</h3><p>CAPD, מניעה, טיפול וגמילה</p></div></a><a class="protocol-card" href="pain.html" data-name="כאב analgesia pain morphine מורפין ketorolac קטורולק paracetamol אקמול dipyrone אופטלגין oxycodone">
+        <span class="icon">💉</span><div><h3>טיפול בכאב</h3><p>Multimodal analgesia ומינונים מרכזיים</p></div></a><a class="protocol-card" href="burn-pain.html" data-name="כוויות burn burns pain analgesia sedation כאב סדציה fentanyl פנטניל ketamine קטמין dexmedetomidine precedex propofol">
 <span class="icon">🔥</span><div>
 <h3>כאב לאחר כוויות</h3>
 <p>אנלגזיה וסדציה לפי היקף הכוויה, גיל ומצב הנשמה</p>
