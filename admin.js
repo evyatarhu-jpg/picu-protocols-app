@@ -16,7 +16,11 @@ const protocolNames = {
   "air-embolism":"תסחיף אוויר מוחי",
   delirium:"דליריום",
   pain:"טיפול בכאב",
-  "burn-pain":"כאב בכוויות"
+  "burn-pain":"כאב בכוויות",
+  tbi:"חבלת ראש טראומטית - TBI",
+  sildenafil:"I.V. Sildenafil",
+  levosimendan:"Levosimendan",
+  iloprost:"Iloprost / Ilomedin"
 };
 
 const issueLabels = {

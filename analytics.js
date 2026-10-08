@@ -20,7 +20,11 @@
     "air-embolism.html": "air-embolism",
     "delirium.html": "delirium",
     "pain.html": "pain",
-    "burn-pain.html": "burn-pain"
+    "burn-pain.html": "burn-pain",
+    "tbi.html": "tbi",
+    "sildenafil.html": "sildenafil",
+    "levosimendan.html": "levosimendan",
+    "iloprost.html": "iloprost"
   };
 
   function uuid() {

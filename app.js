@@ -104,6 +104,15 @@ const protocolAliases = {
     "טיפול בכאב"
   ],
 
+
+  "tbi.html": ["tbi","טי בי איי","חבלת ראש","פגיעת ראש","טראומה ראש","נוירוטראומה","icp","cpp"],
+
+  "sildenafil.html": ["sildenafil","סילדנפיל","סילדאפיל","revatio","רבאטיו","יתר לחץ דם ריאתי","pulmonary hypertension"],
+
+  "levosimendan.html": ["levosimendan","לבוסימנדן","לבוסימנדאן","simdax","סימדקס","אי ספיקת לב","מיוקרדיטיס"],
+
+  "iloprost.html": ["iloprost","אילופרוסט","אילומדין","ilomedin","גפה איסכמית","איסכמיה בגפה"],
+
   "burn-pain.html": [
     "כאב",
     "כוויות",

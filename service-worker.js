@@ -1,4 +1,4 @@
-const CACHE = "picu-v23";
+const CACHE = "picu-v25";
 
 const PRECACHE = [
   "./",
@@ -17,6 +17,11 @@ const PRECACHE = [
   "./chylothorax.html",
   "./bivalirudin.html",
   "./burn-pain.html",
+  "./tbi.html",
+  "./sildenafil.html",
+  "./levosimendan.html",
+  "./iloprost.html",
+  "./assets/tbi-algorithm.png",
   "./assets/icon-192.png",
   "./assets/icon-512.png"
 ];
