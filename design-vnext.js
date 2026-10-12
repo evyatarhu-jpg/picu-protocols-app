@@ -11,6 +11,8 @@
     file: '<svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M7 3h7l4 4v14H7z" stroke-width="2" stroke-linejoin="round"/><path d="M14 3v5h5M10 12h5M10 16h5" stroke-width="2" stroke-linecap="round"/></svg>',
     gear: '<svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M12 15.2a3.2 3.2 0 1 0 0-6.4 3.2 3.2 0 0 0 0 6.4Z" stroke-width="2"/><path d="M19.4 15a1.8 1.8 0 0 0 .36 1.99l.05.05-2.77 2.77-.05-.05A1.8 1.8 0 0 0 15 19.4a1.8 1.8 0 0 0-1.1 1.64V21h-3.8v-.07A1.8 1.8 0 0 0 9 19.4a1.8 1.8 0 0 0-1.99.36l-.05.05-2.77-2.77.05-.05A1.8 1.8 0 0 0 4.6 15a1.8 1.8 0 0 0-1.64-1.1H3v-3.8h.07A1.8 1.8 0 0 0 4.6 9a1.8 1.8 0 0 0-.36-1.99l-.05-.05 2.77-2.77.05.05A1.8 1.8 0 0 0 9 4.6a1.8 1.8 0 0 0 1.1-1.64V3h3.8v.07A1.8 1.8 0 0 0 15 4.6a1.8 1.8 0 0 0 1.99-.36l.05-.05 2.77 2.77-.05.05A1.8 1.8 0 0 0 19.4 9a1.8 1.8 0 0 0 1.64 1.1H21v3.8h-.07A1.8 1.8 0 0 0 19.4 15Z" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg>',
     up: '<svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="m6 14 6-6 6 6" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>',
+    sun: '<svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><circle cx="12" cy="12" r="4" stroke-width="2"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41" stroke-width="2" stroke-linecap="round"/></svg>',
+    moon: '<svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M20.5 15.3A8.4 8.4 0 0 1 8.7 3.5 8.6 8.6 0 1 0 20.5 15.3Z" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>',
     close: '×'
   };
 
@@ -40,6 +42,9 @@
     if (meta) meta.setAttribute('content', resolved === 'dark' ? '#0b1117' : '#0f5b8d');
     document.querySelectorAll('.vnext-theme-option').forEach(btn => {
       btn.setAttribute('aria-pressed', String(btn.dataset.themeChoice === choice));
+    });
+    document.querySelectorAll('.vnext-quick-theme').forEach(btn => {
+      btn.setAttribute('aria-pressed', String(btn.dataset.quickTheme === resolved));
     });
   }
 
@@ -176,7 +181,7 @@
     dock.innerHTML = `
       <a href="index.html" aria-label="מסך ראשי">${svg.home}<span>ראשי</span></a>
       <a class="source-action" href="${escapeAttr(sourceHref)}" target="_blank" rel="noopener" aria-label="מסמך מקור">${svg.file}<span>מקור</span></a>
-      <button type="button" class="vnext-scroll-top" aria-label="לראש הדף">${svg.up}<span>למעלה</span></button>`;
+      <button type="button" class="vnext-scroll-top" aria-label="לראש הדף">${svg.up}<span>לראש הדף</span></button>`;
     document.body.appendChild(dock);
     dock.querySelector('.vnext-scroll-top').addEventListener('click', () => window.scrollTo({ top:0, behavior:'smooth' }));
 
@@ -189,11 +194,22 @@
 
     // A deliberate screen touch/click reveals the controls for 20 seconds.
     document.addEventListener('pointerdown', e => {
-      if (e.target.closest('.vnext-settings-backdrop') || e.target.closest('.vnext-settings-toggle')) return;
+      if (e.target.closest('.vnext-settings-backdrop') || e.target.closest('.vnext-settings-toggle') || e.target.closest('.vnext-quick-theme')) return;
       showDock();
     }, { passive:true });
 
     dock.addEventListener('focusin', showDock);
+
+    // Scrolling/swiping is also an intentional interaction.
+    // Show the dock while the user navigates the page, then fade it 20 sec
+    // after the final scroll event.
+    window.addEventListener('scroll', () => {
+      if (window.scrollY > 90) showDock();
+      else {
+        dock.classList.remove('is-visible');
+        clearTimeout(dockTimer);
+      }
+    }, { passive:true });
   }
 
   function initHome(settings) {
@@ -201,9 +217,31 @@
     const header = document.querySelector('body > header');
     if (!header) return;
 
+    const tools = document.createElement('div');
+    tools.className = 'vnext-home-tools';
+
+    const lightBtn = makeIconButton('מצב בהיר', svg.sun, 'vnext-quick-theme');
+    lightBtn.dataset.quickTheme = 'light';
+    lightBtn.addEventListener('click', e => {
+      e.stopPropagation();
+      safeSet(STORAGE_THEME, 'light');
+      applyTheme('light');
+    });
+
+    const darkBtn = makeIconButton('מצב כהה', svg.moon, 'vnext-quick-theme');
+    darkBtn.dataset.quickTheme = 'dark';
+    darkBtn.addEventListener('click', e => {
+      e.stopPropagation();
+      safeSet(STORAGE_THEME, 'dark');
+      applyTheme('dark');
+    });
+
     const settingsBtn = makeIconButton('הגדרות', svg.gear, 'vnext-settings-toggle');
     settingsBtn.addEventListener('click', e => { e.stopPropagation(); settings?.open(); });
-    header.appendChild(settingsBtn);
+
+    tools.append(lightBtn, darkBtn, settingsBtn);
+    header.appendChild(tools);
+    applyTheme();
 
     const onScroll = () => header.classList.toggle('is-compact', window.scrollY > 44);
     onScroll();
@@ -213,7 +251,7 @@
     topBtn.type = 'button';
     topBtn.className = 'vnext-home-top-dock';
     topBtn.setAttribute('aria-label', 'לראש הדף');
-    topBtn.innerHTML = svg.up;
+    topBtn.innerHTML = `${svg.up}<span>לראש הדף</span>`;
     topBtn.addEventListener('click', () => window.scrollTo({ top:0, behavior:'smooth' }));
     document.body.appendChild(topBtn);
 
@@ -225,10 +263,16 @@
       timer = setTimeout(() => topBtn.classList.remove('is-visible'), 20000);
     };
     document.addEventListener('pointerdown', e => {
-      if (e.target.closest('.vnext-settings-backdrop') || e.target.closest('.vnext-settings-toggle')) return;
+      if (e.target.closest('.vnext-settings-backdrop') || e.target.closest('.vnext-settings-toggle') || e.target.closest('.vnext-quick-theme')) return;
       show();
     }, { passive:true });
-    window.addEventListener('scroll', () => { if (window.scrollY < 120) topBtn.classList.remove('is-visible'); }, { passive:true });
+    window.addEventListener('scroll', () => {
+      if (window.scrollY > 180) show();
+      else if (window.scrollY < 120) {
+        topBtn.classList.remove('is-visible');
+        clearTimeout(timer);
+      }
+    }, { passive:true });
   }
 
   function escapeHtml(value) {

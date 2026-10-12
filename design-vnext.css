@@ -796,3 +796,115 @@ html[data-theme="dark"] body.vnext-protocol .step{
   body.vnext-protocol .hero{padding:19px 17px !important}
   body.vnext-protocol .step .head h2{font-size:18px !important}
 }
+
+
+/* v29 — make "back to top" discoverable during scroll */
+.vnext-home-top-dock{
+  width:auto !important;
+  min-width:118px !important;
+  height:48px !important;
+  padding:0 14px !important;
+  gap:7px !important;
+  border-radius:16px !important;
+  font:inherit;
+  font-size:13px !important;
+  font-weight:850 !important;
+}
+.vnext-home-top-dock span{
+  display:inline-block;
+  white-space:nowrap;
+}
+@media(max-width:650px){
+  .vnext-home-top-dock{
+    left:12px;
+    bottom:calc(12px + var(--v-safe-bottom));
+    min-width:112px !important;
+    height:46px !important;
+  }
+}
+
+
+/* v30 — quick Light/Dark controls in the main header */
+body.vnext-home > header{
+  padding-left:154px !important;
+}
+
+body.vnext-home > header .vnext-home-tools{
+  position:absolute;
+  left:14px;
+  top:50%;
+  transform:translateY(-50%);
+  z-index:3;
+  display:flex;
+  align-items:center;
+  gap:6px;
+}
+
+body.vnext-home > header .vnext-home-tools .vnext-icon-button{
+  position:static !important;
+  transform:none !important;
+  width:38px !important;
+  min-width:38px !important;
+  height:38px !important;
+  min-height:38px !important;
+  border-radius:12px !important;
+  background:rgba(255,255,255,.10) !important;
+  border:1px solid rgba(255,255,255,.22) !important;
+  color:rgba(255,255,255,.86) !important;
+  backdrop-filter:blur(8px);
+}
+
+body.vnext-home > header .vnext-home-tools .vnext-icon-button:hover{
+  background:rgba(255,255,255,.18) !important;
+}
+
+body.vnext-home > header .vnext-home-tools .vnext-quick-theme[aria-pressed="true"]{
+  background:#fff !important;
+  color:#0f5b8d !important;
+  border-color:#fff !important;
+  box-shadow:0 4px 14px rgba(0,0,0,.15) !important;
+}
+
+body.vnext-home > header .vnext-home-tools .vnext-settings-toggle{
+  width:38px !important;
+  min-width:38px !important;
+  height:38px !important;
+  min-height:38px !important;
+}
+
+body.vnext-home > header.is-compact .vnext-home-tools .vnext-icon-button{
+  width:34px !important;
+  min-width:34px !important;
+  height:34px !important;
+  min-height:34px !important;
+  border-radius:11px !important;
+}
+
+html[data-theme="dark"] body.vnext-home > header .vnext-home-tools .vnext-quick-theme[aria-pressed="true"]{
+  background:#dcecf6 !important;
+  color:#0a4a72 !important;
+  border-color:#dcecf6 !important;
+}
+
+@media(max-width:650px){
+  body.vnext-home > header{
+    padding-left:132px !important;
+  }
+  body.vnext-home > header .vnext-home-tools{
+    left:10px;
+    gap:4px;
+  }
+  body.vnext-home > header .vnext-home-tools .vnext-icon-button{
+    width:34px !important;
+    min-width:34px !important;
+    height:34px !important;
+    min-height:34px !important;
+    border-radius:11px !important;
+  }
+  body.vnext-home > header.is-compact .vnext-home-tools .vnext-icon-button{
+    width:31px !important;
+    min-width:31px !important;
+    height:31px !important;
+    min-height:31px !important;
+  }
+}

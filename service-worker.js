@@ -1,4 +1,4 @@
-const CACHE = "picu-v28-design";
+const CACHE = "picu-v30-design";
 
 const PRECACHE = [
   "./",
