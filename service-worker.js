@@ -1,9 +1,11 @@
-const CACHE = "picu-v25";
+const CACHE = "picu-v28-design";
 
 const PRECACHE = [
   "./",
   "./index.html",
   "./style.css",
+  "./design-vnext.css",
+  "./design-vnext.js",
   "./app.js",
   "./manifest.json",
   "./dka.html",

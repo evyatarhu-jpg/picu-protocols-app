@@ -1,0 +1,16 @@
+PICU Protocols — Design vNext v27
+
+This is a stronger visual redesign of v26.
+Replace these files in the root of picu-protocols-app:
+- design-vnext.css
+- service-worker.js
+
+No medical content was changed.
+
+Visual changes:
+- Clearly redesigned home header and search surface.
+- Modern protocol list cards with icon tiles, chevron and category accents.
+- Stronger category hierarchy.
+- More distinct protocol hero/cards while preserving medical content.
+- Existing v26 behavior remains: compact sticky header, temporary 20-sec action dock, Settings, System/Light/Dark.
+- Service-worker cache bumped to picu-v27-design.

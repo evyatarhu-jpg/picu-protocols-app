@@ -1,0 +1,16 @@
+PICU Protocols — Design vNext v26
+
+Replace these files in the root of picu-protocols-app.
+Do not delete the originals/ or assets/ folders.
+
+Design changes only:
+- Sticky header that becomes compact on scroll and remains usable.
+- Redundant Back button removed at runtime.
+- Bottom quick actions appear after screen touch/click and fade after ~20 seconds.
+- Settings panel with System / Light / Dark modes.
+- Language setting scaffold prepared for future languages (Hebrew only for now).
+- Refined mobile-first visual system and consistent colored navigation pills.
+- Home screen also gets compact sticky header, Settings, dark mode and refined cards.
+
+No medical text was changed in any protocol HTML page.
+Service-worker cache version: picu-v26-design.

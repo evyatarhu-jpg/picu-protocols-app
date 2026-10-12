@@ -81,6 +81,9 @@
 }
 </style>
 
+
+<script id="vnext-theme-init">(function(){try{var c=localStorage.getItem("picu-ui-theme")||"system";var d=c==="dark"||(c==="system"&&window.matchMedia&&window.matchMedia("(prefers-color-scheme: dark)").matches);document.documentElement.dataset.theme=d?"dark":"light";document.documentElement.dataset.themeChoice=c;}catch(e){document.documentElement.dataset.theme="light";}})();</script>
+<link rel="stylesheet" href="design-vnext.css">
 </head>
 <body id="top">
 <header><h1>פרוטוקולי PICU / PCICU</h1></header>
@@ -111,4 +114,6 @@
 <script src="app.js"></script>
 <script src="analytics-config.js"></script>
 <script src="analytics.js"></script>
+
+<script src="design-vnext.js"></script>
 </body></html>

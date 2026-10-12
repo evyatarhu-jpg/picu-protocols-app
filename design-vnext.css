@@ -1,0 +1,798 @@
+/* PICU Protocols — Design vNext
+   Presentation-only layer. Loaded after the protocol's existing styles. */
+:root{
+  --v-bg:#f3f6f9;
+  --v-surface:#ffffff;
+  --v-surface-2:#f8fafc;
+  --v-text:#17212b;
+  --v-muted:#637381;
+  --v-line:#dbe4eb;
+  --v-blue:#0f5b8d;
+  --v-blue-2:#287ead;
+  --v-blue-soft:#eaf4fb;
+  --v-shadow:0 10px 32px rgba(22,47,67,.08);
+  --v-shadow-soft:0 4px 18px rgba(22,47,67,.07);
+  --v-radius:18px;
+  --v-safe-bottom:env(safe-area-inset-bottom,0px);
+}
+
+html[data-theme="dark"]{
+  color-scheme:dark;
+  --v-bg:#0b1117;
+  --v-surface:#111a22;
+  --v-surface-2:#16212b;
+  --v-text:#e8eef3;
+  --v-muted:#9eacb8;
+  --v-line:#293845;
+  --v-blue:#62b4e4;
+  --v-blue-2:#87c9ef;
+  --v-blue-soft:#152b3b;
+  --v-shadow:0 10px 34px rgba(0,0,0,.34);
+  --v-shadow-soft:0 4px 18px rgba(0,0,0,.24);
+
+  /* Override protocol-local variables where present. */
+  --bg:var(--v-bg);
+  --text:var(--v-text);
+  --line:var(--v-line);
+  --blue:#62b4e4;
+  --blue2:#287ead;
+  --blueSoft:#152b3b;
+  --green:#75c78a;
+  --greenSoft:#132a1d;
+  --orange:#efb45e;
+  --orangeSoft:#302311;
+  --red:#ff8d86;
+  --redSoft:#351918;
+  --info:#152b3b;
+  --ok:#132a1d;
+  --warn:#302311;
+  --danger:#351918;
+  --muted:var(--v-muted);
+}
+
+html,body{background:var(--v-bg)!important;color:var(--v-text)!important}
+body{
+  transition:background-color .22s ease,color .22s ease;
+  -webkit-tap-highlight-color:transparent;
+}
+body,button,input,select,textarea{font-family:Arial,"Noto Sans Hebrew",system-ui,-apple-system,sans-serif}
+
+/* ---------- Smart protocol header ---------- */
+body.vnext-protocol .appbar{
+  position:sticky!important;
+  top:0;
+  z-index:1600!important;
+  min-height:68px;
+  padding:10px max(12px,env(safe-area-inset-right)) 10px max(12px,env(safe-area-inset-left))!important;
+  background:color-mix(in srgb,var(--v-surface) 90%,transparent)!important;
+  border-bottom:1px solid color-mix(in srgb,var(--v-line) 82%,transparent)!important;
+  box-shadow:0 1px 0 rgba(22,47,67,.02);
+  backdrop-filter:saturate(135%) blur(16px);
+  -webkit-backdrop-filter:saturate(135%) blur(16px);
+  display:flex!important;
+  align-items:center!important;
+  gap:10px!important;
+  transition:min-height .22s ease,padding .22s ease,box-shadow .22s ease,background-color .22s ease;
+}
+body.vnext-protocol .appbar.is-compact{
+  min-height:52px;
+  padding-top:5px!important;
+  padding-bottom:5px!important;
+  box-shadow:0 6px 22px rgba(22,47,67,.10);
+}
+.vnext-appbar-title{
+  min-width:0;
+  flex:1 1 auto;
+  text-align:right;
+  color:var(--v-text);
+  line-height:1.2;
+}
+.vnext-appbar-title small{
+  display:block;
+  margin-bottom:2px;
+  color:var(--v-muted);
+  font-size:11px;
+  font-weight:700;
+  letter-spacing:.02em;
+  transition:opacity .18s ease,max-height .18s ease,margin .18s ease;
+}
+.vnext-appbar-title strong{
+  display:block;
+  max-width:100%;
+  overflow:hidden;
+  white-space:nowrap;
+  text-overflow:ellipsis;
+  font-size:17px;
+  font-weight:850;
+  color:var(--v-text);
+  transition:font-size .18s ease;
+}
+.appbar.is-compact .vnext-appbar-title small{opacity:0;max-height:0;margin:0;overflow:hidden}
+.appbar.is-compact .vnext-appbar-title strong{font-size:15px}
+body.vnext-protocol .appbar .actions{display:flex!important;gap:6px!important;flex:0 0 auto}
+body.vnext-protocol .appbar .btn,
+.vnext-icon-button{
+  width:42px!important;
+  min-width:42px!important;
+  height:42px!important;
+  min-height:42px!important;
+  padding:0!important;
+  border-radius:13px!important;
+  border:1px solid var(--v-line)!important;
+  background:var(--v-surface)!important;
+  color:var(--v-text)!important;
+  box-shadow:none!important;
+  display:inline-flex!important;
+  align-items:center!important;
+  justify-content:center!important;
+  text-decoration:none!important;
+  transition:transform .14s ease,background-color .18s ease,border-color .18s ease;
+}
+body.vnext-protocol .appbar .btn.primary{background:var(--v-blue)!important;color:#fff!important;border-color:var(--v-blue)!important}
+body.vnext-protocol .appbar .btn:active,.vnext-icon-button:active{transform:scale(.94)}
+body.vnext-protocol .appbar .btn svg,.vnext-icon-button svg{width:20px;height:20px;stroke:currentColor}
+.appbar.is-compact .btn,.appbar.is-compact .vnext-icon-button{width:38px!important;min-width:38px!important;height:38px!important;min-height:38px!important;border-radius:12px!important}
+
+/* Protocol content refinement */
+body.vnext-protocol .page{padding-top:14px!important}
+body.vnext-protocol .hero{
+  border-radius:22px!important;
+  box-shadow:0 10px 30px rgba(15,76,129,.15);
+  background:linear-gradient(135deg,#0e527f,#237eae)!important;
+}
+body.vnext-protocol .step{
+  background:var(--v-surface)!important;
+  border-color:var(--v-line)!important;
+  box-shadow:var(--v-shadow-soft)!important;
+  border-radius:18px!important;
+}
+body.vnext-protocol .head{background:var(--v-blue-soft)!important;border-color:var(--v-line)!important}
+body.vnext-protocol .body{color:var(--v-text)!important}
+body.vnext-protocol .field{border-color:var(--v-line)!important}
+body.vnext-protocol .label{color:var(--v-text)!important}
+body.vnext-protocol .mini,
+body.vnext-protocol details{background:var(--v-surface-2)!important;border-color:var(--v-line)!important;color:var(--v-text)!important}
+body.vnext-protocol .dose{border-color:color-mix(in srgb,var(--v-blue) 28%,var(--v-line))!important;background:var(--v-blue-soft)!important;color:var(--v-text)!important}
+body.vnext-protocol .protocol-image,
+body.vnext-protocol .algorithm{border-color:var(--v-line)!important;background:var(--v-surface)!important}
+
+/* Calm, consistent colored horizontal navigation */
+body.vnext-protocol .quick{
+  scrollbar-width:none;
+  padding:2px 1px 10px!important;
+  gap:8px!important;
+}
+body.vnext-protocol .quick::-webkit-scrollbar{display:none}
+body.vnext-protocol .quick a{
+  border:1px solid transparent!important;
+  border-radius:999px!important;
+  padding:8px 13px!important;
+  font-size:14px!important;
+  font-weight:800!important;
+  box-shadow:none!important;
+}
+body.vnext-protocol .quick a:nth-child(6n+1){background:#e9f3ff!important;border-color:#cbdff5!important;color:#145b8c!important}
+body.vnext-protocol .quick a:nth-child(6n+2){background:#edf8ef!important;border-color:#cde8d2!important;color:#2e6f42!important}
+body.vnext-protocol .quick a:nth-child(6n+3){background:#fff4e6!important;border-color:#f1d6ad!important;color:#965d12!important}
+body.vnext-protocol .quick a:nth-child(6n+4){background:#fff0f1!important;border-color:#efc8cd!important;color:#9d3e4a!important}
+body.vnext-protocol .quick a:nth-child(6n+5){background:#f3efff!important;border-color:#dcd1f5!important;color:#684c9b!important}
+body.vnext-protocol .quick a:nth-child(6n+6){background:#eaf8f7!important;border-color:#c9e7e4!important;color:#28716c!important}
+html[data-theme="dark"] body.vnext-protocol .quick a:nth-child(6n+1){background:#14283a!important;border-color:#294a63!important;color:#8dc9ef!important}
+html[data-theme="dark"] body.vnext-protocol .quick a:nth-child(6n+2){background:#15281b!important;border-color:#2b4b34!important;color:#9bd5a9!important}
+html[data-theme="dark"] body.vnext-protocol .quick a:nth-child(6n+3){background:#302313!important;border-color:#5a4020!important;color:#efbf78!important}
+html[data-theme="dark"] body.vnext-protocol .quick a:nth-child(6n+4){background:#331a1d!important;border-color:#5d3137!important;color:#f1a0a9!important}
+html[data-theme="dark"] body.vnext-protocol .quick a:nth-child(6n+5){background:#251d38!important;border-color:#45365f!important;color:#bea6ef!important}
+html[data-theme="dark"] body.vnext-protocol .quick a:nth-child(6n+6){background:#122b2a!important;border-color:#28504d!important;color:#8ed3ce!important}
+
+/* Old lower controls are replaced by a temporary touch dock */
+body.vnext-protocol .page > .actions,
+body.vnext-protocol .to-top{display:none!important}
+
+.vnext-action-dock{
+  position:fixed;
+  left:50%;
+  bottom:calc(14px + var(--v-safe-bottom));
+  z-index:1900;
+  transform:translate(-50%,18px) scale(.98);
+  opacity:0;
+  pointer-events:none;
+  width:min(calc(100% - 28px),360px);
+  padding:7px;
+  border:1px solid color-mix(in srgb,var(--v-line) 88%,transparent);
+  border-radius:20px;
+  background:color-mix(in srgb,var(--v-surface) 92%,transparent);
+  box-shadow:0 14px 38px rgba(20,37,51,.20);
+  backdrop-filter:blur(18px) saturate(140%);
+  -webkit-backdrop-filter:blur(18px) saturate(140%);
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:6px;
+  transition:opacity .45s ease,transform .45s ease;
+}
+.vnext-action-dock.is-visible{opacity:1;pointer-events:auto;transform:translate(-50%,0) scale(1)}
+.vnext-action-dock a,.vnext-action-dock button{
+  min-height:48px;
+  border:0;
+  border-radius:14px;
+  background:transparent;
+  color:var(--v-text);
+  text-decoration:none;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+  gap:2px;
+  font-size:12px;
+  font-weight:800;
+}
+.vnext-action-dock a:active,.vnext-action-dock button:active{background:var(--v-blue-soft)}
+.vnext-action-dock svg{width:20px;height:20px;stroke:currentColor}
+.vnext-action-dock .source-action{color:var(--v-blue)}
+
+/* ---------- Settings sheet ---------- */
+.vnext-settings-backdrop{
+  position:fixed;
+  inset:0;
+  z-index:2400;
+  display:flex;
+  align-items:flex-end;
+  justify-content:center;
+  padding:14px;
+  background:rgba(5,12,18,.38);
+  opacity:0;
+  pointer-events:none;
+  transition:opacity .2s ease;
+}
+.vnext-settings-backdrop.is-open{opacity:1;pointer-events:auto}
+.vnext-settings-panel{
+  width:min(100%,520px);
+  max-height:min(82vh,680px);
+  overflow:auto;
+  background:var(--v-surface);
+  color:var(--v-text);
+  border:1px solid var(--v-line);
+  border-radius:24px;
+  box-shadow:0 22px 70px rgba(0,0,0,.28);
+  padding:18px;
+  transform:translateY(20px);
+  transition:transform .22s ease;
+}
+.vnext-settings-backdrop.is-open .vnext-settings-panel{transform:translateY(0)}
+.vnext-settings-head{display:flex;justify-content:space-between;align-items:center;gap:12px;margin-bottom:18px}
+.vnext-settings-head h2{margin:0!important;font-size:21px!important;color:var(--v-text)!important}
+.vnext-settings-close{border:0;background:var(--v-surface-2);color:var(--v-text);width:38px;height:38px;border-radius:12px;font-size:22px;cursor:pointer}
+.vnext-setting-row{padding:14px 0;border-top:1px solid var(--v-line)}
+.vnext-setting-row:first-of-type{border-top:0}
+.vnext-setting-label{font-weight:850;margin-bottom:9px}
+.vnext-setting-help{color:var(--v-muted);font-size:13px;margin-top:7px}
+.vnext-theme-options{display:grid;grid-template-columns:repeat(3,1fr);gap:7px}
+.vnext-theme-option{border:1px solid var(--v-line);background:var(--v-surface-2);color:var(--v-text);border-radius:13px;padding:10px 8px;font-weight:800;cursor:pointer}
+.vnext-theme-option[aria-pressed="true"]{background:var(--v-blue);border-color:var(--v-blue);color:#fff}
+.vnext-settings-panel select{width:100%;padding:11px;border-radius:12px;border:1px solid var(--v-line);background:var(--v-surface-2);color:var(--v-text);font:inherit}
+
+/* ---------- Home screen ---------- */
+body.vnext-home header{
+  position:sticky;
+  top:0;
+  z-index:1500;
+  display:flex!important;
+  align-items:center;
+  justify-content:space-between;
+  gap:10px;
+  padding:20px max(16px,env(safe-area-inset-right)) 20px max(16px,env(safe-area-inset-left))!important;
+  background:linear-gradient(135deg,#0d527f,#227dac)!important;
+  border-radius:0 0 22px 22px!important;
+  box-shadow:0 8px 26px rgba(15,76,129,.16);
+  transition:padding .22s ease,border-radius .22s ease,box-shadow .22s ease;
+}
+body.vnext-home header.is-compact{padding-top:9px!important;padding-bottom:9px!important;border-radius:0 0 16px 16px!important;box-shadow:0 7px 24px rgba(15,76,129,.20)}
+body.vnext-home header h1{font-size:25px!important;text-align:right!important;transition:font-size .18s ease;line-height:1.2}
+body.vnext-home header.is-compact h1{font-size:18px!important}
+body.vnext-home header .vnext-icon-button{background:rgba(255,255,255,.14)!important;color:#fff!important;border-color:rgba(255,255,255,.28)!important;flex:0 0 auto}
+body.vnext-home main{max-width:1040px!important;padding-top:18px!important}
+body.vnext-home .search-container{
+  position:relative;
+  gap:8px!important;
+  margin:2px 0 24px!important;
+}
+body.vnext-home #searchInput{
+  background:var(--v-surface)!important;
+  color:var(--v-text)!important;
+  border:1px solid var(--v-line)!important;
+  box-shadow:var(--v-shadow-soft)!important;
+  border-radius:16px!important;
+}
+body.vnext-home #searchInput::placeholder{color:var(--v-muted)}
+body.vnext-home #voiceSearch{
+  background:var(--v-surface)!important;
+  color:var(--v-text)!important;
+  border-color:var(--v-line)!important;
+  box-shadow:var(--v-shadow-soft)!important;
+}
+body.vnext-home section.category h2{color:var(--v-text)!important;font-weight:850!important;letter-spacing:-.01em}
+body.vnext-home .protocol-card{
+  background:var(--v-surface)!important;
+  color:var(--v-text)!important;
+  border-top:1px solid var(--v-line)!important;
+  border-left:1px solid var(--v-line)!important;
+  border-bottom:1px solid var(--v-line)!important;
+  box-shadow:var(--v-shadow-soft)!important;
+  border-radius:18px!important;
+}
+body.vnext-home .protocol-card h3{color:var(--v-blue)!important}
+body.vnext-home .protocol-card p{color:var(--v-muted)!important}
+body.vnext-home #noResults{background:var(--v-surface)!important;color:var(--v-muted)!important;border:1px solid var(--v-line)}
+body.vnext-home .home-to-top{display:none!important}
+
+.vnext-home-top-dock{
+  position:fixed;
+  left:16px;
+  bottom:calc(16px + var(--v-safe-bottom));
+  z-index:1800;
+  width:48px;
+  height:48px;
+  border-radius:16px;
+  border:1px solid var(--v-line);
+  background:color-mix(in srgb,var(--v-surface) 92%,transparent);
+  color:var(--v-text);
+  box-shadow:var(--v-shadow);
+  opacity:0;
+  pointer-events:none;
+  transform:translateY(12px);
+  transition:opacity .35s ease,transform .35s ease;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+}
+.vnext-home-top-dock.is-visible{opacity:1;pointer-events:auto;transform:none}
+.vnext-home-top-dock svg{width:22px;height:22px;stroke:currentColor}
+
+/* General dark-mode overrides for common legacy elements */
+html[data-theme="dark"] .protocol-content,
+html[data-theme="dark"] .clinical-table,
+html[data-theme="dark"] details,
+html[data-theme="dark"] .monitor-box,
+html[data-theme="dark"] .treatment-box,
+html[data-theme="dark"] #noResults{background:var(--v-surface)!important;color:var(--v-text)!important;border-color:var(--v-line)!important}
+html[data-theme="dark"] .clinical-table td{border-color:var(--v-line)!important}
+html[data-theme="dark"] .clinical-table tr:nth-child(even){background:var(--v-surface-2)!important}
+html[data-theme="dark"] .small,
+html[data-theme="dark"] .meta{color:var(--v-muted)!important}
+
+@media(max-width:650px){
+  body.vnext-protocol .appbar{min-height:62px}
+  .vnext-appbar-title strong{font-size:16px}
+  body.vnext-protocol .appbar .btn,
+  .vnext-icon-button{width:40px!important;min-width:40px!important;height:40px!important;min-height:40px!important}
+  body.vnext-protocol .hero{padding:17px!important;border-radius:18px!important}
+  body.vnext-protocol .page{padding-left:12px!important;padding-right:12px!important}
+  .vnext-settings-backdrop{padding:8px}
+  .vnext-settings-panel{border-radius:22px 22px 16px 16px}
+}
+
+@media(prefers-reduced-motion:reduce){
+  *,*::before,*::after{scroll-behavior:auto!important;transition:none!important;animation:none!important}
+}
+
+
+/* ============================================================
+   v27 — stronger visual redesign
+   This block intentionally makes the new design visually distinct.
+   ============================================================ */
+
+/* ---------- HOME: clearly different visual language ---------- */
+body.vnext-home{
+  background:
+    radial-gradient(circle at 92% -8%, rgba(34,126,174,.18), transparent 34rem),
+    linear-gradient(180deg,#eef5fa 0,#f7f9fb 36%,#f4f7fa 100%) !important;
+}
+
+body.vnext-home > header{
+  position:sticky !important;
+  top:8px !important;
+  z-index:1500 !important;
+  width:min(calc(100% - 24px),960px);
+  min-height:98px;
+  margin:8px auto 0 !important;
+  padding:24px 74px 24px 24px !important;
+  border-radius:26px !important;
+  background:
+    linear-gradient(135deg,rgba(8,73,116,.98),rgba(20,116,166,.95)) !important;
+  box-shadow:0 16px 42px rgba(15,76,129,.22) !important;
+  text-align:right !important;
+  display:flex !important;
+  align-items:center !important;
+  justify-content:flex-start !important;
+  transition:min-height .22s ease,padding .22s ease,border-radius .22s ease,box-shadow .22s ease !important;
+  overflow:hidden;
+}
+
+body.vnext-home > header::after{
+  content:"";
+  position:absolute;
+  inset:auto -44px -78px auto;
+  width:190px;
+  height:190px;
+  border-radius:50%;
+  border:34px solid rgba(255,255,255,.075);
+  pointer-events:none;
+}
+
+body.vnext-home > header h1{
+  position:relative;
+  z-index:1;
+  margin:0 !important;
+  font-size:30px !important;
+  line-height:1.15 !important;
+  letter-spacing:-.025em;
+  color:#fff !important;
+  text-shadow:0 1px 1px rgba(0,0,0,.06);
+}
+
+body.vnext-home > header.is-compact{
+  min-height:58px !important;
+  padding-top:10px !important;
+  padding-bottom:10px !important;
+  border-radius:18px !important;
+  box-shadow:0 10px 28px rgba(15,76,129,.18) !important;
+}
+
+body.vnext-home > header.is-compact h1{
+  font-size:20px !important;
+}
+
+body.vnext-home > header .vnext-settings-toggle{
+  position:absolute !important;
+  left:16px !important;
+  top:50% !important;
+  transform:translateY(-50%) !important;
+  width:44px !important;
+  height:44px !important;
+  min-width:44px !important;
+  border-radius:14px !important;
+  color:#fff !important;
+  background:rgba(255,255,255,.12) !important;
+  border:1px solid rgba(255,255,255,.25) !important;
+  backdrop-filter:blur(8px);
+}
+
+body.vnext-home > main{
+  width:min(100%,980px);
+  margin:auto;
+  padding:22px 14px 44px !important;
+}
+
+/* Search becomes a distinct control card */
+body.vnext-home .search-container{
+  position:relative;
+  margin:0 0 30px !important;
+  gap:10px !important;
+  padding:8px !important;
+  border:1px solid rgba(15,91,141,.10);
+  border-radius:22px;
+  background:rgba(255,255,255,.86);
+  box-shadow:0 10px 30px rgba(22,47,67,.08);
+  backdrop-filter:blur(14px);
+}
+
+body.vnext-home #searchInput{
+  min-height:54px;
+  padding:14px 17px !important;
+  border:0 !important;
+  border-radius:15px !important;
+  background:transparent !important;
+  box-shadow:none !important;
+  color:#18303f !important;
+}
+
+body.vnext-home #searchInput::placeholder{color:#758796}
+
+body.vnext-home #voiceSearch{
+  flex:0 0 54px !important;
+  width:54px !important;
+  height:54px !important;
+  border-radius:15px !important;
+  border:0 !important;
+  background:#eaf3f9 !important;
+  box-shadow:none !important;
+}
+
+/* Category sections get strong hierarchy */
+body.vnext-home section.category{
+  margin:0 0 32px !important;
+}
+
+body.vnext-home section.category h2{
+  display:flex;
+  align-items:center;
+  gap:10px;
+  margin:0 4px 12px !important;
+  color:#203746 !important;
+  font-size:20px !important;
+  font-weight:850 !important;
+  letter-spacing:-.015em;
+}
+
+body.vnext-home section.category h2::before{
+  content:"";
+  width:9px;
+  height:9px;
+  border-radius:50%;
+  background:#6f8fa4;
+  box-shadow:0 0 0 5px rgba(111,143,164,.10);
+}
+
+body.vnext-home .cat-emergency h2::before{background:#e99a3d;box-shadow:0 0 0 5px rgba(233,154,61,.12)}
+body.vnext-home .cat-coag h2::before{background:#d45170;box-shadow:0 0 0 5px rgba(212,81,112,.12)}
+body.vnext-home .cat-pcicu h2::before{background:#408bbd;box-shadow:0 0 0 5px rgba(64,139,189,.12)}
+body.vnext-home .cat-med h2::before{background:#278b87;box-shadow:0 0 0 5px rgba(39,139,135,.12)}
+body.vnext-home .cat-pain h2::before{background:#8068ad;box-shadow:0 0 0 5px rgba(128,104,173,.12)}
+
+body.vnext-home .protocol-grid{
+  gap:11px !important;
+}
+
+/* Cards: modern list tiles, not the old white rectangles */
+body.vnext-home .protocol-card{
+  position:relative;
+  min-height:96px !important;
+  padding:15px 62px 15px 15px !important;
+  gap:13px !important;
+  border:1px solid #dde7ee !important;
+  border-right:1px solid #dde7ee !important;
+  border-radius:21px !important;
+  background:
+    linear-gradient(135deg,#ffffff 0,#fbfdff 100%) !important;
+  box-shadow:0 5px 18px rgba(24,50,67,.065) !important;
+  transform:none !important;
+  overflow:hidden;
+}
+
+body.vnext-home .protocol-card::before{
+  content:"";
+  position:absolute;
+  right:0;
+  top:14px;
+  bottom:14px;
+  width:5px;
+  border-radius:0 999px 999px 0;
+  background:#8ba4b5;
+}
+
+body.vnext-home .protocol-card::after{
+  content:"‹";
+  position:absolute;
+  left:17px;
+  top:50%;
+  transform:translateY(-52%);
+  color:#9bb0bd;
+  font-size:29px;
+  line-height:1;
+  font-weight:400;
+}
+
+body.vnext-home .cat-emergency .protocol-card::before{background:#e99a3d}
+body.vnext-home .cat-coag .protocol-card::before{background:#d45170}
+body.vnext-home .cat-pcicu .protocol-card::before{background:#408bbd}
+body.vnext-home .cat-med .protocol-card::before{background:#278b87}
+body.vnext-home .cat-pain .protocol-card::before{background:#8068ad}
+
+body.vnext-home .protocol-card .icon{
+  position:absolute;
+  right:14px;
+  top:50%;
+  transform:translateY(-50%);
+  width:38px !important;
+  min-width:38px !important;
+  height:38px;
+  display:grid !important;
+  place-items:center;
+  border-radius:12px;
+  font-size:21px !important;
+  background:#edf3f7;
+}
+
+body.vnext-home .cat-emergency .protocol-card .icon{background:#fff1df}
+body.vnext-home .cat-coag .protocol-card .icon{background:#fdebf0}
+body.vnext-home .cat-pcicu .protocol-card .icon{background:#e9f3fb}
+body.vnext-home .cat-med .protocol-card .icon{background:#e6f6f4}
+body.vnext-home .cat-pain .protocol-card .icon{background:#f1ecfb}
+
+body.vnext-home .protocol-card > div{
+  min-width:0;
+}
+
+body.vnext-home .protocol-card h3{
+  margin:0 0 5px !important;
+  color:#0f5b8d !important;
+  font-size:19px !important;
+  line-height:1.28 !important;
+  font-weight:850 !important;
+  letter-spacing:-.015em;
+}
+
+body.vnext-home .protocol-card p{
+  margin:0 !important;
+  color:#70818d !important;
+  font-size:14.5px !important;
+  line-height:1.45 !important;
+}
+
+body.vnext-home .protocol-card:hover{
+  transform:translateY(-2px) !important;
+  border-color:#c8dbe7 !important;
+  box-shadow:0 12px 28px rgba(24,50,67,.10) !important;
+}
+
+body.vnext-home .home-to-top{display:none !important}
+
+/* ---------- PROTOCOLS: more obviously redesigned ---------- */
+body.vnext-protocol{
+  background:
+    radial-gradient(circle at 100% -6%,rgba(40,126,173,.12),transparent 30rem),
+    var(--v-bg) !important;
+}
+
+body.vnext-protocol .page{
+  max-width:860px !important;
+  padding:16px 13px 86px !important;
+}
+
+body.vnext-protocol .hero{
+  position:relative;
+  overflow:hidden;
+  padding:22px 20px !important;
+  border-radius:24px !important;
+  background:
+    linear-gradient(135deg,#0a4975 0,#1775a5 68%,#2587b6 100%) !important;
+  box-shadow:0 14px 34px rgba(15,76,129,.19) !important;
+}
+
+body.vnext-protocol .hero::after{
+  content:"";
+  position:absolute;
+  left:-42px;
+  bottom:-72px;
+  width:170px;
+  height:170px;
+  border-radius:50%;
+  border:30px solid rgba(255,255,255,.07);
+}
+
+body.vnext-protocol .hero h1{
+  position:relative;
+  z-index:1;
+  font-size:30px !important;
+  letter-spacing:-.025em;
+}
+
+body.vnext-protocol .hero p,
+body.vnext-protocol .hero .meta{
+  position:relative;
+  z-index:1;
+}
+
+body.vnext-protocol .quick{
+  margin:3px 0 7px !important;
+  padding:5px 1px 12px !important;
+}
+
+body.vnext-protocol .quick a{
+  min-height:38px;
+  display:inline-flex;
+  align-items:center;
+}
+
+body.vnext-protocol .step{
+  margin:12px 0 !important;
+  border-radius:21px !important;
+  border:1px solid #dfe8ee !important;
+  box-shadow:0 7px 22px rgba(24,50,67,.065) !important;
+}
+
+body.vnext-protocol .step .head{
+  min-height:58px;
+  padding:11px 14px !important;
+  background:linear-gradient(90deg,var(--v-blue-soft),color-mix(in srgb,var(--v-blue-soft) 46%,var(--v-surface))) !important;
+}
+
+body.vnext-protocol .step .num{
+  width:36px !important;
+  height:36px !important;
+  flex-basis:36px !important;
+  font-size:17px !important;
+  box-shadow:0 4px 12px rgba(15,91,141,.16);
+}
+
+body.vnext-protocol .step .head h2{
+  font-size:20px !important;
+  letter-spacing:-.015em;
+}
+
+body.vnext-protocol .body{
+  padding:15px 16px 17px !important;
+}
+
+body.vnext-protocol .dose{
+  border-radius:9px !important;
+  padding:2px 7px !important;
+  box-shadow:inset 0 -1px 0 rgba(15,91,141,.08);
+}
+
+/* ---------- DARK: deliberately premium rather than merely inverted ---------- */
+html[data-theme="dark"] body.vnext-home{
+  background:
+    radial-gradient(circle at 95% -5%,rgba(52,144,195,.16),transparent 30rem),
+    #0b1117 !important;
+}
+
+html[data-theme="dark"] body.vnext-home .search-container{
+  background:rgba(17,26,34,.92);
+  border-color:#263744;
+  box-shadow:0 12px 32px rgba(0,0,0,.22);
+}
+html[data-theme="dark"] body.vnext-home #searchInput{color:#edf4f8 !important}
+html[data-theme="dark"] body.vnext-home #voiceSearch{background:#172631 !important}
+html[data-theme="dark"] body.vnext-home section.category h2{color:#e5edf2 !important}
+
+html[data-theme="dark"] body.vnext-home .protocol-card{
+  background:linear-gradient(135deg,#111a22,#121e27) !important;
+  border-color:#263744 !important;
+  box-shadow:0 8px 22px rgba(0,0,0,.18) !important;
+}
+html[data-theme="dark"] body.vnext-home .protocol-card h3{color:#87c9ef !important}
+html[data-theme="dark"] body.vnext-home .protocol-card p{color:#9badb8 !important}
+html[data-theme="dark"] body.vnext-home .protocol-card::after{color:#526a79}
+html[data-theme="dark"] body.vnext-home .protocol-card .icon{filter:saturate(.9)}
+
+html[data-theme="dark"] body.vnext-protocol .step{
+  border-color:#263744 !important;
+  box-shadow:0 8px 24px rgba(0,0,0,.18) !important;
+}
+
+/* ---------- Settings sheet: clearer and more app-like ---------- */
+.vnext-settings-panel{
+  border-radius:26px 26px 0 0 !important;
+}
+.vnext-theme-option{
+  min-height:44px !important;
+  border-radius:12px !important;
+}
+
+/* ---------- Mobile first ---------- */
+@media(max-width:650px){
+  body.vnext-home > header{
+    width:calc(100% - 18px);
+    min-height:88px;
+    margin-top:7px !important;
+    padding:20px 62px 20px 18px !important;
+    border-radius:23px !important;
+  }
+  body.vnext-home > header h1{font-size:24px !important}
+  body.vnext-home > header.is-compact{min-height:54px !important}
+  body.vnext-home > header.is-compact h1{font-size:18px !important}
+
+  body.vnext-home > main{padding:17px 9px 36px !important}
+  body.vnext-home .search-container{margin-bottom:25px !important;border-radius:19px}
+  body.vnext-home section.category{margin-bottom:27px !important}
+  body.vnext-home section.category h2{font-size:19px !important;margin-right:8px !important}
+  body.vnext-home .protocol-card{
+    min-height:88px !important;
+    padding:13px 57px 13px 38px !important;
+    border-radius:19px !important;
+  }
+  body.vnext-home .protocol-card .icon{
+    right:12px;
+    width:34px !important;
+    min-width:34px !important;
+    height:34px;
+    font-size:19px !important;
+  }
+  body.vnext-home .protocol-card h3{font-size:18px !important}
+  body.vnext-home .protocol-card p{font-size:13.5px !important}
+  body.vnext-home .protocol-card::after{left:13px;font-size:25px}
+
+  body.vnext-protocol .hero h1{font-size:25px !important}
+  body.vnext-protocol .hero{padding:19px 17px !important}
+  body.vnext-protocol .step .head h2{font-size:18px !important}
+}
