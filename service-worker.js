@@ -1,4 +1,4 @@
-const CACHE = "picu-v30-design";
+const CACHE = "picu-v31-berlin-excor";
 
 const PRECACHE = [
   "./",
@@ -18,6 +18,7 @@ const PRECACHE = [
   "./pain.html",
   "./chylothorax.html",
   "./bivalirudin.html",
+  "./berlin-excor-anticoagulation.html",
   "./burn-pain.html",
   "./tbi.html",
   "./sildenafil.html",

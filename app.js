@@ -57,6 +57,21 @@ const protocolAliases = {
     "אייץ איי טי"
   ],
 
+  "berlin-excor-anticoagulation.html": [
+    "ברלין",
+    "ברלין הארט",
+    "berlin",
+    "berlin heart",
+    "excor",
+    "אקסקור",
+    "אקס קור",
+    "vad",
+    "וי איי די",
+    "אנטיקואגולציה ברלין",
+    "berlin excor",
+    "excor anticoagulation"
+  ],
+
   "bleeding.html": [
     "דימום",
     "דימום אחרי ניתוח",
