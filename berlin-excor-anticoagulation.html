@@ -25,13 +25,13 @@ body{margin:0;background:var(--bg);color:#1f2933;font-family:Arial,"Noto Sans He
 .num{flex:0 0 38px;width:38px;height:38px;border-radius:50%;display:flex;align-items:center;justify-content:center;background:var(--blue);color:#fff;font-size:19px;font-weight:800}
 .head h2{margin:0;color:var(--blue);font-size:1.25rem}.body{padding:15px 16px}
 .field{display:grid;grid-template-columns:170px 1fr;gap:10px;padding:9px 0;border-bottom:1px dashed #e5edf3}.field:last-child{border-bottom:0}
-.label{font-weight:800;color:#34495e}.dose{display:inline-block;background:#edf6ff;border:1px solid #cfe3f3;border-radius:8px;padding:3px 7px;font-weight:800;direction:ltr;unicode-bidi:isolate;white-space:nowrap}
+.label{font-weight:800;color:#34495e}.dose{display:inline-block;background:#edf6ff;border:1px solid #cfe3f3;border-radius:7px;padding:2px 5px;font-size:.88em;line-height:1.25;font-weight:800;direction:ltr;unicode-bidi:isolate;white-space:nowrap;vertical-align:baseline}
 .callout{border-radius:14px;padding:13px 14px;margin:12px 0;border-right:5px solid}.callout strong{display:block;margin-bottom:4px}
 .blue{background:var(--blueSoft);border-color:var(--blue)}.green{background:var(--greenSoft);border-color:var(--green)}.orange{background:var(--orangeSoft);border-color:var(--orange)}.red{background:var(--redSoft);border-color:var(--red)}
 ul{margin:0;padding-right:21px}li{margin:6px 0}.target{color:var(--green);font-weight:800}
-.compact{margin:4px 0}.subhead{margin:13px 0 5px;color:var(--blue);font-size:1rem}
+.compact{margin:4px 0}.subhead{margin:13px 0 5px;color:var(--blue);font-size:1rem}.bullet-list{margin:0;padding-right:20px}.bullet-list li{margin:8px 0}.timeline-steps{list-style:none;margin:8px 0 0;padding:0}.timeline-steps li{position:relative;margin:8px 0;padding:8px 42px 8px 10px;background:#f7fafc;border:1px solid #e1eaf0;border-radius:12px}.timeline-steps li::before{position:absolute;right:10px;top:8px;width:24px;height:24px;border-radius:50%;background:var(--blue);color:#fff;font-size:13px;font-weight:800;display:flex;align-items:center;justify-content:center}.timeline-steps li:nth-child(1)::before{content:"1"}.timeline-steps li:nth-child(2)::before{content:"2"}.timeline-steps li:nth-child(3)::before{content:"3"}.timeline-steps li:nth-child(4)::before{content:"4"}.nowrap{white-space:nowrap}.drug-line{display:inline;white-space:normal}
 .to-top{position:fixed;left:14px;bottom:16px;z-index:1200;padding:7px 10px;border-radius:999px;background:var(--blue);color:#fff;text-decoration:none;font-weight:800;font-size:13px;border:2px solid #fff;box-shadow:0 5px 14px rgba(15,76,129,.24)}
-@media(max-width:650px){.page{padding:12px 10px 28px}.hero h1{font-size:1.55rem}.field{grid-template-columns:1fr;gap:3px}.body{padding:13px}}
+@media(max-width:650px){.page{padding:12px 10px 28px}.hero h1{font-size:1.55rem}.field{grid-template-columns:1fr;gap:3px}.body{padding:13px}.dose{font-size:.82em;padding:1px 4px}.bullet-list{padding-right:18px}.bullet-list li{margin:7px 0}.timeline-steps li{padding-right:40px}}
 </style>
 </head>
 <body id="top">
@@ -43,7 +43,6 @@ ul{margin:0;padding-right:21px}li{margin:6px 0}.target{color:var(--green);font-w
 <main class="page">
 <section class="hero">
   <h1>אנטיקואגולציה ב־Berlin Heart EXCOR®</h1>
-  <p>עיקרי EXCOR® Pediatric Anticoagulation</p>
   <div class="meta"><span>Berlin Heart</span><span>Version 1.0 · 08.04.2022</span></div>
 </section>
 
@@ -58,22 +57,30 @@ ul{margin:0;padding-right:21px}li{margin:6px 0}.target{color:var(--green);font-w
 <section class="step" id="timeline">
   <div class="head"><div class="num">1</div><h2>ציר זמן</h2></div>
   <div class="body">
-    <ul>
+    <ul class="bullet-list">
       <li><strong>טרום ניתוח:</strong> לשקול בירור הפרעות קרישה מולדות: vWD, Factor V Leiden, חסר Protein C/S ורמות נמוכות של ATIII.</li>
       <li><strong>לפני יציאה מחדר ניתוח:</strong> היפוך מלא של האנטיקואגולציה.</li>
-      <li><strong>לאחר ניתוח:</strong> תחילה ללא אנטיקואגולציה → UFH לאחר יותר מ־24 שעות → טיפול כפול נוגד טסיות ב־POD 2–4 → VKA או LMWH כאשר הזנה אנטרלית אפשרית.</li>
     </ul>
+    <h3 class="subhead">לאחר הניתוח</h3>
+    <ol class="timeline-steps">
+      <li><strong>שלב מוקדם:</strong> ללא אנטיקואגולציה.</li>
+      <li><strong>UFH:</strong> להתחיל לאחר יותר מ־24 שעות.</li>
+      <li><strong>טיפול כפול נוגד טסיות:</strong> להתחיל ב־POD 2–4.</li>
+      <li><strong>VKA או LMWH:</strong> להתחיל כאשר הזנה אנטרלית אפשרית.</li>
+    </ol>
   </div>
 </section>
 
 <section class="step" id="ufh">
   <div class="head"><div class="num">2</div><h2>UFH</h2></div>
   <div class="body">
-    <div class="callout blue"><strong>התחלה</strong> 24–48 שעות לאחר הניתוח, בהיעדר דימום או כשהדימום &lt;5 mL/h. לאחר ECLS יש לדחות, בערך עד 48 שעות לאחר הניתוח.</div>
-    <div class="field"><div class="label">לפני התחלה</div><div>Plt &gt;20,000/µL, ATIII &gt;70%; TEG תקין אם ניתן.</div></div>
-    <div class="field"><div class="label">מתחת לגיל שנה</div><div><span class="dose">15 U/kg/h</span> ללא bolus; עד <span class="dose">28 U/kg/h</span>.</div></div>
-    <div class="field"><div class="label">מעל גיל שנה</div><div><span class="dose">10 U/kg/h</span> ללא bolus; עד <span class="dose">20 U/kg/h</span>.</div></div>
-    <div class="field"><div class="label">ניטור</div><div>aPTT כל 6 שעות.</div></div>
+    <ul class="bullet-list">
+      <li><strong>התחלה:</strong> 24–48 שעות לאחר הניתוח, בהיעדר דימום או כשהדימום <span class="dose">&lt;5 mL/h</span>. לאחר ECLS יש לדחות, בערך עד 48 שעות לאחר הניתוח.</li>
+      <li><strong>לפני התחלה:</strong> Plt &gt;20,000/µL, ATIII &gt;70%; TEG תקין אם ניתן.</li>
+      <li><strong>מתחת לגיל שנה:</strong> <span class="dose">15 U/kg/h</span> ללא bolus; עד <span class="dose">28 U/kg/h</span>.</li>
+      <li><strong>מעל גיל שנה:</strong> <span class="dose">10 U/kg/h</span> ללא bolus; עד <span class="dose">20 U/kg/h</span>.</li>
+      <li><strong>ניטור:</strong> aPTT כל 6 שעות.</li>
+    </ul>
     <div class="callout green"><strong>יעד</strong> <span class="dose">PTT 60–85 sec</span> או <span class="dose">Anti-FXa 0.35–0.5 U/mL</span>.</div>
   </div>
 </section>
@@ -81,9 +88,11 @@ ul{margin:0;padding-right:21px}li{margin:6px 0}.target{color:var(--green);font-w
 <section class="step" id="platelets">
   <div class="head"><div class="num">3</div><h2>אנטיאגרגציה</h2></div>
   <div class="body">
-    <div class="field"><div class="label">תנאי</div><div>Plt &gt;40,000/µL.</div></div>
-    <div class="field"><div class="label">Dipyridamole</div><div>POD 2: <span class="dose">4 mg/kg/day</span> מחולק ל־4; מקסימום <span class="dose">15 mg/kg/day</span>.</div></div>
-    <div class="field"><div class="label">ASA</div><div>POD 4, אם הנקזים הוצאו: <span class="dose">1 mg/kg/day</span> מחולק ל־2 אם קיימת בדיקת אגרגציה; אחרת <span class="dose">4–5 mg/kg/day</span>.</div></div>
+    <ul class="bullet-list">
+      <li><strong>תנאי:</strong> Plt &gt;40,000/µL.</li>
+      <li><strong>Dipyridamole — POD 2:</strong> <span class="dose">4 mg/kg/day</span> מחולק ל־4; מקסימום <span class="dose">15 mg/kg/day</span>.</li>
+      <li><strong>ASA — POD 4, אם הנקזים הוצאו:</strong> <span class="dose">1 mg/kg/day</span> מחולק ל־2 אם קיימת בדיקת אגרגציה; אחרת <span class="dose">4–5 mg/kg/day</span>.</li>
+    </ul>
     <div class="callout green"><strong>יעד</strong> ARA activity &lt;30%.</div>
   </div>
 </section>
@@ -92,18 +101,24 @@ ul{margin:0;padding-right:21px}li{margin:6px 0}.target{color:var(--green);font-w
   <div class="head"><div class="num">4</div><h2>VKA / LMWH</h2></div>
   <div class="body">
     <h3 class="subhead">Vitamin K antagonist — גיל &gt;12 חודשים + הזנה אנטרלית</h3>
-    <div class="field"><div class="label">Warfarin התחלתי</div><div><span class="dose">0.2 mg/kg/day</span>, מקסימום <span class="dose">5 mg/day</span>.</div></div>
-    <div class="field"><div class="label">INR</div><div>יומי ב־4 השבועות הראשונים, לאחר מכן 1–2 פעמים בשבוע.</div></div>
+    <ul class="bullet-list">
+      <li><strong>Warfarin התחלתי:</strong> <span class="dose">0.2 mg/kg/day</span>; מקסימום <span class="dose">5 mg/day</span>.</li>
+      <li><strong>INR:</strong> יומי ב־4 השבועות הראשונים, לאחר מכן 1–2 פעמים בשבוע.</li>
+    </ul>
     <div class="callout green"><strong>יעד אחזקה</strong> INR <span class="dose">2.7–3.5</span>.</div>
 
     <h3 class="subhead">Enoxaparin כאשר INR אינו בטווח תחת VKA</h3>
-    <div class="field"><div class="label">INR 2.0–&lt;2.7</div><div><span class="dose">0.5 mg/kg BID</span> — prophylactic.</div></div>
-    <div class="field"><div class="label">INR &lt;2.0</div><div><span class="dose">1.0 mg/kg BID</span> — therapeutic.</div></div>
+    <ul class="bullet-list">
+      <li><strong>INR 2.0–&lt;2.7:</strong> <span class="dose">0.5 mg/kg BID</span> — prophylactic.</li>
+      <li><strong>INR &lt;2.0:</strong> <span class="dose">1.0 mg/kg BID</span> — therapeutic.</li>
+    </ul>
 
     <h3 class="subhead">LMWH כמעבר מ־UFH / INR מחוץ לטווח, בתפקוד כלייתי תקין</h3>
-    <div class="field"><div class="label">&lt;3 חודשים</div><div>Enoxaparin <span class="dose">1.8 mg/kg BID</span>.</div></div>
-    <div class="field"><div class="label">&gt;3 חודשים</div><div>Enoxaparin <span class="dose">1.1–1.4 mg/kg BID</span>.</div></div>
-    <div class="field"><div class="label">Anti-FXa</div><div>4 שעות לאחר המנה; יומי עד רמה טיפולית יציבה ואז פעם–פעמיים בשבוע.</div></div>
+    <ul class="bullet-list">
+      <li><strong>&lt;3 חודשים:</strong> Enoxaparin <span class="dose">1.8 mg/kg BID</span>.</li>
+      <li><strong>&gt;3 חודשים:</strong> Enoxaparin <span class="dose">1.1–1.4 mg/kg BID</span>.</li>
+      <li><strong>Anti-FXa:</strong> 4 שעות לאחר המנה; יומי עד רמה טיפולית יציבה ואז פעם–פעמיים בשבוע.</li>
+    </ul>
     <div class="callout green"><strong>יעד LMWH</strong> Anti-FXa <span class="dose">0.6–1.0 U/mL</span>.</div>
   </div>
 </section>
