@@ -27,20 +27,16 @@ ul,ol{margin:0;padding-right:20px}li{margin:6px 0}.target{color:var(--green);fon
 </style>
 
 <script id="vnext-theme-init">(function(){try{var c=localStorage.getItem("picu-ui-theme")||"system";var d=c==="dark"||(c==="system"&&window.matchMedia&&window.matchMedia("(prefers-color-scheme: dark)").matches);document.documentElement.dataset.theme=d?"dark":"light";document.documentElement.dataset.themeChoice=c;}catch(e){document.documentElement.dataset.theme="light";}})();</script>
-<link rel="stylesheet" href="design-vnext.css">
+<link id="font-awesome-css" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" referrerpolicy="no-referrer">
+<link rel="stylesheet" href="design-vnext.css?v=51">
 </head>
 <body id="top">
-<header class="appbar">
-  <div class="actions">
-    <button class="btn" onclick="history.back()">← חזרה</button>
-    <a class="btn" href="index.html">⌂ מסך ראשי</a>
-  </div>
-  <a class="btn primary" href="originals/Enteral-Feeding-Cardiac-2026.pdf" target="_blank" rel="noopener">מסמך מקור</a>
-</header>
+<header class="appbar"><div class="actions"><a class="btn" href="index.html" aria-label="מסך ראשי"><i class="fa-solid fa-house" aria-hidden="true"></i></a></div></header>
 <main class="page">
 <section class="hero">
   <h1>הזנה אנטרלית בחולים עם מום לבבי</h1>
-  <div class="meta"><span>עדכון: 2026</span></div>
+<div class="meta"><span>תאריך מסמך: 2026</span></div>
+<a class="vnext-hero-source" href="originals/Enteral-Feeding-Cardiac-2026.pdf" target="_blank" rel="noopener" aria-label="מסמך מקור"><i class="fa-solid fa-file-lines" aria-hidden="true"></i><span>מסמך מקור</span></a>
 </section>
 <nav class="quick"><a href="#path">מסלול</a><a href="#risk">סיכון</a><a href="#age">לפי גיל</a><a href="#intolerance">אי־סבילות</a><a href="#special">מיוחדים</a></nav>
 <section class="step" id="path"><div class="head"><div class="num">1</div><h2>בחירת מסלול הזנה</h2></div><div class="body">
@@ -71,11 +67,11 @@ ul,ol{margin:0;padding-right:20px}li{margin:6px 0}.target{color:var(--green);fon
   <a class="btn" href="index.html">מסך ראשי</a>
   <a class="btn primary" href="originals/Enteral-Feeding-Cardiac-2026.pdf" target="_blank" rel="noopener">מסמך מקור</a>
 </div>
-<a class="to-top" href="#top" aria-label="לראש הדף">↑ לראש הדף</a>
+
 </main>
 <script src="analytics-config.js"></script>
 <script src="analytics.js"></script>
 
-<script src="design-vnext.js"></script>
+<script src="design-vnext.js?v=51"></script>
 </body>
 </html>
