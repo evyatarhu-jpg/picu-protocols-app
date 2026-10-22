@@ -1,4 +1,4 @@
-const CACHE = "picu-v33-fontawesome";
+const CACHE = "picu-v34-force-pwa-update";
 
 const PRECACHE = [
   "./",
@@ -31,9 +31,25 @@ const PRECACHE = [
 
 self.addEventListener("install", event => {
   event.waitUntil(
-    caches.open(CACHE).then(cache => cache.addAll(PRECACHE))
+    caches.open(CACHE).then(async cache => {
+      // Fetch a fresh copy of every precached resource rather than reusing
+      // the browser HTTP cache from an older installed PWA.
+      await Promise.all(
+        PRECACHE.map(async path => {
+          const request = new Request(path, { cache: "reload" });
+          const response = await fetch(request);
+          if (response && response.ok) await cache.put(path, response.clone());
+        })
+      );
+    })
   );
   self.skipWaiting();
+});
+
+self.addEventListener("message", event => {
+  if (event.data && event.data.type === "SKIP_WAITING") {
+    self.skipWaiting();
+  }
 });
 
 self.addEventListener("activate", event => {
@@ -59,7 +75,7 @@ self.addEventListener("fetch", event => {
   if (url.origin !== self.location.origin) return;
 
   event.respondWith(
-    fetch(request, { cache: "no-store" })
+    fetch(request, { cache: request.mode === "navigate" ? "reload" : "no-store" })
       .then(response => {
         if (response && response.status === 200) {
           const copy = response.clone();
