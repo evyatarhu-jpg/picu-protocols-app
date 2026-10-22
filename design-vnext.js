@@ -228,7 +228,7 @@
     const check = async () => {
       try {
         registration = registration || await navigator.serviceWorker.register(
-          './service-worker.js?v=50',
+          './service-worker.js?v=51',
           { updateViaCache: 'none' }
         );
 
@@ -259,28 +259,41 @@
 
   function initProtocol(settings) {
     ensureProtocolPwaFresh();
+
     const bar = document.querySelector('.appbar');
-    if (!bar) return;
+    const hero = document.querySelector('.hero');
+    if (!bar || !hero) return;
+
     document.body.classList.add('vnext-protocol');
     normalizeProtocolHeaderContent();
     enhanceProtocolSemantics();
-    document.querySelectorAll('.to-top').forEach(el => {
-      el.innerHTML = `${svg.up}<span>לראש הדף</span>`;
-    });
 
-    // Remove redundant browser-back controls (links or buttons).
+    // Remove obsolete lower navigation left in legacy protocol markup.
+    document.querySelectorAll('.page > .actions, .to-top').forEach(el => el.remove());
+
+    // Remove browser-back and settings controls from protocol pages.
     [...bar.querySelectorAll('a,button')].forEach(el => {
       const href = (el.getAttribute('href') || '').toLowerCase();
       const onclick = (el.getAttribute('onclick') || '').toLowerCase();
       const txt = (el.textContent || '').replace(/[←↩]/g, '').trim();
-      if (href.includes('history.back') || onclick.includes('history.back') || txt === 'חזרה') el.remove();
+      if (
+        href.includes('history.back') ||
+        onclick.includes('history.back') ||
+        txt === 'חזרה' ||
+        el.classList.contains('vnext-settings-toggle')
+      ) el.remove();
     });
 
     bar.classList.add('vnext-appbar');
-    const titleBox = document.createElement('div');
-    titleBox.className = 'vnext-appbar-title';
-    titleBox.innerHTML = `<small>פרוטוקול</small><strong>${escapeHtml(protocolTitle())}</strong>`;
-    bar.prepend(titleBox);
+
+    // One compact contextual title; hidden while the hero itself is visible.
+    let titleBox = bar.querySelector('.vnext-appbar-title');
+    if (!titleBox) {
+      titleBox = document.createElement('div');
+      titleBox.className = 'vnext-appbar-title';
+      titleBox.innerHTML = `<strong>${escapeHtml(protocolTitle())}</strong>`;
+      bar.prepend(titleBox);
+    }
 
     const actions = bar.querySelector('.actions') || (() => {
       const div = document.createElement('div');
@@ -289,14 +302,13 @@
       return div;
     })();
 
-    const home = actions.querySelector('a[href*="index.html"]');
-    const source = [...bar.querySelectorAll('a')].find(a => /originals\//i.test(a.getAttribute('href') || ''));
+    const home = [...bar.querySelectorAll('a')].find(a => /(?:^|\/)index\.html(?:[?#]|$)/i.test(a.getAttribute('href') || ''));
     convertHeaderAction(home, 'home', 'מסך ראשי');
 
-    const hero = document.querySelector('.hero');
-
-    // Put source access next to the protocol identity in the hero.
-    if (hero && source && !hero.querySelector('.vnext-hero-source')) {
+    // Move source access into the blue hero if the legacy page still has it in the appbar.
+    const existingHeroSource = hero.querySelector('.vnext-hero-source');
+    const source = existingHeroSource || [...document.querySelectorAll('a')].find(a => /originals\//i.test(a.getAttribute('href') || ''));
+    if (source && !existingHeroSource) {
       const heroSource = document.createElement('a');
       heroSource.className = 'vnext-hero-source';
       heroSource.href = source.getAttribute('href') || '#';
@@ -308,14 +320,13 @@
       source.remove();
     }
 
-    // Avoid duplicating the title: show it in the app bar only after
-    // the hero title has scrolled out of view.
+    // Sticky sub-navigation follows the compact blue appbar.
     const quickNav = document.querySelector('.quick');
     if (quickNav) quickNav.classList.add('vnext-sticky-subnav');
 
     const updateHeaderState = () => {
-      const heroBottom = hero ? hero.getBoundingClientRect().bottom : 0;
-      const showTitle = hero ? heroBottom <= bar.offsetHeight + 6 : window.scrollY > 54;
+      const heroBottom = hero.getBoundingClientRect().bottom;
+      const showTitle = heroBottom <= bar.offsetHeight + 6;
 
       bar.classList.toggle('show-protocol-title', showTitle);
       bar.classList.toggle('is-compact', showTitle);
@@ -325,39 +336,13 @@
 
       if (quickNav) {
         const quickRect = quickNav.getBoundingClientRect();
-        const pinned = showTitle && quickRect.top <= appbarHeight + 2;
-        quickNav.classList.toggle('is-pinned', pinned);
+        quickNav.classList.toggle('is-pinned', showTitle && quickRect.top <= appbarHeight + 2);
       }
     };
+
     updateHeaderState();
     window.addEventListener('scroll', updateHeaderState, { passive:true });
     window.addEventListener('resize', updateHeaderState, { passive:true });
-
-
-      dock.classList.add('is-visible');
-      clearTimeout(dockTimer);
-      dockTimer = setTimeout(hideDock, 6000);
-    };
-
-    // Any new touch/click brings the temporary controls back.
-    document.addEventListener('pointerdown', e => {
-      if (e.target.closest('.vnext-settings-backdrop') || e.target.closest('.vnext-settings-toggle') || e.target.closest('.vnext-quick-theme')) return;
-      showDock();
-    }, { passive:true });
-
-    dock.addEventListener('focusin', showDock);
-
-    // Scrolling reveals the controls briefly. "Back to top" exists only after scrolling.
-    window.addEventListener('scroll', () => {
-      if (window.scrollY > 90) {
-        showDock();
-      } else {
-        updateTopAvailability();
-        hideDock();
-        clearTimeout(dockTimer);
-      }
-    }, { passive:true });
-    updateTopAvailability();
   }
 
   function initHome(settings) {
