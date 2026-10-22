@@ -367,7 +367,7 @@ if ("serviceWorker" in navigator) {
   const checkForUpdate = async () => {
     try {
       registrationRef = registrationRef || await navigator.serviceWorker.register(
-        "./service-worker.js?v=51",
+        "./service-worker.js?v=52",
         { updateViaCache: "none" }
       );
 
