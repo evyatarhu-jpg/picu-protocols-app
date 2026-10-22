@@ -228,7 +228,7 @@
     const check = async () => {
       try {
         registration = registration || await navigator.serviceWorker.register(
-          './service-worker.js?v=53',
+          './service-worker.js?v=54',
           { updateViaCache: 'none' }
         );
 
