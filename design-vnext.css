@@ -1562,3 +1562,27 @@ html[data-theme="dark"] body.vnext-protocol .hero{
     border-radius:7px!important;
   }
 }
+
+
+/* v48 — consistent Font Awesome stop/warning icon */
+body.vnext-protocol .step .num.stop{
+  width:42px!important;
+  min-width:42px!important;
+  height:42px!important;
+  flex-basis:42px!important;
+  border-radius:50%!important;
+  clip-path:none!important;
+  border:0!important;
+  background:#d62828!important;
+  color:#fff!important;
+  box-shadow:none!important;
+  display:inline-flex!important;
+  align-items:center!important;
+  justify-content:center!important;
+}
+body.vnext-protocol .step .num.stop .semantic-stop-icon{
+  color:#fff!important;
+  font-size:19px!important;
+  line-height:1!important;
+  transform:none!important;
+}

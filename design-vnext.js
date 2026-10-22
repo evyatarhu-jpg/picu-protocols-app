@@ -154,6 +154,11 @@
   ];
 
   function enhanceProtocolSemantics() {
+    document.querySelectorAll('.num.stop').forEach(stop => {
+      stop.innerHTML = '<i class="fa-solid fa-hand semantic-stop-icon" aria-hidden="true"></i>';
+      stop.setAttribute('aria-label', 'אזהרה');
+    });
+
     document.querySelectorAll('.step .body strong').forEach(strong => {
       if (strong.querySelector('.semantic-label-icon')) return;
 
