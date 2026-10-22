@@ -1627,3 +1627,69 @@ body.vnext-protocol .step .num.stop{
 body.vnext-protocol .step .num.stop .semantic-stop-icon{
   font-size:17px!important;
 }
+
+
+/* v53 — compact source access, temporary top button, softer masthead corners */
+body.vnext-protocol .appbar{
+  border-radius:0 0 6px 6px!important;
+  overflow:hidden;
+}
+body.vnext-protocol .appbar.is-compact{
+  border-radius:0 0 5px 5px!important;
+}
+
+body.vnext-protocol .appbar .vnext-compact-source{
+  display:none!important;
+}
+body.vnext-protocol .appbar .vnext-compact-source.is-visible{
+  display:inline-flex!important;
+}
+
+.vnext-protocol-top-button{
+  position:fixed;
+  left:14px;
+  bottom:calc(16px + var(--v-safe-bottom));
+  z-index:1800;
+  width:42px;
+  height:42px;
+  padding:0;
+  border:1px solid var(--v-line);
+  border-radius:6px;
+  background:color-mix(in srgb,var(--v-surface) 94%,transparent);
+  color:var(--v-blue);
+  box-shadow:0 8px 22px rgba(22,47,67,.14);
+  backdrop-filter:blur(12px);
+  -webkit-backdrop-filter:blur(12px);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  opacity:0;
+  pointer-events:none;
+  transform:translateY(8px);
+  transition:opacity .28s ease,transform .28s ease;
+}
+.vnext-protocol-top-button.is-visible{
+  opacity:1;
+  pointer-events:auto;
+  transform:none;
+}
+.vnext-protocol-top-button i{
+  font-size:15px!important;
+  line-height:1!important;
+}
+.vnext-protocol-top-button:active{
+  background:var(--v-blue-soft);
+}
+
+@media(max-width:650px){
+  body.vnext-protocol .appbar{
+    border-radius:0 0 5px 5px!important;
+  }
+  .vnext-protocol-top-button{
+    left:12px;
+    bottom:calc(14px + var(--v-safe-bottom));
+    width:40px;
+    height:40px;
+    border-radius:5px;
+  }
+}
