@@ -23,23 +23,16 @@ ul{margin:0;padding-right:20px}li{margin:6px 0}.target{color:var(--green);font-w
 </style>
 
 <script id="vnext-theme-init">(function(){try{var c=localStorage.getItem("picu-ui-theme")||"system";var d=c==="dark"||(c==="system"&&window.matchMedia&&window.matchMedia("(prefers-color-scheme: dark)").matches);document.documentElement.dataset.theme=d?"dark":"light";document.documentElement.dataset.themeChoice=c;}catch(e){document.documentElement.dataset.theme="light";}})();</script>
-<link rel="stylesheet" href="design-vnext.css">
+<link id="font-awesome-css" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" referrerpolicy="no-referrer">
+<link rel="stylesheet" href="design-vnext.css?v=51">
 </head>
 <body id="top">
-
-<header class="appbar">
-  <div class="actions">
-    <button class="btn" onclick="history.back()">← חזרה</button>
-    <a class="btn" href="index.html">⌂ מסך ראשי</a>
-  </div>
-  <a class="btn primary" href="originals/DKA-Public.pdf" target="_blank" rel="noopener">מסמך מקור</a>
-</header>
-
+<header class="appbar"><div class="actions"><a class="btn" href="index.html" aria-label="מסך ראשי"><i class="fa-solid fa-house" aria-hidden="true"></i></a></div></header>
 <main class="page">
 <section class="hero">
-  <h1>פרוטוקול DKA</h1>
-  
-  <div class="meta"><span>עדכון: ינואר 2026</span></div>
+  <h1>DKA</h1>
+<div class="meta"><span>תאריך מסמך: ינואר 2026</span></div>
+<a class="vnext-hero-source" href="originals/DKA-Public.pdf" target="_blank" rel="noopener" aria-label="מסמך מקור"><i class="fa-solid fa-file-lines" aria-hidden="true"></i><span>מסמך מקור</span></a>
 </section>
 
 <nav class="quick">
@@ -126,7 +119,7 @@ ul{margin:0;padding-right:20px}li{margin:6px 0}.target{color:var(--green);font-w
 <ul><li><span class="target">pH &gt;7.3</span> ו/או <span class="target">HCO₃⁻ &gt;18 mmol/L</span>.</li><li>המטופל רוצה ויכול לאכול פומית, ללא בחילות/הקאות.</li><li>15 דקות לאחר מתן אינסולין SC ניתן לאכול ולהפסיק אינסולין IV.</li><li>ב־DKA קל, אם אינו מקיא ומסוגל לאכול, ניתן להתחיל טיפול SC.</li></ul>
 </div></section>
 
-<section class="step" id="cerebral"><div class="head"><div class="num stop" aria-label="עצור"><span>✋</span></div><h2>בצקת מוחית — זיהוי וטיפול</h2></div><div class="body">
+<section class="step" id="cerebral"><div class="head"><div class="num stop" aria-label="עצור"><i class="fa-solid fa-hand semantic-stop-icon" aria-hidden="true"></i></div><h2>בצקת מוחית — זיהוי וטיפול</h2></div><div class="body">
 <div class="callout red"><strong>סימנים מוקדמים</strong> כאב ראש, שינוי התנהגות/אי־שקט, בחילות או הקאות מתמשכות, תגובה שאינה תואמת לכאב, ירידה בערנות.</div>
 <div class="callout red"><strong>סימנים מתקדמים</strong> ברדיקרדיה ו/או יתר לחץ דם, שינוי במצב הכרה, שיתוק עצבים קרניאליים, פפילאדמה, פרכוסים או דיכוי נשימתי.</div>
 <div class="field"><div class="label">1. Neuroprotection</div><div>
@@ -151,10 +144,10 @@ ul{margin:0;padding-right:20px}li{margin:6px 0}.target{color:var(--green);font-w
   <a class="btn" href="index.html">מסך ראשי</a>
   <a class="btn primary" href="originals/DKA-Public.pdf" target="_blank" rel="noopener">מסמך מקור</a>
 </div>
-<a class="to-top" href="#top" aria-label="לראש הדף">↑ לראש הדף</a>
+
 </main>
 <script src="analytics-config.js"></script>
 <script src="analytics.js"></script>
 
-<script src="design-vnext.js"></script>
+<script src="design-vnext.js?v=51"></script>
 </body></html>
