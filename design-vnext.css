@@ -1011,3 +1011,111 @@ html[data-theme="dark"] body.vnext-home .cat-coag .protocol-card .icon i{color:#
 html[data-theme="dark"] body.vnext-home .cat-pcicu .protocol-card .icon i{color:#78b8e1!important}
 html[data-theme="dark"] body.vnext-home .cat-med .protocol-card .icon i{color:#70c5bf!important}
 html[data-theme="dark"] body.vnext-home .cat-pain .protocol-card .icon i{color:#b19ae0!important}
+
+
+/* v38 — squarer visual language across the app */
+:root{
+  --v-radius:8px;
+}
+
+/* Home */
+body.vnext-home > header{
+  border-radius:8px!important;
+}
+body.vnext-home > header.is-compact{
+  border-radius:6px!important;
+}
+body.vnext-home .search-container{
+  border-radius:8px!important;
+}
+body.vnext-home #searchInput{
+  border-radius:6px!important;
+}
+body.vnext-home #voiceSearch{
+  border-radius:6px!important;
+}
+body.vnext-home #searchAction{
+  border-radius:5px!important;
+}
+body.vnext-home .protocol-card{
+  border-radius:8px!important;
+}
+body.vnext-home .protocol-card::before{
+  border-radius:0!important;
+}
+body.vnext-home > header .vnext-home-tools .vnext-icon-button{
+  border-radius:6px!important;
+}
+body.vnext-home > header.is-compact .vnext-home-tools .vnext-icon-button{
+  border-radius:5px!important;
+}
+.vnext-home-top-dock{
+  border-radius:7px!important;
+}
+
+/* Protocol pages */
+body.vnext-protocol .appbar .btn,
+.vnext-icon-button{
+  border-radius:6px!important;
+}
+body.vnext-protocol .hero{
+  border-radius:8px!important;
+}
+body.vnext-protocol .step{
+  border-radius:8px!important;
+}
+body.vnext-protocol .quick a{
+  border-radius:6px!important;
+}
+body.vnext-protocol .dose{
+  border-radius:5px!important;
+}
+body.vnext-protocol .mini,
+body.vnext-protocol details,
+body.vnext-protocol .protocol-image,
+body.vnext-protocol .algorithm{
+  border-radius:6px!important;
+}
+
+/* Temporary controls */
+.vnext-action-dock{
+  border-radius:8px!important;
+}
+.vnext-action-dock a,
+.vnext-action-dock button{
+  border-radius:5px!important;
+}
+
+/* Settings */
+.vnext-settings-panel{
+  border-radius:8px!important;
+}
+.vnext-settings-close{
+  border-radius:5px!important;
+}
+.vnext-theme-option{
+  border-radius:5px!important;
+}
+.vnext-settings-panel select{
+  border-radius:5px!important;
+}
+
+/* Common legacy components */
+.protocol-content,
+.back-button,
+.source-button,
+.info-box,
+.warning-box,
+.danger-box,
+.success-box,
+.treatment-box,
+.monitor-box,
+details,
+#noResults{
+  border-radius:6px!important;
+}
+
+/* Keep intentional circles circular */
+body.vnext-protocol .step .num{
+  border-radius:50%!important;
+}
