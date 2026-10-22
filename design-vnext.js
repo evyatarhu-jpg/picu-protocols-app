@@ -228,7 +228,7 @@
     const check = async () => {
       try {
         registration = registration || await navigator.serviceWorker.register(
-          './service-worker.js?v=52',
+          './service-worker.js?v=53',
           { updateViaCache: 'none' }
         );
 
@@ -320,6 +320,51 @@
       source.remove();
     }
 
+    const heroSource = hero.querySelector('.vnext-hero-source');
+    let compactSource = actions.querySelector('.vnext-compact-source');
+    if (heroSource && !compactSource) {
+      compactSource = document.createElement('a');
+      compactSource.className = 'btn vnext-compact-source';
+      compactSource.href = heroSource.getAttribute('href') || '#';
+      compactSource.target = '_blank';
+      compactSource.rel = 'noopener';
+      compactSource.setAttribute('aria-label', 'מסמך מקור');
+      compactSource.setAttribute('title', 'מסמך מקור');
+      compactSource.innerHTML = svg.file;
+      actions.appendChild(compactSource);
+    }
+
+    // One temporary floating control: back to top only.
+    const topBtn = document.createElement('button');
+    topBtn.type = 'button';
+    topBtn.className = 'vnext-protocol-top-button';
+    topBtn.setAttribute('aria-label', 'לראש הדף');
+    topBtn.setAttribute('title', 'לראש הדף');
+    topBtn.innerHTML = svg.up;
+    topBtn.addEventListener('click', event => {
+      event.stopPropagation();
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+    document.body.appendChild(topBtn);
+
+    let topTimer = null;
+    const hideTopButton = () => topBtn.classList.remove('is-visible');
+    const showTopButton = () => {
+      if (window.scrollY <= 120) {
+        hideTopButton();
+        clearTimeout(topTimer);
+        return;
+      }
+      topBtn.classList.add('is-visible');
+      clearTimeout(topTimer);
+      topTimer = setTimeout(hideTopButton, 6000);
+    };
+
+    document.addEventListener('pointerdown', event => {
+      if (event.target.closest('.vnext-protocol-top-button')) return;
+      showTopButton();
+    }, { passive: true });
+
     // Sticky sub-navigation follows the compact blue appbar.
     const quickNav = document.querySelector('.quick');
     if (quickNav) quickNav.classList.add('vnext-sticky-subnav');
@@ -330,6 +375,13 @@
 
       bar.classList.toggle('show-protocol-title', showTitle);
       bar.classList.toggle('is-compact', showTitle);
+      if (compactSource) compactSource.classList.toggle('is-visible', showTitle);
+
+      if (window.scrollY > 120) showTopButton();
+      else {
+        hideTopButton();
+        clearTimeout(topTimer);
+      }
 
       const appbarHeight = Math.ceil(bar.getBoundingClientRect().height);
       document.documentElement.style.setProperty('--v-protocol-appbar-height', appbarHeight + 'px');
