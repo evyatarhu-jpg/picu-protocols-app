@@ -348,40 +348,50 @@ if (voiceButton) {
 }
 
 
-/* PWA — force installed app to pick up new releases promptly */
+/* PWA — update immediately on launch/resume */
 if ("serviceWorker" in navigator) {
   let reloadingForNewWorker = false;
+  let registrationRef = null;
 
-  navigator.serviceWorker.addEventListener("controllerchange", () => {
+  const reloadOnce = () => {
     if (reloadingForNewWorker) return;
     reloadingForNewWorker = true;
     window.location.reload();
+  };
+
+  navigator.serviceWorker.addEventListener("controllerchange", reloadOnce);
+  navigator.serviceWorker.addEventListener("message", event => {
+    if (event.data && event.data.type === "APP_UPDATED") reloadOnce();
   });
 
-  window.addEventListener("load", async () => {
+  const checkForUpdate = async () => {
     try {
-      const registration = await navigator.serviceWorker.register(
-        "./service-worker.js?v=35",
+      registrationRef = registrationRef || await navigator.serviceWorker.register(
+        "./service-worker.js?v=36",
         { updateViaCache: "none" }
       );
 
-      // Do not wait for the browser's periodic service-worker update check.
-      await registration.update();
+      await registrationRef.update();
 
-      // If a newer worker is already waiting, activate it immediately.
-      if (registration.waiting) {
-        registration.waiting.postMessage({ type: "SKIP_WAITING" });
+      if (registrationRef.waiting) {
+        registrationRef.waiting.postMessage({ type: "SKIP_WAITING" });
       }
 
-      registration.addEventListener("updatefound", () => {
-        const worker = registration.installing;
-        if (!worker) return;
+      const worker = registrationRef.installing;
+      if (worker && !worker.__picuStateListener) {
+        worker.__picuStateListener = true;
         worker.addEventListener("statechange", () => {
           if (worker.state === "installed" && navigator.serviceWorker.controller) {
             worker.postMessage({ type: "SKIP_WAITING" });
           }
         });
-      });
+      }
     } catch (_) {}
+  };
+
+  window.addEventListener("load", checkForUpdate);
+  window.addEventListener("pageshow", checkForUpdate);
+  document.addEventListener("visibilitychange", () => {
+    if (document.visibilityState === "visible") checkForUpdate();
   });
 }

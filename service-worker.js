@@ -1,4 +1,4 @@
-const CACHE = "picu-v35-search-top-ux";
+const CACHE = "picu-v36-auto-refresh";
 
 const PRECACHE = [
   "./",
@@ -53,17 +53,35 @@ self.addEventListener("message", event => {
 });
 
 self.addEventListener("activate", event => {
-  event.waitUntil(
-    caches.keys()
-      .then(keys =>
-        Promise.all(
-          keys
-            .filter(key => key !== CACHE)
-            .map(key => caches.delete(key))
-        )
-      )
-      .then(() => self.clients.claim())
-  );
+  event.waitUntil((async () => {
+    const keys = await caches.keys();
+    await Promise.all(
+      keys
+        .filter(key => key !== CACHE)
+        .map(key => caches.delete(key))
+    );
+
+    await self.clients.claim();
+
+    const windows = await self.clients.matchAll({
+      type: "window",
+      includeUncontrolled: true
+    });
+
+    await Promise.all(windows.map(async client => {
+      try {
+        client.postMessage({ type: "APP_UPDATED", version: "36" });
+
+        const url = new URL(client.url);
+        if (url.origin !== self.location.origin) return;
+
+        // Force a fresh navigation of the installed PWA without changing
+        // the user's current page or losing its path.
+        url.searchParams.set("_appv", "36");
+        await client.navigate(url.href);
+      } catch (_) {}
+    }));
+  })());
 });
 
 self.addEventListener("fetch", event => {
