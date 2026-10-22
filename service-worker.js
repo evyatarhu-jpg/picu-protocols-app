@@ -1,4 +1,4 @@
-const CACHE = "picu-v50-protocol-auto-update";
+const CACHE = "picu-v51-canonical-protocol-shell";
 
 const PRECACHE = [
   "./",
@@ -70,14 +70,14 @@ self.addEventListener("activate", event => {
 
     await Promise.all(windows.map(async client => {
       try {
-        client.postMessage({ type: "APP_UPDATED", version: "50" });
+        client.postMessage({ type: "APP_UPDATED", version: "51" });
 
         const url = new URL(client.url);
         if (url.origin !== self.location.origin) return;
 
         // Force a fresh navigation of the installed PWA without changing
         // the user's current page or losing its path.
-        url.searchParams.set("_appv", "50");
+        url.searchParams.set("_appv", "51");
         await client.navigate(url.href);
       } catch (_) {}
     }));
