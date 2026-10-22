@@ -27,20 +27,16 @@ ul,ol{margin:0;padding-right:20px}li{margin:6px 0}.target{color:var(--green);fon
 </style>
 
 <script id="vnext-theme-init">(function(){try{var c=localStorage.getItem("picu-ui-theme")||"system";var d=c==="dark"||(c==="system"&&window.matchMedia&&window.matchMedia("(prefers-color-scheme: dark)").matches);document.documentElement.dataset.theme=d?"dark":"light";document.documentElement.dataset.themeChoice=c;}catch(e){document.documentElement.dataset.theme="light";}})();</script>
-<link rel="stylesheet" href="design-vnext.css">
+<link id="font-awesome-css" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" referrerpolicy="no-referrer">
+<link rel="stylesheet" href="design-vnext.css?v=51">
 </head>
 <body id="top">
-<header class="appbar">
-  <div class="actions">
-    <button class="btn" onclick="history.back()">← חזרה</button>
-    <a class="btn" href="index.html">⌂ מסך ראשי</a>
-  </div>
-  <a class="btn primary" href="originals/Warfarin-2025-Public.pdf" target="_blank" rel="noopener">מסמך מקור</a>
-</header>
+<header class="appbar"><div class="actions"><a class="btn" href="index.html" aria-label="מסך ראשי"><i class="fa-solid fa-house" aria-hidden="true"></i></a></div></header>
 <main class="page">
 <section class="hero">
   <h1>קומדין / Warfarin</h1>
-  <div class="meta"><span>עדכון: 2025</span></div>
+<div class="meta"><span>תאריך מסמך: 2025</span></div>
+<a class="vnext-hero-source" href="originals/Warfarin-2025-Public.pdf" target="_blank" rel="noopener" aria-label="מסמך מקור"><i class="fa-solid fa-file-lines" aria-hidden="true"></i><span>מסמך מקור</span></a>
 </section>
 <nav class="quick"><a href="#targets">יעדי INR</a><a href="#start">מינון</a><a href="#initial-monitor">ניטור</a><a href="#day3">יום 3</a><a href="#maintenance">אחזקה</a><a href="#reversal">דימום</a><a href="#procedure">פרוצדורה</a></nav>
 <section class="step" id="targets"><div class="head"><div class="num">1</div><h2>יעדי INR</h2></div><div class="body">
@@ -67,7 +63,7 @@ ul,ol{margin:0;padding-right:20px}li{margin:6px 0}.target{color:var(--green);fon
 <div class="field"><div class="label">לאחר שתי בדיקות יציבות</div><div>ניתן לרווח לשבועיים.</div></div>
 <div class="field"><div class="label">בהמשך</div><div>ניתן לרווח ל־3–4 שבועות.</div></div>
 <div class="field"><div class="label">מינימום מעקב</div><div>לפחות פעם ב־4 שבועות גם במטופל יציב.</div></div>
-</div></section><section class="step" id="reversal"><div class="head"><div class="num stop" aria-label="עצור"><span>✋</span></div><h2>INR גבוה / דימום</h2></div><div class="body">
+</div></section><section class="step" id="reversal"><div class="head"><div class="num stop" aria-label="עצור"><i class="fa-solid fa-hand semantic-stop-icon" aria-hidden="true"></i></div><h2>INR גבוה / דימום</h2></div><div class="body">
 <div class="field"><div class="label">Vitamin K</div><div><span class="dose">30 mcg/kg</span> בילדים ומתבגרים צעירים, בהתאם לתרחיש בפרוטוקול.</div></div>
 <div class="field"><div class="label">דימום משמעותי</div><div>טיפול נוסף וייעוץ כונן קרישה לפי הפרוטוקול.</div></div>
 </div></section><section class="step" id="procedure"><div class="head"><div class="num">7</div><h2>סביב פרוצדורה</h2></div><div class="body">
@@ -79,11 +75,11 @@ ul,ol{margin:0;padding-right:20px}li{margin:6px 0}.target{color:var(--green);fon
   <a class="btn" href="index.html">מסך ראשי</a>
   <a class="btn primary" href="originals/Warfarin-2025-Public.pdf" target="_blank" rel="noopener">מסמך מקור</a>
 </div>
-<a class="to-top" href="#top" aria-label="לראש הדף">↑ לראש הדף</a>
+
 </main>
 <script src="analytics-config.js"></script>
 <script src="analytics.js"></script>
 
-<script src="design-vnext.js"></script>
+<script src="design-vnext.js?v=51"></script>
 </body>
 </html>
