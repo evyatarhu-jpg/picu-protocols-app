@@ -1320,3 +1320,9 @@ html[data-theme="dark"] body.vnext-protocol .quick.vnext-sticky-subnav.is-pinned
     font-size:12.5px!important;
   }
 }
+
+
+/* v45 — clean protocol hero: title, document date and source only */
+body.vnext-protocol .hero > p{
+  display:none!important;
+}
