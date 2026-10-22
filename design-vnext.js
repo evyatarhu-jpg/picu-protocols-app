@@ -207,7 +207,58 @@
     anchor.setAttribute('title', label);
   }
 
+  function ensureProtocolPwaFresh() {
+    if (!('serviceWorker' in navigator) || window.__picuProtocolUpdaterInstalled) return;
+    window.__picuProtocolUpdaterInstalled = true;
+
+    let reloading = false;
+    let registration = null;
+
+    const reloadOnce = () => {
+      if (reloading) return;
+      reloading = true;
+      window.location.reload();
+    };
+
+    navigator.serviceWorker.addEventListener('controllerchange', reloadOnce);
+    navigator.serviceWorker.addEventListener('message', event => {
+      if (event.data && event.data.type === 'APP_UPDATED') reloadOnce();
+    });
+
+    const check = async () => {
+      try {
+        registration = registration || await navigator.serviceWorker.register(
+          './service-worker.js?v=50',
+          { updateViaCache: 'none' }
+        );
+
+        await registration.update();
+
+        if (registration.waiting) {
+          registration.waiting.postMessage({ type: 'SKIP_WAITING' });
+        }
+
+        const worker = registration.installing;
+        if (worker && !worker.__picuStateListener) {
+          worker.__picuStateListener = true;
+          worker.addEventListener('statechange', () => {
+            if (worker.state === 'installed' && navigator.serviceWorker.controller) {
+              worker.postMessage({ type: 'SKIP_WAITING' });
+            }
+          });
+        }
+      } catch (_) {}
+    };
+
+    check();
+    window.addEventListener('pageshow', check);
+    document.addEventListener('visibilitychange', () => {
+      if (document.visibilityState === 'visible') check();
+    });
+  }
+
   function initProtocol(settings) {
+    ensureProtocolPwaFresh();
     const bar = document.querySelector('.appbar');
     if (!bar) return;
     document.body.classList.add('vnext-protocol');
