@@ -245,26 +245,10 @@
     const tools = document.createElement('div');
     tools.className = 'vnext-home-tools';
 
-    const lightBtn = makeIconButton('מצב בהיר', svg.sun, 'vnext-quick-theme');
-    lightBtn.dataset.quickTheme = 'light';
-    lightBtn.addEventListener('click', e => {
-      e.stopPropagation();
-      safeSet(STORAGE_THEME, 'light');
-      applyTheme('light');
-    });
-
-    const darkBtn = makeIconButton('מצב כהה', svg.moon, 'vnext-quick-theme');
-    darkBtn.dataset.quickTheme = 'dark';
-    darkBtn.addEventListener('click', e => {
-      e.stopPropagation();
-      safeSet(STORAGE_THEME, 'dark');
-      applyTheme('dark');
-    });
-
     const settingsBtn = makeIconButton('הגדרות', svg.gear, 'vnext-settings-toggle');
     settingsBtn.addEventListener('click', e => { e.stopPropagation(); settings?.open(); });
 
-    tools.append(lightBtn, darkBtn, settingsBtn);
+    tools.append(settingsBtn);
     header.appendChild(tools);
     applyTheme();
 

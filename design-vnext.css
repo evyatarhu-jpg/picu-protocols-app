@@ -1129,3 +1129,41 @@ body.vnext-home .protocol-card::before{
 body.vnext-home .protocol-card{
   border-right:1px solid var(--v-line)!important;
 }
+
+
+/* v40 — theme controls only in Settings + category bullets match icon colors */
+body.vnext-home > header{
+  padding-left:68px!important;
+}
+body.vnext-home > header .vnext-home-tools{
+  left:14px!important;
+}
+body.vnext-home > header .vnext-home-tools .vnext-settings-toggle{
+  width:38px!important;
+  min-width:38px!important;
+  height:38px!important;
+  min-height:38px!important;
+}
+body.vnext-home section.category h2::before{
+  background:currentColor!important;
+}
+body.vnext-home .cat-emergency h2::before{background:#e48a1d!important}
+body.vnext-home .cat-coag h2::before{background:#c43f5f!important}
+body.vnext-home .cat-pcicu h2::before{background:#2f7fb3!important}
+body.vnext-home .cat-med h2::before{background:#23847f!important}
+body.vnext-home .cat-pain h2::before{background:#7358a0!important}
+
+html[data-theme="dark"] body.vnext-home .cat-emergency h2::before{background:#f0a64f!important}
+html[data-theme="dark"] body.vnext-home .cat-coag h2::before{background:#ef7890!important}
+html[data-theme="dark"] body.vnext-home .cat-pcicu h2::before{background:#78b8e1!important}
+html[data-theme="dark"] body.vnext-home .cat-med h2::before{background:#70c5bf!important}
+html[data-theme="dark"] body.vnext-home .cat-pain h2::before{background:#b19ae0!important}
+
+@media(max-width:650px){
+  body.vnext-home > header{
+    padding-left:58px!important;
+  }
+  body.vnext-home > header .vnext-home-tools{
+    left:10px!important;
+  }
+}
