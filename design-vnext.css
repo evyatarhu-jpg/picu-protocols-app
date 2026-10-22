@@ -987,3 +987,27 @@ body.vnext-home #voiceSearch i{
     padding-bottom:12px!important;
   }
 }
+
+
+/* v37 — clean category-colored icons without tinted icon tiles */
+body.vnext-home .protocol-card .icon{
+  background:transparent!important;
+  border:0!important;
+  box-shadow:none!important;
+  border-radius:0!important;
+}
+body.vnext-home .protocol-card .icon i{
+  font-size:22px!important;
+  line-height:1!important;
+}
+body.vnext-home .cat-emergency .protocol-card .icon i{color:#e48a1d!important}
+body.vnext-home .cat-coag .protocol-card .icon i{color:#c43f5f!important}
+body.vnext-home .cat-pcicu .protocol-card .icon i{color:#2f7fb3!important}
+body.vnext-home .cat-med .protocol-card .icon i{color:#23847f!important}
+body.vnext-home .cat-pain .protocol-card .icon i{color:#7358a0!important}
+
+html[data-theme="dark"] body.vnext-home .cat-emergency .protocol-card .icon i{color:#f0a64f!important}
+html[data-theme="dark"] body.vnext-home .cat-coag .protocol-card .icon i{color:#ef7890!important}
+html[data-theme="dark"] body.vnext-home .cat-pcicu .protocol-card .icon i{color:#78b8e1!important}
+html[data-theme="dark"] body.vnext-home .cat-med .protocol-card .icon i{color:#70c5bf!important}
+html[data-theme="dark"] body.vnext-home .cat-pain .protocol-card .icon i{color:#b19ae0!important}
