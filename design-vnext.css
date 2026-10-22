@@ -1592,3 +1592,38 @@ body.vnext-protocol .step .num.stop .semantic-stop-icon{
 body.vnext-protocol .vnext-action-dock{
   display:none!important;
 }
+
+
+/* v51 — canonical protocol shell and compact icon sizing */
+body.vnext-protocol .appbar .btn,
+body.vnext-protocol .appbar .vnext-icon-button{
+  width:38px!important;
+  min-width:38px!important;
+  height:38px!important;
+  min-height:38px!important;
+  padding:0!important;
+}
+body.vnext-protocol .appbar .btn i,
+body.vnext-protocol .appbar .vnext-icon-button i{
+  font-size:17px!important;
+  line-height:1!important;
+}
+body.vnext-protocol .hero .vnext-hero-source i{
+  font-size:13px!important;
+}
+body.vnext-protocol .step .num:not(.stop){
+  width:36px!important;
+  min-width:36px!important;
+  height:36px!important;
+  flex-basis:36px!important;
+  font-size:16px!important;
+}
+body.vnext-protocol .step .num.stop{
+  width:38px!important;
+  min-width:38px!important;
+  height:38px!important;
+  flex-basis:38px!important;
+}
+body.vnext-protocol .step .num.stop .semantic-stop-icon{
+  font-size:17px!important;
+}
