@@ -135,6 +135,43 @@
     return { backdrop, open, close };
   }
 
+  const PROTOCOL_META_RULES = [
+    {
+      id: 'update',
+      regex: /^\s*עדכון\s*[:\-–—]?\s*(.+?)\s*$/i,
+      replace: match => `תאריך מסמך: ${match[1]}`
+    },
+    {
+      id: 'effective-date',
+      regex: /^\s*תאריך\s+אפקטיבי\s*[:\-–—]?\s*(.+?)\s*$/i,
+      replace: match => `תאריך מסמך: ${match[1]}`
+    },
+    {
+      id: 'version-with-date',
+      regex: /^\s*Version\s+([^·|]+?)\s*[·|]\s*(\d{1,2}[./-]\d{1,2}[./-]\d{2,4})\s*$/i,
+      replace: match => `גרסה ${match[1].trim()} · תאריך מסמך: ${match[2]}`
+    }
+  ];
+
+  function normalizeProtocolHeaderContent() {
+    const heroTitle = document.querySelector('.hero h1');
+    if (heroTitle) {
+      heroTitle.textContent = heroTitle.textContent.replace(/^\s*פרוטוקול\s+/i, '').trim();
+    }
+
+    document.querySelectorAll('.hero .meta span').forEach(span => {
+      const original = (span.textContent || '').trim();
+      for (const rule of PROTOCOL_META_RULES) {
+        const match = original.match(rule.regex);
+        if (match) {
+          span.textContent = rule.replace(match);
+          span.dataset.metaRule = rule.id;
+          break;
+        }
+      }
+    });
+  }
+
   function protocolTitle() {
     return document.querySelector('.hero h1')?.textContent?.trim() || document.title || 'פרוטוקול';
   }
@@ -151,6 +188,7 @@
     const bar = document.querySelector('.appbar');
     if (!bar) return;
     document.body.classList.add('vnext-protocol');
+    normalizeProtocolHeaderContent();
     document.querySelectorAll('.to-top').forEach(el => {
       el.innerHTML = `${svg.up}<span>לראש הדף</span>`;
     });
