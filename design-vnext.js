@@ -155,11 +155,12 @@
       el.innerHTML = `${svg.up}<span>לראש הדף</span>`;
     });
 
-    // Remove redundant browser-back control.
-    [...bar.querySelectorAll('a')].forEach(a => {
-      const href = (a.getAttribute('href') || '').toLowerCase();
-      const txt = (a.textContent || '').trim();
-      if (href.includes('history.back') || txt === 'חזרה') a.remove();
+    // Remove redundant browser-back controls (links or buttons).
+    [...bar.querySelectorAll('a,button')].forEach(el => {
+      const href = (el.getAttribute('href') || '').toLowerCase();
+      const onclick = (el.getAttribute('onclick') || '').toLowerCase();
+      const txt = (el.textContent || '').replace(/[←↩]/g, '').trim();
+      if (href.includes('history.back') || onclick.includes('history.back') || txt === 'חזרה') el.remove();
     });
 
     bar.classList.add('vnext-appbar');
@@ -176,23 +177,41 @@
     })();
 
     const home = actions.querySelector('a[href*="index.html"]');
-    const source = [...actions.querySelectorAll('a')].find(a => /originals\//i.test(a.getAttribute('href') || ''));
+    const source = [...bar.querySelectorAll('a')].find(a => /originals\//i.test(a.getAttribute('href') || ''));
     convertHeaderAction(home, 'home', 'מסך ראשי');
-    convertHeaderAction(source, 'file', 'מסמך מקור');
 
-    const settingsBtn = makeIconButton('הגדרות', svg.gear, 'vnext-settings-toggle');
-    settingsBtn.addEventListener('click', e => { e.stopPropagation(); settings?.open(); });
-    actions.appendChild(settingsBtn);
+    const hero = document.querySelector('.hero');
 
-    const onScroll = () => bar.classList.toggle('is-compact', window.scrollY > 54);
-    onScroll();
-    window.addEventListener('scroll', onScroll, { passive:true });
+    // Put source access next to the protocol identity in the hero.
+    if (hero && source && !hero.querySelector('.vnext-hero-source')) {
+      const heroSource = document.createElement('a');
+      heroSource.className = 'vnext-hero-source';
+      heroSource.href = source.getAttribute('href') || '#';
+      heroSource.target = '_blank';
+      heroSource.rel = 'noopener';
+      heroSource.setAttribute('aria-label', 'מסמך מקור');
+      heroSource.innerHTML = `${svg.file}<span>מסמך מקור</span>`;
+      hero.appendChild(heroSource);
+      source.remove();
+    }
+
+    // Avoid duplicating the title: show it in the app bar only after
+    // the hero title has scrolled out of view.
+    const updateHeaderState = () => {
+      const heroBottom = hero ? hero.getBoundingClientRect().bottom : 0;
+      const showTitle = hero ? heroBottom <= bar.offsetHeight + 6 : window.scrollY > 54;
+      bar.classList.toggle('show-protocol-title', showTitle);
+      bar.classList.toggle('is-compact', showTitle);
+    };
+    updateHeaderState();
+    window.addEventListener('scroll', updateHeaderState, { passive:true });
+    window.addEventListener('resize', updateHeaderState, { passive:true });
 
     // Build temporary lower action dock from the page's actual source link.
     const dock = document.createElement('nav');
     dock.className = 'vnext-action-dock';
     dock.setAttribute('aria-label', 'פעולות מהירות');
-    const sourceHref = source?.getAttribute('href') || document.querySelector('a[href*="originals/"]')?.getAttribute('href') || '#';
+    const sourceHref = document.querySelector('.vnext-hero-source')?.getAttribute('href') || source?.getAttribute('href') || document.querySelector('a[href*="originals/"]')?.getAttribute('href') || '#';
     dock.innerHTML = `
       <a href="index.html" aria-label="מסך ראשי">${svg.home}<span>ראשי</span></a>
       <a class="source-action" href="${escapeAttr(sourceHref)}" target="_blank" rel="noopener" aria-label="מסמך מקור">${svg.file}<span>מקור</span></a>

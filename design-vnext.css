@@ -1191,3 +1191,74 @@ html[data-theme="dark"] body.vnext-home .cat-coag{--cat-color:#ef7890}
 html[data-theme="dark"] body.vnext-home .cat-pcicu{--cat-color:#78b8e1}
 html[data-theme="dark"] body.vnext-home .cat-med{--cat-color:#70c5bf}
 html[data-theme="dark"] body.vnext-home .cat-pain{--cat-color:#b19ae0}
+
+
+/* v42 — simplified protocol header + neutral category bullets */
+body.vnext-home section.category h2::before{
+  background:#394854!important;
+  box-shadow:none!important;
+  opacity:1!important;
+}
+html[data-theme="dark"] body.vnext-home section.category h2::before{
+  background:#aeb9c2!important;
+}
+
+/* No duplicate title at the top of protocol pages. */
+body.vnext-protocol .vnext-appbar-title{
+  opacity:0;
+  visibility:hidden;
+  transform:translateY(-3px);
+  transition:opacity .18s ease,transform .18s ease,visibility .18s ease;
+}
+body.vnext-protocol .appbar.show-protocol-title .vnext-appbar-title{
+  opacity:1;
+  visibility:visible;
+  transform:none;
+}
+
+/* Settings is intentionally available from the main screen only. */
+body.vnext-protocol .appbar .vnext-settings-toggle{
+  display:none!important;
+}
+
+/* Update/version metadata should read as text, not as a tappable capsule. */
+body.vnext-protocol .hero .meta{
+  margin-top:10px!important;
+  gap:10px!important;
+}
+body.vnext-protocol .hero .meta span{
+  background:transparent!important;
+  border:0!important;
+  border-radius:0!important;
+  padding:0!important;
+  box-shadow:none!important;
+  font-weight:700!important;
+  color:rgba(255,255,255,.88)!important;
+}
+
+/* Original protocol access is part of the hero. */
+body.vnext-protocol .hero .vnext-hero-source{
+  position:relative;
+  z-index:2;
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  gap:7px;
+  margin-top:14px;
+  min-height:38px;
+  padding:8px 11px;
+  border:1px solid rgba(255,255,255,.62);
+  border-radius:5px;
+  background:rgba(255,255,255,.10);
+  color:#fff;
+  text-decoration:none;
+  font-size:14px;
+  font-weight:800;
+  backdrop-filter:blur(6px);
+}
+body.vnext-protocol .hero .vnext-hero-source i{
+  font-size:14px;
+}
+body.vnext-protocol .hero .vnext-hero-source:active{
+  background:rgba(255,255,255,.19);
+}
