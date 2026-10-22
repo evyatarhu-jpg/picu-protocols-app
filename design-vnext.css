@@ -1693,3 +1693,9 @@ body.vnext-protocol .appbar .vnext-compact-source.is-visible{
     border-radius:5px;
   }
 }
+
+
+/* v55 — explicit light/dark theme choices only */
+.vnext-theme-options{
+  grid-template-columns:repeat(2,1fr)!important;
+}

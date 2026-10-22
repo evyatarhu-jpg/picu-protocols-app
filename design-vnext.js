@@ -3,7 +3,7 @@
 
   const STORAGE_THEME = 'picu-ui-theme';
   const STORAGE_LANG = 'picu-ui-language';
-  const THEME_VALUES = new Set(['system', 'light', 'dark']);
+  const THEME_VALUES = new Set(['light', 'dark']);
   const mqDark = window.matchMedia ? window.matchMedia('(prefers-color-scheme: dark)') : null;
 
   const svg = {
@@ -37,13 +37,16 @@
   }
 
   function savedTheme() {
-    const value = safeGet(STORAGE_THEME, 'system');
-    return THEME_VALUES.has(value) ? value : 'system';
+    const value = safeGet(STORAGE_THEME, 'light');
+    if (value === 'system') {
+      safeSet(STORAGE_THEME, 'light');
+      return 'light';
+    }
+    return THEME_VALUES.has(value) ? value : 'light';
   }
 
   function resolvedTheme(choice = savedTheme()) {
-    if (choice === 'system') return mqDark && mqDark.matches ? 'dark' : 'light';
-    return choice;
+    return choice === 'dark' ? 'dark' : 'light';
   }
 
   function applyTheme(choice = savedTheme()) {
@@ -85,11 +88,9 @@
         <div class="vnext-setting-row">
           <div class="vnext-setting-label">תצוגה</div>
           <div class="vnext-theme-options" role="group" aria-label="מצב תצוגה">
-            <button type="button" class="vnext-theme-option" data-theme-choice="system">מערכת</button>
             <button type="button" class="vnext-theme-option" data-theme-choice="light">בהיר</button>
             <button type="button" class="vnext-theme-option" data-theme-choice="dark">כהה</button>
           </div>
-          <div class="vnext-setting-help">במצב „מערכת” האפליקציה מתאימה את עצמה אוטומטית להגדרת הטלפון.</div>
         </div>
         <div class="vnext-setting-row">
           <div class="vnext-setting-label">שפה</div>
@@ -228,7 +229,7 @@
     const check = async () => {
       try {
         registration = registration || await navigator.serviceWorker.register(
-          './service-worker.js?v=54',
+          './service-worker.js?v=55',
           { updateViaCache: 'none' }
         );
 
@@ -463,9 +464,5 @@
     else if (document.getElementById('searchInput') && document.querySelector('.protocol-grid')) initHome(settings);
   });
 
-  if (mqDark) {
-    const handler = () => { if (savedTheme() === 'system') applyTheme('system'); };
-    if (mqDark.addEventListener) mqDark.addEventListener('change', handler);
-    else if (mqDark.addListener) mqDark.addListener(handler);
-  }
+
 })();
