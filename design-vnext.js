@@ -197,11 +197,24 @@
 
     // Avoid duplicating the title: show it in the app bar only after
     // the hero title has scrolled out of view.
+    const quickNav = document.querySelector('.quick');
+    if (quickNav) quickNav.classList.add('vnext-sticky-subnav');
+
     const updateHeaderState = () => {
       const heroBottom = hero ? hero.getBoundingClientRect().bottom : 0;
       const showTitle = hero ? heroBottom <= bar.offsetHeight + 6 : window.scrollY > 54;
+
       bar.classList.toggle('show-protocol-title', showTitle);
       bar.classList.toggle('is-compact', showTitle);
+
+      const appbarHeight = Math.ceil(bar.getBoundingClientRect().height);
+      document.documentElement.style.setProperty('--v-protocol-appbar-height', appbarHeight + 'px');
+
+      if (quickNav) {
+        const quickRect = quickNav.getBoundingClientRect();
+        const pinned = showTitle && quickRect.top <= appbarHeight + 2;
+        quickNav.classList.toggle('is-pinned', pinned);
+      }
     };
     updateHeaderState();
     window.addEventListener('scroll', updateHeaderState, { passive:true });
