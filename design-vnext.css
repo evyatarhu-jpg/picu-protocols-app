@@ -1326,3 +1326,116 @@ html[data-theme="dark"] body.vnext-protocol .quick.vnext-sticky-subnav.is-pinned
 body.vnext-protocol .hero > p{
   display:none!important;
 }
+
+
+/* v46 — unified clinical typography and calm emphasis across all protocols */
+body.vnext-protocol{
+  --protocol-body-size:17px;
+  --protocol-heading-size:20px;
+  --protocol-regular-weight:400;
+  --protocol-emphasis-weight:700;
+}
+
+/* Two-level typography inside clinical content */
+body.vnext-protocol .step .head h2{
+  font-size:var(--protocol-heading-size)!important;
+  font-weight:var(--protocol-emphasis-weight)!important;
+  line-height:1.3!important;
+}
+body.vnext-protocol .step .body,
+body.vnext-protocol .step .body p,
+body.vnext-protocol .step .body li,
+body.vnext-protocol .step .body td,
+body.vnext-protocol .step .body th,
+body.vnext-protocol .step .body .field,
+body.vnext-protocol .step .body .label,
+body.vnext-protocol .step .body .mini,
+body.vnext-protocol .step .body .mini h3,
+body.vnext-protocol .step .body .callout,
+body.vnext-protocol .step .body .subhead,
+body.vnext-protocol .step .body .small,
+body.vnext-protocol .step .body .dose{
+  font-size:var(--protocol-body-size)!important;
+  line-height:1.62!important;
+}
+body.vnext-protocol .step .body{
+  font-weight:var(--protocol-regular-weight)!important;
+}
+body.vnext-protocol .step .body strong,
+body.vnext-protocol .step .body b,
+body.vnext-protocol .step .body .label,
+body.vnext-protocol .step .body .mini h3,
+body.vnext-protocol .step .body .subhead,
+body.vnext-protocol .step .body .dose{
+  font-weight:var(--protocol-emphasis-weight)!important;
+}
+
+/* Values: noticeable, but never button-like or color-coded */
+body.vnext-protocol .dose{
+  display:inline!important;
+  padding:1px 4px!important;
+  margin:0 1px!important;
+  border:0!important;
+  border-radius:3px!important;
+  background:#edf1f4!important;
+  color:inherit!important;
+  box-shadow:none!important;
+  text-decoration:none!important;
+  white-space:nowrap;
+}
+html[data-theme="dark"] body.vnext-protocol .dose{
+  background:#24313b!important;
+  color:inherit!important;
+}
+
+/* Remove decorative colored side bars and colored callout treatments */
+body.vnext-protocol .callout,
+body.vnext-protocol .info-box,
+body.vnext-protocol .warning-box,
+body.vnext-protocol .danger-box,
+body.vnext-protocol .success-box,
+body.vnext-protocol .treatment-box{
+  border-right:0!important;
+  border-left:0!important;
+  border-top:0!important;
+  border-bottom:0!important;
+  background:var(--v-surface-2)!important;
+  color:var(--v-text)!important;
+  box-shadow:none!important;
+}
+
+/* Keep semantic hierarchy through a small icon rather than more color/weight */
+body.vnext-protocol .semantic-target-label{
+  display:inline-flex;
+  align-items:center;
+  gap:6px;
+  color:inherit!important;
+}
+body.vnext-protocol .semantic-label-icon{
+  width:1em;
+  text-align:center;
+  color:var(--v-blue);
+  font-size:.9em!important;
+  line-height:1!important;
+  flex:0 0 auto;
+}
+
+/* Calm supporting cards and separators */
+body.vnext-protocol .mini{
+  border:1px solid var(--v-line)!important;
+  background:var(--v-surface-2)!important;
+  box-shadow:none!important;
+}
+body.vnext-protocol .field{
+  border-bottom:1px solid var(--v-line)!important;
+}
+body.vnext-protocol .field:last-child{
+  border-bottom:0!important;
+}
+
+@media(max-width:650px){
+  body.vnext-protocol{
+    --protocol-body-size:17px;
+    --protocol-heading-size:20px;
+  }
+}

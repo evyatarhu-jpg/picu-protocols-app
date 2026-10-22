@@ -153,6 +153,24 @@
     }
   ];
 
+  function enhanceProtocolSemantics() {
+    document.querySelectorAll('.step .body strong').forEach(strong => {
+      if (strong.querySelector('.semantic-label-icon')) return;
+
+      const label = (strong.textContent || '')
+        .replace(/[:：]\s*$/, '')
+        .trim();
+
+      if (/^(מטרה|יעד)(\s|$)/.test(label)) {
+        strong.classList.add('semantic-target-label');
+        const icon = document.createElement('i');
+        icon.className = 'fa-solid fa-bullseye semantic-label-icon';
+        icon.setAttribute('aria-hidden', 'true');
+        strong.prepend(icon);
+      }
+    });
+  }
+
   function normalizeProtocolHeaderContent() {
     const heroTitle = document.querySelector('.hero h1');
     if (heroTitle) {
@@ -189,6 +207,7 @@
     if (!bar) return;
     document.body.classList.add('vnext-protocol');
     normalizeProtocolHeaderContent();
+    enhanceProtocolSemantics();
     document.querySelectorAll('.to-top').forEach(el => {
       el.innerHTML = `${svg.up}<span>לראש הדף</span>`;
     });
