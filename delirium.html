@@ -27,20 +27,18 @@ ul,ol{margin:0;padding-right:20px}li{margin:6px 0}.target{color:var(--green);fon
 </style>
 
 <script id="vnext-theme-init">(function(){try{var c=localStorage.getItem("picu-ui-theme")||"system";var d=c==="dark"||(c==="system"&&window.matchMedia&&window.matchMedia("(prefers-color-scheme: dark)").matches);document.documentElement.dataset.theme=d?"dark":"light";document.documentElement.dataset.themeChoice=c;}catch(e){document.documentElement.dataset.theme="light";}})();</script>
-<link rel="stylesheet" href="design-vnext.css">
+<link id="font-awesome-css" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" referrerpolicy="no-referrer">
+<link rel="stylesheet" href="design-vnext.css?v=51">
 </head>
 <body id="top">
-<header class="appbar">
-  <div class="actions">
-    <button class="btn" onclick="history.back()">← חזרה</button>
-    <a class="btn" href="index.html">⌂ מסך ראשי</a>
-  </div>
+<header class="appbar"></header>
   <a class="btn primary" href="originals/Delirium-2026-Public.pdf" target="_blank" rel="noopener">מסמך מקור</a>
 </header>
 <main class="page">
 <section class="hero">
   <h1>דליריום בטיפול נמרץ ילדים</h1>
-  <div class="meta"><span>עדכון: פברואר 2026</span></div>
+<div class="meta"><span>תאריך מסמך: פברואר 2026</span></div>
+<a class="vnext-hero-source" href="originals/Delirium-2026-Public.pdf" target="_blank" rel="noopener" aria-label="מסמך מקור"><i class="fa-solid fa-file-lines" aria-hidden="true"></i><span>מסמך מקור</span></a>
 </section>
 <nav class="quick"><a href="#definition">הגדרה</a><a href="#prevention">מניעה</a><a href="#capd">CAPD</a><a href="#response">תגובה</a><a href="#refractory">עמיד</a><a href="#meds">תרופות</a><a href="#stop">הפסקת מעקב</a></nav>
 <section class="step" id="definition"><div class="head"><div class="num">1</div><h2>הגדרה וסוגים</h2></div><div class="body">
@@ -80,15 +78,11 @@ ul,ol{margin:0;padding-right:20px}li{margin:6px 0}.target{color:var(--green);fon
 <div class="field"><div class="label">2</div><div>יציבות קלינית ללא גורמי סיכון אקטיביים לדליריום.</div></div>
 <div class="field"><div class="label">3</div><div>חזרה למצב ההתנהגותי הבסיסי לפי ההורים והצוות.</div></div>
 </div></section>
-<div class="actions" style="justify-content:center;margin-top:18px">
-  <a class="btn" href="index.html">מסך ראשי</a>
-  <a class="btn primary" href="originals/Delirium-2026-Public.pdf" target="_blank" rel="noopener">מסמך מקור</a>
-</div>
-<a class="to-top" href="#top" aria-label="לראש הדף">↑ לראש הדף</a>
+
 </main>
 <script src="analytics-config.js"></script>
 <script src="analytics.js"></script>
 
-<script src="design-vnext.js"></script>
+<script src="design-vnext.js?v=51"></script>
 </body>
 </html>
