@@ -935,3 +935,55 @@ html[data-theme="dark"] body.vnext-home > header .vnext-home-tools .vnext-quick-
 .vnext-action-dock button i{
   display:block;
 }
+
+
+/* v35 — compact home cards, search action, temporary back-to-top */
+body.vnext-home .protocol-card p{display:none!important}
+body.vnext-home .protocol-card{
+  min-height:76px!important;
+}
+body.vnext-home .protocol-card h3{
+  margin:0!important;
+}
+body.vnext-home .search-field{
+  position:relative;
+  flex:1;
+  min-width:0;
+}
+body.vnext-home #searchAction{
+  color:var(--v-muted);
+}
+body.vnext-home #searchAction.has-value{
+  color:var(--v-blue);
+  background:var(--v-blue-soft);
+}
+body.vnext-home #voiceSearch{
+  display:flex!important;
+  align-items:center!important;
+  justify-content:center!important;
+  padding:0!important;
+}
+body.vnext-home #voiceSearch i{
+  display:block;
+  margin:0;
+  line-height:1;
+}
+.vnext-action-dock{
+  grid-template-columns:repeat(2,1fr);
+}
+.vnext-action-dock.can-scroll-top{
+  grid-template-columns:repeat(3,1fr);
+}
+.vnext-action-dock .vnext-scroll-top{
+  display:none!important;
+}
+.vnext-action-dock.can-scroll-top .vnext-scroll-top{
+  display:flex!important;
+}
+@media(max-width:650px){
+  body.vnext-home .protocol-card{
+    min-height:72px!important;
+    padding-top:12px!important;
+    padding-bottom:12px!important;
+  }
+}

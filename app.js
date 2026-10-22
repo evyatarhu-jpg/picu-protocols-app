@@ -1,5 +1,6 @@
 const searchInput = document.getElementById("searchInput");
 const voiceButton = document.getElementById("voiceSearch");
+const searchAction = document.getElementById("searchAction");
 const cards = [...document.querySelectorAll(".protocol-card")];
 const categories = [...document.querySelectorAll(".category")];
 const noResults = document.getElementById("noResults");
@@ -248,9 +249,33 @@ function performSearch(value) {
   }
 }
 
+function updateSearchAction() {
+  if (!searchAction || !searchInput) return;
+  const hasValue = searchInput.value.trim().length > 0;
+  searchAction.classList.toggle("has-value", hasValue);
+  searchAction.setAttribute("aria-label", hasValue ? "נקה חיפוש" : "חיפוש");
+  searchAction.setAttribute("title", hasValue ? "נקה חיפוש" : "חיפוש");
+  searchAction.innerHTML = hasValue
+    ? '<i class="fa-solid fa-xmark" aria-hidden="true"></i>'
+    : '<i class="fa-solid fa-magnifying-glass" aria-hidden="true"></i>';
+}
+
 if (searchInput) {
   searchInput.addEventListener("input", e => {
     performSearch(e.target.value);
+    updateSearchAction();
+  });
+  updateSearchAction();
+}
+
+if (searchAction && searchInput) {
+  searchAction.addEventListener("click", () => {
+    if (searchInput.value.trim()) {
+      searchInput.value = "";
+      performSearch("");
+      updateSearchAction();
+    }
+    searchInput.focus();
   });
 }
 
@@ -307,6 +332,7 @@ if (voiceButton) {
 
       searchInput.value = spoken;
       performSearch(spoken);
+      updateSearchAction();
     });
 
     recognition.addEventListener("end", () => {
@@ -335,7 +361,7 @@ if ("serviceWorker" in navigator) {
   window.addEventListener("load", async () => {
     try {
       const registration = await navigator.serviceWorker.register(
-        "./service-worker.js?v=34",
+        "./service-worker.js?v=35",
         { updateViaCache: "none" }
       );
 

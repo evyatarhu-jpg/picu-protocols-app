@@ -1,4 +1,4 @@
-const CACHE = "picu-v34-force-pwa-update";
+const CACHE = "picu-v35-search-top-ux";
 
 const PRECACHE = [
   "./",

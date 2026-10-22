@@ -200,14 +200,23 @@
     document.body.appendChild(dock);
     dock.querySelector('.vnext-scroll-top').addEventListener('click', () => window.scrollTo({ top:0, behavior:'smooth' }));
 
+    const topControl = dock.querySelector('.vnext-scroll-top');
     let dockTimer = null;
+    const updateTopAvailability = () => {
+      const canGoTop = window.scrollY > 90;
+      dock.classList.toggle('can-scroll-top', canGoTop);
+      if (topControl) topControl.disabled = !canGoTop;
+      return canGoTop;
+    };
+    const hideDock = () => dock.classList.remove('is-visible');
     const showDock = () => {
+      updateTopAvailability();
       dock.classList.add('is-visible');
       clearTimeout(dockTimer);
-      dockTimer = setTimeout(() => dock.classList.remove('is-visible'), 20000);
+      dockTimer = setTimeout(hideDock, 6000);
     };
 
-    // A deliberate screen touch/click reveals the controls for 20 seconds.
+    // Any new touch/click brings the temporary controls back.
     document.addEventListener('pointerdown', e => {
       if (e.target.closest('.vnext-settings-backdrop') || e.target.closest('.vnext-settings-toggle') || e.target.closest('.vnext-quick-theme')) return;
       showDock();
@@ -215,16 +224,17 @@
 
     dock.addEventListener('focusin', showDock);
 
-    // Scrolling/swiping is also an intentional interaction.
-    // Show the dock while the user navigates the page, then fade it 20 sec
-    // after the final scroll event.
+    // Scrolling reveals the controls briefly. "Back to top" exists only after scrolling.
     window.addEventListener('scroll', () => {
-      if (window.scrollY > 90) showDock();
-      else {
-        dock.classList.remove('is-visible');
+      if (window.scrollY > 90) {
+        showDock();
+      } else {
+        updateTopAvailability();
+        hideDock();
         clearTimeout(dockTimer);
       }
     }, { passive:true });
+    updateTopAvailability();
   }
 
   function initHome(settings) {
@@ -271,20 +281,25 @@
     document.body.appendChild(topBtn);
 
     let timer = null;
+    const hide = () => topBtn.classList.remove('is-visible');
     const show = () => {
-      if (window.scrollY < 180) return;
+      if (window.scrollY <= 120) {
+        hide();
+        clearTimeout(timer);
+        return;
+      }
       topBtn.classList.add('is-visible');
       clearTimeout(timer);
-      timer = setTimeout(() => topBtn.classList.remove('is-visible'), 20000);
+      timer = setTimeout(hide, 6000);
     };
     document.addEventListener('pointerdown', e => {
       if (e.target.closest('.vnext-settings-backdrop') || e.target.closest('.vnext-settings-toggle') || e.target.closest('.vnext-quick-theme')) return;
       show();
     }, { passive:true });
     window.addEventListener('scroll', () => {
-      if (window.scrollY > 180) show();
-      else if (window.scrollY < 120) {
-        topBtn.classList.remove('is-visible');
+      if (window.scrollY > 120) show();
+      else {
+        hide();
         clearTimeout(timer);
       }
     }, { passive:true });
