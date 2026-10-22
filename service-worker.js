@@ -1,4 +1,4 @@
-const CACHE = "picu-v40-settings-only-theme";
+const CACHE = "picu-v41-category-colors";
 
 const PRECACHE = [
   "./",
@@ -70,14 +70,14 @@ self.addEventListener("activate", event => {
 
     await Promise.all(windows.map(async client => {
       try {
-        client.postMessage({ type: "APP_UPDATED", version: "40" });
+        client.postMessage({ type: "APP_UPDATED", version: "41" });
 
         const url = new URL(client.url);
         if (url.origin !== self.location.origin) return;
 
         // Force a fresh navigation of the installed PWA without changing
         // the user's current page or losing its path.
-        url.searchParams.set("_appv", "40");
+        url.searchParams.set("_appv", "41");
         await client.navigate(url.href);
       } catch (_) {}
     }));

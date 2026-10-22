@@ -1167,3 +1167,27 @@ html[data-theme="dark"] body.vnext-home .cat-pain h2::before{background:#b19ae0!
     left:10px!important;
   }
 }
+
+
+/* v41 — one exact category color shared by icon and heading bullet */
+body.vnext-home .cat-emergency{--cat-color:#e48a1d}
+body.vnext-home .cat-coag{--cat-color:#c43f5f}
+body.vnext-home .cat-pcicu{--cat-color:#2f7fb3}
+body.vnext-home .cat-med{--cat-color:#23847f}
+body.vnext-home .cat-pain{--cat-color:#7358a0}
+
+body.vnext-home section.category h2::before{
+  background:var(--cat-color)!important;
+  box-shadow:none!important;
+  opacity:1!important;
+}
+
+body.vnext-home section.category .protocol-card .icon i{
+  color:var(--cat-color)!important;
+}
+
+html[data-theme="dark"] body.vnext-home .cat-emergency{--cat-color:#f0a64f}
+html[data-theme="dark"] body.vnext-home .cat-coag{--cat-color:#ef7890}
+html[data-theme="dark"] body.vnext-home .cat-pcicu{--cat-color:#78b8e1}
+html[data-theme="dark"] body.vnext-home .cat-med{--cat-color:#70c5bf}
+html[data-theme="dark"] body.vnext-home .cat-pain{--cat-color:#b19ae0}
