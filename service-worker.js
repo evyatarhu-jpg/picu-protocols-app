@@ -1,4 +1,4 @@
-const CACHE = "picu-v32-berlin-excor-layout";
+const CACHE = "picu-v33-fontawesome";
 
 const PRECACHE = [
   "./",

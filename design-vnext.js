@@ -7,14 +7,26 @@
   const mqDark = window.matchMedia ? window.matchMedia('(prefers-color-scheme: dark)') : null;
 
   const svg = {
-    home: '<svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M3 11.5 12 4l9 7.5" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M5.5 10.5V20h13v-9.5M9.5 20v-6h5v6" stroke-width="2" stroke-linejoin="round"/></svg>',
-    file: '<svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M7 3h7l4 4v14H7z" stroke-width="2" stroke-linejoin="round"/><path d="M14 3v5h5M10 12h5M10 16h5" stroke-width="2" stroke-linecap="round"/></svg>',
-    gear: '<svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M12 15.2a3.2 3.2 0 1 0 0-6.4 3.2 3.2 0 0 0 0 6.4Z" stroke-width="2"/><path d="M19.4 15a1.8 1.8 0 0 0 .36 1.99l.05.05-2.77 2.77-.05-.05A1.8 1.8 0 0 0 15 19.4a1.8 1.8 0 0 0-1.1 1.64V21h-3.8v-.07A1.8 1.8 0 0 0 9 19.4a1.8 1.8 0 0 0-1.99.36l-.05.05-2.77-2.77.05-.05A1.8 1.8 0 0 0 4.6 15a1.8 1.8 0 0 0-1.64-1.1H3v-3.8h.07A1.8 1.8 0 0 0 4.6 9a1.8 1.8 0 0 0-.36-1.99l-.05-.05 2.77-2.77.05.05A1.8 1.8 0 0 0 9 4.6a1.8 1.8 0 0 0 1.1-1.64V3h3.8v.07A1.8 1.8 0 0 0 15 4.6a1.8 1.8 0 0 0 1.99-.36l.05-.05 2.77 2.77-.05.05A1.8 1.8 0 0 0 19.4 9a1.8 1.8 0 0 0 1.64 1.1H21v3.8h-.07A1.8 1.8 0 0 0 19.4 15Z" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg>',
-    up: '<svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="m6 14 6-6 6 6" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>',
-    sun: '<svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><circle cx="12" cy="12" r="4" stroke-width="2"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41" stroke-width="2" stroke-linecap="round"/></svg>',
-    moon: '<svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M20.5 15.3A8.4 8.4 0 0 1 8.7 3.5 8.6 8.6 0 1 0 20.5 15.3Z" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>',
-    close: '×'
+    home: '<i class="fa-solid fa-house" aria-hidden="true"></i>',
+    file: '<i class="fa-solid fa-file-lines" aria-hidden="true"></i>',
+    gear: '<i class="fa-solid fa-gear" aria-hidden="true"></i>',
+    up: '<i class="fa-solid fa-arrow-up" aria-hidden="true"></i>',
+    sun: '<i class="fa-solid fa-sun" aria-hidden="true"></i>',
+    moon: '<i class="fa-solid fa-moon" aria-hidden="true"></i>',
+    close: '<i class="fa-solid fa-xmark" aria-hidden="true"></i>'
   };
+
+  function ensureFontAwesome() {
+    if (document.getElementById('font-awesome-css')) return;
+    const link = document.createElement('link');
+    link.id = 'font-awesome-css';
+    link.rel = 'stylesheet';
+    link.href = 'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css';
+    link.referrerPolicy = 'no-referrer';
+    document.head.appendChild(link);
+  }
+
+  ensureFontAwesome();
 
   function safeGet(key, fallback = null) {
     try { return localStorage.getItem(key) ?? fallback; } catch (_) { return fallback; }
@@ -139,6 +151,9 @@
     const bar = document.querySelector('.appbar');
     if (!bar) return;
     document.body.classList.add('vnext-protocol');
+    document.querySelectorAll('.to-top').forEach(el => {
+      el.innerHTML = `${svg.up}<span>לראש הדף</span>`;
+    });
 
     // Remove redundant browser-back control.
     [...bar.querySelectorAll('a')].forEach(a => {

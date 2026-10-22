@@ -277,7 +277,7 @@ if (voiceButton) {
       try {
         recognition.start();
         voiceButton.classList.add("listening");
-        voiceButton.textContent = "🔴";
+        voiceButton.innerHTML = '<i class="fa-solid fa-microphone" aria-hidden="true"></i>';
       } catch (e) {}
     });
 
@@ -311,12 +311,12 @@ if (voiceButton) {
 
     recognition.addEventListener("end", () => {
       voiceButton.classList.remove("listening");
-      voiceButton.textContent = "🎙️";
+      voiceButton.innerHTML = '<i class="fa-solid fa-microphone" aria-hidden="true"></i>';
     });
 
     recognition.addEventListener("error", () => {
       voiceButton.classList.remove("listening");
-      voiceButton.textContent = "🎙️";
+      voiceButton.innerHTML = '<i class="fa-solid fa-microphone" aria-hidden="true"></i>';
     });
   }
 }

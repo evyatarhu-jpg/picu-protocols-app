@@ -560,15 +560,16 @@ body.vnext-home .protocol-card::before{
 }
 
 body.vnext-home .protocol-card::after{
-  content:"‹";
+  content:"\f104";
+  font-family:"Font Awesome 6 Free";
+  font-weight:900;
   position:absolute;
   left:17px;
   top:50%;
   transform:translateY(-52%);
   color:#9bb0bd;
-  font-size:29px;
+  font-size:18px;
   line-height:1;
-  font-weight:400;
 }
 
 body.vnext-home .cat-emergency .protocol-card::before{background:#e99a3d}
@@ -907,4 +908,30 @@ html[data-theme="dark"] body.vnext-home > header .vnext-home-tools .vnext-quick-
     height:31px !important;
     min-height:31px !important;
   }
+}
+
+
+/* Font Awesome icon sizing */
+.protocol-card .icon i{
+  font-size:20px;
+  line-height:1;
+  color:inherit;
+}
+.vnext-icon-button i{
+  font-size:17px;
+  line-height:1;
+}
+.vnext-action-dock i,
+.vnext-home-top-dock i,
+.to-top i{
+  font-size:15px;
+  line-height:1;
+}
+.vnext-settings-close i{
+  font-size:18px;
+  line-height:1;
+}
+.vnext-action-dock a i,
+.vnext-action-dock button i{
+  display:block;
 }
