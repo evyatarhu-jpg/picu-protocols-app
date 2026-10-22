@@ -1586,3 +1586,9 @@ body.vnext-protocol .step .num.stop .semantic-stop-icon{
   line-height:1!important;
   transform:none!important;
 }
+
+
+/* v49 — remove redundant floating protocol action dock */
+body.vnext-protocol .vnext-action-dock{
+  display:none!important;
+}

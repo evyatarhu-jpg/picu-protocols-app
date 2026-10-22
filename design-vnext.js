@@ -282,29 +282,7 @@
     window.addEventListener('scroll', updateHeaderState, { passive:true });
     window.addEventListener('resize', updateHeaderState, { passive:true });
 
-    // Build temporary lower action dock from the page's actual source link.
-    const dock = document.createElement('nav');
-    dock.className = 'vnext-action-dock';
-    dock.setAttribute('aria-label', 'פעולות מהירות');
-    const sourceHref = document.querySelector('.vnext-hero-source')?.getAttribute('href') || source?.getAttribute('href') || document.querySelector('a[href*="originals/"]')?.getAttribute('href') || '#';
-    dock.innerHTML = `
-      <a href="index.html" aria-label="מסך ראשי">${svg.home}<span>ראשי</span></a>
-      <a class="source-action" href="${escapeAttr(sourceHref)}" target="_blank" rel="noopener" aria-label="מסמך מקור">${svg.file}<span>מקור</span></a>
-      <button type="button" class="vnext-scroll-top" aria-label="לראש הדף">${svg.up}<span>לראש הדף</span></button>`;
-    document.body.appendChild(dock);
-    dock.querySelector('.vnext-scroll-top').addEventListener('click', () => window.scrollTo({ top:0, behavior:'smooth' }));
 
-    const topControl = dock.querySelector('.vnext-scroll-top');
-    let dockTimer = null;
-    const updateTopAvailability = () => {
-      const canGoTop = window.scrollY > 90;
-      dock.classList.toggle('can-scroll-top', canGoTop);
-      if (topControl) topControl.disabled = !canGoTop;
-      return canGoTop;
-    };
-    const hideDock = () => dock.classList.remove('is-visible');
-    const showDock = () => {
-      updateTopAvailability();
       dock.classList.add('is-visible');
       clearTimeout(dockTimer);
       dockTimer = setTimeout(hideDock, 6000);
