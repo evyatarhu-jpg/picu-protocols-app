@@ -1119,3 +1119,13 @@ details,
 body.vnext-protocol .step .num{
   border-radius:50%!important;
 }
+
+
+/* v39 — remove redundant category side strips */
+body.vnext-home .protocol-card::before{
+  display:none!important;
+  content:none!important;
+}
+body.vnext-home .protocol-card{
+  border-right:1px solid var(--v-line)!important;
+}
