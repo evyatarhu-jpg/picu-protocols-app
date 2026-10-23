@@ -22,9 +22,9 @@ ul{margin:0;padding-right:20px}li{margin:6px 0}.target{color:var(--green);font-w
 @media(max-width:700px){.page{padding:12px 10px 28px}.hero{border-radius:16px;padding:17px}.hero h1{font-size:1.65rem}.step{border-radius:15px}.head{padding:12px}.head h2{font-size:1.14rem}.body{padding:13px}.field{grid-template-columns:1fr;gap:3px;padding:10px 0}.label{font-size:15px;color:var(--blue)}.field>div:last-child{font-size:17px}.grid{grid-template-columns:1fr}.btn{font-size:14px;padding:8px 11px}}
 </style>
 
-<script id="vnext-theme-init">(function(){try{var c=localStorage.getItem("picu-ui-theme")||"system";var d=c==="dark"||(c==="system"&&window.matchMedia&&window.matchMedia("(prefers-color-scheme: dark)").matches);document.documentElement.dataset.theme=d?"dark":"light";document.documentElement.dataset.themeChoice=c;}catch(e){document.documentElement.dataset.theme="light";}})();</script>
+<script id="vnext-theme-init">(function(){try{var c=localStorage.getItem("picu-ui-theme")||"light";if(c==="system"){c="light";localStorage.setItem("picu-ui-theme","light");}var d=c==="dark";document.documentElement.dataset.theme=d?"dark":"light";document.documentElement.dataset.themeChoice=c;}catch(e){document.documentElement.dataset.theme="light";}})();</script>
 <link id="font-awesome-css" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" referrerpolicy="no-referrer">
-<link rel="stylesheet" href="design-vnext.css?v=54">
+<link rel="stylesheet" href="design-vnext.css?v=56">
 </head>
 <body id="top">
 <header class="appbar"><div class="actions"><a class="btn" href="index.html" aria-label="מסך ראשי"><i class="fa-solid fa-house" aria-hidden="true"></i></a></div></header>
@@ -149,5 +149,5 @@ ul{margin:0;padding-right:20px}li{margin:6px 0}.target{color:var(--green);font-w
 <script src="analytics-config.js"></script>
 <script src="analytics.js"></script>
 
-<script src="design-vnext.js?v=54"></script>
+<script src="design-vnext.js?v=56"></script>
 </body></html>
