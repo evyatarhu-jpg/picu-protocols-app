@@ -352,12 +352,14 @@
     actionDock.setAttribute('aria-label', 'פעולות פרוטוקול');
 
     if (home) {
-      home.classList.remove('btn', 'primary');
-      home.classList.add('vnext-protocol-dock-action', 'vnext-home-action');
-      home.innerHTML = `${svg.home}<span>ראשי</span>`;
-      home.setAttribute('aria-label', 'מסך ראשי');
-      home.setAttribute('title', 'מסך ראשי');
-      actionDock.appendChild(home);
+      const dockHome = home.cloneNode(true);
+      dockHome.removeAttribute('id');
+      dockHome.classList.remove('btn', 'primary');
+      dockHome.classList.add('vnext-protocol-dock-action', 'vnext-home-action');
+      dockHome.innerHTML = `${svg.home}<span>ראשי</span>`;
+      dockHome.setAttribute('aria-label', 'מסך ראשי');
+      dockHome.setAttribute('title', 'מסך ראשי');
+      actionDock.appendChild(dockHome);
     }
 
     const topBtn = document.createElement('button');
