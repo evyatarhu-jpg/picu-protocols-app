@@ -229,7 +229,7 @@
     const check = async () => {
       try {
         registration = registration || await navigator.serviceWorker.register(
-          './service-worker.js?v=55',
+          './service-worker.js?v=56',
           { updateViaCache: 'none' }
         );
 
@@ -322,6 +322,17 @@
     }
 
     const heroSource = hero.querySelector('.vnext-hero-source');
+
+    // Keep source access visually attached to the protocol title.
+    const heroTitle = hero.querySelector('h1');
+    if (heroTitle && heroSource && !hero.querySelector('.vnext-hero-title-row')) {
+      const titleRow = document.createElement('div');
+      titleRow.className = 'vnext-hero-title-row';
+      hero.insertBefore(titleRow, heroTitle);
+      titleRow.appendChild(heroTitle);
+      titleRow.appendChild(heroSource);
+    }
+
     let compactSource = actions.querySelector('.vnext-compact-source');
     if (heroSource && !compactSource) {
       compactSource = document.createElement('a');
@@ -335,34 +346,65 @@
       actions.appendChild(compactSource);
     }
 
-    // One temporary floating control: back to top only.
+    // Unified protocol actions: Home (left), Top (center), Report issue (right).
+    const actionDock = document.createElement('div');
+    actionDock.className = 'vnext-protocol-action-dock';
+    actionDock.setAttribute('aria-label', 'פעולות פרוטוקול');
+
+    if (home) {
+      home.classList.remove('btn', 'primary');
+      home.classList.add('vnext-protocol-dock-action', 'vnext-home-action');
+      home.innerHTML = `${svg.home}<span>ראשי</span>`;
+      home.setAttribute('aria-label', 'מסך ראשי');
+      home.setAttribute('title', 'מסך ראשי');
+      actionDock.appendChild(home);
+    }
+
     const topBtn = document.createElement('button');
     topBtn.type = 'button';
-    topBtn.className = 'vnext-protocol-top-button';
+    topBtn.className = 'vnext-protocol-dock-action vnext-top-action';
     topBtn.setAttribute('aria-label', 'לראש הדף');
     topBtn.setAttribute('title', 'לראש הדף');
-    topBtn.innerHTML = svg.up;
+    topBtn.innerHTML = `${svg.up}<span>לראש הדף</span>`;
     topBtn.addEventListener('click', event => {
       event.stopPropagation();
       window.scrollTo({ top: 0, behavior: 'smooth' });
     });
-    document.body.appendChild(topBtn);
+    actionDock.appendChild(topBtn);
+
+    const attachReportButton = () => {
+      const reportBtn = document.getElementById('reportIssueBtn');
+      if (!reportBtn || actionDock.contains(reportBtn)) return Boolean(reportBtn);
+      reportBtn.classList.add('vnext-protocol-dock-action', 'vnext-report-action');
+      actionDock.appendChild(reportBtn);
+      return true;
+    };
+
+    attachReportButton();
+    document.body.appendChild(actionDock);
+
+    if (!document.getElementById('reportIssueBtn')) {
+      const observer = new MutationObserver(() => {
+        if (attachReportButton()) observer.disconnect();
+      });
+      observer.observe(document.body, { childList: true });
+    }
 
     let topTimer = null;
-    const hideTopButton = () => topBtn.classList.remove('is-visible');
+    const hideTopButton = () => actionDock.classList.remove('is-visible');
     const showTopButton = () => {
       if (window.scrollY <= 120) {
         hideTopButton();
         clearTimeout(topTimer);
         return;
       }
-      topBtn.classList.add('is-visible');
+      actionDock.classList.add('is-visible');
       clearTimeout(topTimer);
       topTimer = setTimeout(hideTopButton, 6000);
     };
 
     document.addEventListener('pointerdown', event => {
-      if (event.target.closest('.vnext-protocol-top-button')) return;
+      if (event.target.closest('.vnext-protocol-action-dock') || event.target.closest('#issueModal')) return;
       showTopButton();
     }, { passive: true });
 
