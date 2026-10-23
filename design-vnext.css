@@ -1699,3 +1699,191 @@ body.vnext-protocol .appbar .vnext-compact-source.is-visible{
 .vnext-theme-options{
   grid-template-columns:repeat(2,1fr)!important;
 }
+
+
+/* v56 — semantic color cleanup + unified protocol controls */
+
+/* Decorative category bullets removed: headings stand on typography alone. */
+body.vnext-home section.category h2::before{
+  display:none!important;
+  content:none!important;
+}
+body.vnext-home section.category h2{
+  gap:0!important;
+}
+
+/* Quick-navigation chips use one visual language.
+   Color is no longer assigned by position because position carries no clinical meaning. */
+body.vnext-protocol .quick a:nth-child(n){
+  background:#edf3f7!important;
+  border-color:#d8e3ea!important;
+  color:#27485d!important;
+  box-shadow:none!important;
+}
+html[data-theme="dark"] body.vnext-protocol .quick a:nth-child(n){
+  background:#172631!important;
+  border-color:#2b3e4b!important;
+  color:#c3d5df!important;
+}
+
+/* Source document belongs to the protocol identity, directly beside the title. */
+body.vnext-protocol .hero .vnext-hero-title-row{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:12px;
+  flex-wrap:wrap;
+}
+body.vnext-protocol .hero .vnext-hero-title-row h1{
+  flex:1 1 260px;
+  margin:0!important;
+}
+body.vnext-protocol .hero .vnext-hero-title-row .vnext-hero-source{
+  flex:0 0 auto;
+  margin-top:0!important;
+  min-height:36px;
+  padding:7px 10px;
+  border-radius:7px;
+  background:rgba(255,255,255,.10);
+  color:#fff;
+}
+
+/* One action-control system on protocol pages. */
+.vnext-protocol-action-dock{
+  position:fixed;
+  left:50%;
+  bottom:calc(14px + var(--v-safe-bottom));
+  z-index:1900;
+  width:min(calc(100% - 24px),430px);
+  transform:translate(-50%,10px);
+  opacity:0;
+  pointer-events:none;
+  display:grid;
+  grid-template-columns:repeat(3,minmax(0,1fr));
+  gap:8px;
+  direction:ltr;
+  transition:opacity .28s ease,transform .28s ease;
+}
+.vnext-protocol-action-dock.is-visible{
+  opacity:1;
+  pointer-events:auto;
+  transform:translate(-50%,0);
+}
+.vnext-protocol-action-dock .vnext-protocol-dock-action{
+  min-width:0;
+  min-height:52px;
+  padding:7px 8px!important;
+  border:1px solid var(--v-line)!important;
+  border-radius:8px!important;
+  background:color-mix(in srgb,var(--v-surface) 96%,transparent)!important;
+  color:var(--v-text)!important;
+  box-shadow:0 7px 20px rgba(22,47,67,.12)!important;
+  backdrop-filter:blur(12px);
+  -webkit-backdrop-filter:blur(12px);
+  text-decoration:none!important;
+  display:flex!important;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+  gap:4px;
+  font:inherit;
+  font-size:12.5px!important;
+  font-weight:800!important;
+  line-height:1.15;
+  cursor:pointer;
+  direction:rtl;
+  transition:transform .14s ease,background-color .18s ease,border-color .18s ease;
+}
+.vnext-protocol-action-dock .vnext-protocol-dock-action i{
+  font-size:17px!important;
+  line-height:1!important;
+  color:currentColor!important;
+}
+.vnext-protocol-action-dock .vnext-protocol-dock-action svg{
+  width:18px!important;
+  height:18px!important;
+  stroke:currentColor;
+}
+.vnext-protocol-action-dock .vnext-protocol-dock-action:active{
+  transform:scale(.96);
+  background:var(--v-blue-soft)!important;
+}
+.vnext-protocol-action-dock .vnext-protocol-dock-action span{
+  display:block;
+  white-space:nowrap;
+  overflow:hidden;
+  text-overflow:ellipsis;
+  max-width:100%;
+}
+
+/* Retire the old standalone protocol top button if stale markup survives. */
+.vnext-protocol-top-button{
+  display:none!important;
+}
+
+/* Home-screen Back-to-top uses the same button language. */
+.vnext-home-top-dock{
+  min-width:124px!important;
+  height:52px!important;
+  padding:7px 12px!important;
+  border:1px solid var(--v-line)!important;
+  border-radius:8px!important;
+  background:color-mix(in srgb,var(--v-surface) 96%,transparent)!important;
+  color:var(--v-text)!important;
+  box-shadow:0 7px 20px rgba(22,47,67,.12)!important;
+  gap:7px!important;
+  font-size:13px!important;
+  font-weight:800!important;
+}
+.vnext-home-top-dock:active{
+  background:var(--v-blue-soft)!important;
+  transform:scale(.97)!important;
+}
+.vnext-home-top-dock svg{
+  width:18px!important;
+  height:18px!important;
+}
+
+/* Analytics fallback: when not yet docked, keep the report control visually consistent. */
+body.vnext-protocol > #reportIssueBtn.vnext-protocol-dock-action{
+  position:fixed;
+  right:14px;
+  bottom:calc(14px + var(--v-safe-bottom));
+  z-index:1890;
+  min-height:52px;
+  padding:8px 12px;
+  border:1px solid var(--v-line);
+  border-radius:8px;
+  background:var(--v-surface);
+  color:var(--v-text);
+  box-shadow:0 7px 20px rgba(22,47,67,.12);
+  font:inherit;
+  font-size:12.5px;
+  font-weight:800;
+}
+
+@media(max-width:650px){
+  body.vnext-protocol .hero .vnext-hero-title-row{
+    align-items:flex-start;
+    gap:9px;
+  }
+  body.vnext-protocol .hero .vnext-hero-title-row h1{
+    flex-basis:220px;
+  }
+  .vnext-protocol-action-dock{
+    width:calc(100% - 18px);
+    bottom:calc(9px + var(--v-safe-bottom));
+    gap:6px;
+  }
+  .vnext-protocol-action-dock .vnext-protocol-dock-action{
+    min-height:50px;
+    padding:6px 5px!important;
+    font-size:12px!important;
+  }
+  .vnext-home-top-dock{
+    min-width:120px!important;
+    height:50px!important;
+    left:9px!important;
+    bottom:calc(9px + var(--v-safe-bottom))!important;
+  }
+}
