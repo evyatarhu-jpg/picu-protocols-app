@@ -100,7 +100,6 @@
 
     const style = document.createElement("style");
     style.textContent = `
-      #reportIssueBtn{position:fixed;right:14px;bottom:16px;z-index:1199;border:1px solid #d7e2ea;background:#fff;color:#0f4c81;border-radius:999px;padding:7px 10px;font-weight:800;font-size:13px;box-shadow:0 5px 14px rgba(15,76,129,.18);cursor:pointer}
       #issueModal{position:fixed;inset:0;z-index:3000;background:rgba(0,0,0,.38);display:none;align-items:center;justify-content:center;padding:18px}
       #issueModal.open{display:flex}
       #issueModal .box{width:min(520px,100%);background:#fff;border-radius:18px;padding:18px;direction:rtl;text-align:right;box-shadow:0 18px 50px rgba(0,0,0,.22)}
@@ -118,7 +117,8 @@
     const btn = document.createElement("button");
     btn.id = "reportIssueBtn";
     btn.type = "button";
-    btn.textContent = "⚑ דווח על בעיה";
+    btn.className = "vnext-protocol-dock-action vnext-report-action";
+    btn.innerHTML = '<i class="fa-solid fa-flag" aria-hidden="true"></i><span>דווח על בעיה</span>';
     document.body.appendChild(btn);
 
     const modal = document.createElement("div");
@@ -155,8 +155,10 @@
       await track("issue_report", { issue_category: category, issue_text: text || null });
       modal.querySelector("#issueText").value = "";
       modal.classList.remove("open");
-      btn.textContent = "✓ הדיווח נשלח";
-      setTimeout(() => btn.textContent = "⚑ דווח על בעיה", 1800);
+      btn.innerHTML = '<i class="fa-solid fa-check" aria-hidden="true"></i><span>הדיווח נשלח</span>';
+      setTimeout(() => {
+        btn.innerHTML = '<i class="fa-solid fa-flag" aria-hidden="true"></i><span>דווח על בעיה</span>';
+      }, 1800);
     });
   }
 
